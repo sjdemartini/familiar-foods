@@ -1,10 +1,12 @@
 package edu.berkeley.cs160.familiarfoods;
 
-import android.os.Bundle;
 import android.app.Activity;
+import android.os.Bundle;
 import android.view.Menu;
 
 public class HomeActivity extends Activity {
+
+    public static final String TAG = "FF_Home";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
