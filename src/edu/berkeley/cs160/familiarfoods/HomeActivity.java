@@ -20,5 +20,10 @@ public class HomeActivity extends Activity {
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
+    
+    public void startAdventureModeActivity(View v){
+        Intent openAdventureIntent = new Intent(this, AdventureMode.class);
+        startActivity(openAdventureIntent);
+    }
 
 }
