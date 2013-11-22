@@ -58,7 +58,6 @@ public class FamiliarFoodsDatabase extends Application {
      */
     protected final String[] cuisines = {
             "American",
-            "Asian Fusion",
             "Chinese",
             "French",
             "Ethiopian",

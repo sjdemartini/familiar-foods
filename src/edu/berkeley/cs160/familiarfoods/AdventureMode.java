@@ -18,8 +18,8 @@ public class AdventureMode extends Activity {
 
     /**
      * A list of the foods that can be shown for adventure mode based on any
-     * filters on cuisine. The foods list is in randomized order each time
-     * Adventure Mode is opened.
+     * filters on cuisine. The foods list is in randomized order, as that is
+     * critical to Adventure Mode showing a "random" result.
      */
     List<String> foods;
 
@@ -37,10 +37,7 @@ public class AdventureMode extends Activity {
 
         // TODO: Add filtering of cuisines (via user-chosen filter), instead of
         // always using all of them:
-        foods = db.getFoodsForCuisines(cuisines);
-
-        // Randomize the order of the foods shown:
-        Collections.shuffle(foods);
+        setFoods(cuisines);
     }
 
     /**
@@ -75,5 +72,21 @@ public class AdventureMode extends Activity {
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    /**
+     * Set the foods to be shown based on a list of cuisines.
+     *
+     * This method is useful when filtering by cuisine type. Results shown will
+     * be based on the foods field, which is a randomized ordering of foods from
+     * the cuisines provided here.
+     *
+     * @param cuisines The list of cuisines to be used for filtering.
+     */
+    protected void setFoods(List<String> cuisines) {
+        foods = db.getFoodsForCuisines(cuisines);
+
+        // Randomize the order of the foods shown:
+        Collections.shuffle(foods);
     }
 }
