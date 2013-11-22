@@ -7,6 +7,50 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".HomeActivity" >
-    
+   
+    <RelativeLayout
+          android:layout_width="fill_parent"
+          android:layout_height="fill_parent"
+          >
+
+       <Button
+               android:layout_height="wrap_content"
+               android:layout_width="wrap_content"
+               android:id = "@+id/"
+               android:text="@string/"
+               android:onClick=""
+               />
+
+       <Button
+               android:layout_height="wrap_content"
+               android:layout_width="wrap_content"
+               android:id = "@+id/"
+               android:text="@string/"
+               android:onClick=""
+               />
+
+          </RelativeLayout>
+
+    <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            >
+        <Button
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:id = "@+id/"
+                android:text="@string/"
+                android:onClick=""
+                />
+
+        <Button
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:id = "@+id/"
+                android:text="@string/"
+                android:onClick=""
+                />
+
+    </RelativeLayout>
 
 </LinearLayout>
