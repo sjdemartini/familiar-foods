@@ -4,5 +4,9 @@
     <string name="app_name">Familiar Foods</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_adventure_mode">AdventureMode</string>
+    <string name="link_food">Link Similar Foods</string>
+    <string name="add_food">Add New Food</string>
+    <string name="adventure_mode">Adventure Mode</string>
+    <string name="friends_foods">Friend's Foods</string>
 
 </resources>
