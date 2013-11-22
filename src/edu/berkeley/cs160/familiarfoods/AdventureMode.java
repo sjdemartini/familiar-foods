@@ -1,5 +1,8 @@
 package edu.berkeley.cs160.familiarfoods;
 
+import java.util.Collections;
+import java.util.List;
+
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.os.Build;
@@ -13,13 +16,31 @@ public class AdventureMode extends Activity {
     /** The database for this app. */
     FamiliarFoodsDatabase db;
 
+    /**
+     * A list of the foods that can be shown for adventure mode based on any
+     * filters on cuisine. The foods list is in randomized order each time
+     * Adventure Mode is opened.
+     */
+    List<String> foods;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_adventure_mode);
         // Show the Up button in the action bar.
         setupActionBar();
+
+        // Get the database:
         db = ((FamiliarFoodsDatabase) getApplication());
+
+        List<String> cuisines = db.getAllCuisines();
+
+        // TODO: Add filtering of cuisines (via user-chosen filter), instead of
+        // always using all of them:
+        foods = db.getFoodsForCuisines(cuisines);
+
+        // Randomize the order of the foods shown:
+        Collections.shuffle(foods);
     }
 
     /**
@@ -54,22 +75,5 @@ public class AdventureMode extends Activity {
                 return true;
         }
         return super.onOptionsItemSelected(item);
-    }
-
-    /**
-     * Return a random food from any cuisine type.
-     * @return a random food food of any cuisine type.
-     */
-    public String getRandomFood() {
-        return "";
-    }
-
-    /**
-     * Return a random food from a given cuisine type.
-     * @param cuisine The type of cuisine from which a random food is wanted.
-     * @return a random food from the given cuisine.
-     */
-    public String getRandomFood(String cuisine) {
-        return "";
     }
 }
