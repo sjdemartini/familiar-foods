@@ -1,11 +1,137 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".AdventureMode" >
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent"
+              android:id="@+id/linearLayout1"
 
-</RelativeLayout>
+        >
+
+    <LinearLayout
+            android:id="@+id/linearLayout2"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_gravity="center"
+            android:padding="5dp"
+            >
+
+       <Button
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:id="@+id/filterResultsButton"
+            android:text="@string/filer_button"
+               />
+
+        <Button
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:id="@+id/helpButton"
+                android:text="@string/help_button"
+
+
+                />
+
+    </LinearLayout>
+
+
+
+
+    <LinearLayout
+            android:id="@+id/linearLayout3"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:padding="5dp"
+            >
+
+        <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:text="@string/suggestion_prompt"
+                />
+
+    </LinearLayout>
+
+
+
+
+
+    <LinearLayout
+            android:id="@+id/linearLayout4"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_gravity="center"
+            android:padding="20dp"
+            >
+        <Button
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:id="@+id/previousFoodButton"
+                android:text="@string/previous_food"
+                />
+
+        <ImageView
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:id="@+id/currentDisplayedFood"
+                />
+
+        <Button
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:id="@+id/nextFoodButton"
+                android:text="@string/next_food"
+                />
+
+
+    </LinearLayout>
+
+
+
+
+
+    <LinearLayout
+            android:id="@+id/linearLayout5"
+            android:orientation="vertical"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_gravity="center"
+            android:padding="30dp"
+            >
+
+        <TextView
+                android:id="@+id/cuisine"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:text="@string/cuisine"
+
+
+                />
+
+        <TextView
+                android:id="@+id/currentCuisine"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:text="@string/cuisine_type"
+                />
+
+        <TextView
+                android:id="@+id/food"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:text="@string/food"
+                />
+
+        <TextView
+                android:id="@+id/currentFood"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:text="@string/food_name"
+                />
+
+    </LinearLayout>
+
+</LinearLayout>
+
