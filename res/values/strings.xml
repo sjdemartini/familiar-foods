@@ -8,5 +8,14 @@
     <string name="add_food">Add New Food</string>
     <string name="adventure_mode">Adventure Mode</string>
     <string name="friends_foods">Friend's Foods</string>
+    <string name="filter_button">Filter Results</string>
+    <string name="help_button">\?</string>
+    <string name="suggestion_prompt">Why don\'t you try...</string>
+    <string name="previous_food">&lt;</string>
+    <string name="next_food">&gt;</string>
+    <string name="cuisine">Cuisine</string>
+    <string name="cuisine_type">Cuisine Type Goes Here</string>
+    <string name="food">Food</string>
+    <string name="food_name">Name of Food Goes Here</string>
 
 </resources>
