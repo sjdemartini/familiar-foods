@@ -10,7 +10,7 @@
     <string name="friends_foods">Friend's Foods</string>
     <string name="filter_button">Filter Results</string>
     <string name="help_button">\?</string>
-    <string name="suggestion_prompt">Why don\'t you try...</string>
+    <string name="suggestion_prompt">Why don\'t you try&#8230;</string>
     <string name="previous_food">&lt;</string>
     <string name="next_food">&gt;</string>
     <string name="cuisine">Cuisine</string>
