@@ -1,7 +1,9 @@
 package edu.berkeley.cs160.familiarfoods;
 
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
@@ -10,6 +12,10 @@ import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.TextView;
 
 public class AdventureMode extends Activity {
 
@@ -22,6 +28,8 @@ public class AdventureMode extends Activity {
      * critical to Adventure Mode showing a "random" result.
      */
     List<String> foods;
+    ListIterator<String> foodIterator;
+    String displayedFood;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +37,7 @@ public class AdventureMode extends Activity {
         setContentView(R.layout.activity_adventure_mode);
         // Show the Up button in the action bar.
         setupActionBar();
-
+        startListeners();
         // Get the database:
         db = ((FamiliarFoodsDatabase) getApplication());
 
@@ -38,6 +46,9 @@ public class AdventureMode extends Activity {
         // TODO: Add filtering of cuisines (via user-chosen filter), instead of
         // always using all of them:
         setFoods(cuisines);
+        rotateThroughFoods("next");
+        rotateThroughFoods("next");
+        displayFood();
     }
 
     /**
@@ -55,6 +66,25 @@ public class AdventureMode extends Activity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.adventure_mode, menu);
         return true;
+    }
+    
+    protected void startListeners() {
+    	Button nextButton = (Button) findViewById(R.id.nextFoodButton);
+		nextButton.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View arg0) {
+				rotateThroughFoods("next");
+				displayFood();
+			}
+    	});
+		Button prevButton = (Button) findViewById(R.id.previousFoodButton);
+		prevButton.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View arg0) {
+				rotateThroughFoods("prev");
+				displayFood();
+			}
+    	});
     }
 
     @Override
@@ -85,8 +115,25 @@ public class AdventureMode extends Activity {
      */
     protected void setFoods(List<String> cuisines) {
         foods = db.getFoodsForCuisines(cuisines);
+        foodIterator = foods.listIterator();
 
         // Randomize the order of the foods shown:
         Collections.shuffle(foods);
+    }
+    
+    protected void rotateThroughFoods(String direction) {
+    	if (direction == "next") {
+    		displayedFood = foodIterator.next();
+    	}
+    	if (direction == "prev") {
+    		displayedFood = foodIterator.previous();
+    	}
+    }
+    
+    protected void displayFood() {
+    	TextView foodName = (TextView) findViewById(R.id.currentFood);
+    	TextView cuisineName = (TextView) findViewById(R.id.currentCuisine);
+    	foodName.setText(displayedFood);
+    	cuisineName.setText(db.getCuisineForFood(displayedFood));
     }
 }
