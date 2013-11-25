@@ -3,6 +3,8 @@ package edu.berkeley.cs160.familiarfoods;
 import java.util.Collections;
 import java.util.List;
 
+import com.example.familiar_foods.R;
+
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.os.Build;
