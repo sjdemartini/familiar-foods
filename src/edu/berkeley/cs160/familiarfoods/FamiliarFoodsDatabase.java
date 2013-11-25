@@ -66,6 +66,9 @@ public class FamiliarFoodsDatabase extends Application {
     /** Dictates whether initial data should be loaded. */
     protected boolean shouldLoadData = true;
 
+    /** Used to keep track of whether database initialization is complete. */
+    protected boolean isInitializingFinished = false;
+
     /**
      * All cuisines, stored in sorted order (for convenience when filtering).
      */
@@ -252,6 +255,14 @@ public class FamiliarFoodsDatabase extends Application {
     }
 
     /**
+     * Boolean to check whether the database has been completely initialized.
+     * @return True if the database has finished being initialized.
+     */
+    public boolean isInitializingFinished() {
+        return isInitializingFinished;
+    }
+
+    /**
      * Return a list of all cuisines (in alphabetical order) used in this app.
      * Useful for creating a list of cuisines to filter by (in search and in
      * Adventure Mode).
@@ -395,6 +406,7 @@ public class FamiliarFoodsDatabase extends Application {
 
         protected Void doInBackground(Void... params) {
             loadDataFromFile();
+            isInitializingFinished = true;
             return null;
         }
 
