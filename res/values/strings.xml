@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">familiar-foods</string>
+    <string name="app_name">Familiar Foods</string>
     <string name="action_settings">Settings</string>
-
-    
     <string name="title_activity_adventure_mode">AdventureMode</string>
     <string name="link_food">Link Similar Foods</string>
     <string name="add_food">Add New Food</string>
     <string name="adventure_mode">Adventure Mode</string>
-    <string name="friends_foods">Friend\'s Foods</string>
+    <string name="friends_foods">Friend's Foods</string>
     <string name="filter_button">Filter Results</string>
     <string name="help_button">\?</string>
     <string name="suggestion_prompt">Why don\'t you try&#8230;</string>
@@ -19,5 +17,5 @@
     <string name="cuisine_type">Cuisine Type Goes Here</string>
     <string name="food">Food</string>
     <string name="food_name">Name of Food Goes Here</string>
-    
+
 </resources>

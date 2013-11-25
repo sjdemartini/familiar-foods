@@ -19,14 +19,14 @@
 
             >
         <ImageButton
-              android:id="@+id/linkSimilarFoodsButton"
+              android:id="linkSimilarFoodsButton"
               android:layout_height="wrap_content"
               android:layout_width="wrap_content"
 
                 />
 
         <ImageButton
-                android:id="@+id/addNewFoodButton"
+                android:id="addNewFoodButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
 
@@ -69,7 +69,7 @@
             >
 
         <ImageButton
-                android:id="@+id/adventureModeButton"
+                android:id="adventureModeButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:onClick="startAdventureModeActivity"
@@ -77,7 +77,7 @@
                 />
 
         <ImageButton
-                android:id="@+id/friendsFoodsButton"
+                android:id="friendsFoodsButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
 
@@ -105,13 +105,6 @@
                 android:text="@string/friends_foods"
 
                 />
-
-        <Button
-            android:id="@+id/button1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Adventure Mode!" />
-
     </LinearLayout>
 
 
