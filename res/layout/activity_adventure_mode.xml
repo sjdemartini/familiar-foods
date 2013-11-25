@@ -4,6 +4,8 @@
               android:layout_width="fill_parent"
               android:layout_height="fill_parent"
               android:id="@+id/linearLayout1"
+              android:background="@color/white"
+
 
         >
 
@@ -13,7 +15,8 @@
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
             android:layout_gravity="center"
-            android:padding="5dp"
+            android:padding="20dp"
+
             >
 
        <Button
@@ -21,18 +24,36 @@
             android:layout_width="wrap_content"
             android:id="@+id/filterResultsButton"
             android:text="@string/filter_button"
-               />
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textSize="sp"
+            android:textColor="@color/white"
+            android:background="@drawable/filter_button"
+            android:padding="5dp"
+            android:layout_marginRight="20dp"
+
+
+
+/>
 
         <Button
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_width="fill_parent"
                 android:id="@+id/helpButton"
                 android:text="@string/help_button"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textSize="20sp"
+                android:textColor="@color/white"
+                android:background="@drawable/help_button"
+                android:padding="9dp"
+                android:layout_marginLeft="15dp"
+
 
 
                 />
 
     </LinearLayout>
+
+
 
 
 
@@ -49,6 +70,13 @@
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
                 android:text="@string/suggestion_prompt"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@color/blue"
+                android:background="@color/white"
+                android:textStyle="bold|italic"
+                android:layout_margin="10dp"
+
+
                 />
 
     </LinearLayout>
@@ -70,6 +98,12 @@
                 android:layout_width="wrap_content"
                 android:id="@+id/previousFoodButton"
                 android:text="@string/previous_food"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textSize="20sp"
+                android:textColor="@color/white"
+                android:background="@drawable/previous_button"
+                android:padding="10dp"
+
                 />
 
         <ImageView
@@ -79,10 +113,16 @@
                 />
 
         <Button
-                android:layout_height="wrap_content"
+                android:layout_height="fill_parent"
                 android:layout_width="wrap_content"
                 android:id="@+id/nextFoodButton"
                 android:text="@string/next_food"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textSize="20sp"
+                android:textColor="@color/white"
+                android:background="@drawable/next_button"
+                android:padding="10dp"
+
                 />
 
 
@@ -98,7 +138,7 @@
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
             android:layout_gravity="center"
-            android:padding="30dp"
+            android:padding="20dp"
             >
 
         <TextView
@@ -106,7 +146,11 @@
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
                 android:text="@string/cuisine"
-
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:layout_gravity="center"
+                android:textColor="@color/blue"
+                android:background="@color/white"
+                android:textStyle="bold"
 
                 />
 
@@ -115,6 +159,10 @@
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
                 android:text="@string/cuisine_type"
+                android:layout_gravity="center"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@color/blue"
+                android:background="@color/white"
                 />
 
         <TextView
@@ -122,6 +170,12 @@
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
                 android:text="@string/food"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:layout_gravity="center"
+                android:textColor="@color/blue"
+                android:background="@color/white"
+                android:textStyle="bold"
+                android:paddingTop="20dp"
                 />
 
         <TextView
@@ -129,6 +183,9 @@
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
                 android:text="@string/food_name"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@color/blue"
+                android:background="@color/white"
                 />
 
     </LinearLayout>
