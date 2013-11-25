@@ -352,7 +352,7 @@ public class FamiliarFoodsDatabase extends Application {
      * @param cuisine The name of the cuisine type.
      * @param description The descriptors for this food.
      * @param photoFile The filename for the photo.
-     * @return whether the addition to the database was successful.
+     * 
      */
     public void addFoodToDatabase(String foodName, String cuisine,
             String[] descriptors, String photoFile) {
