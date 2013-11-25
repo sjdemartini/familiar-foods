@@ -1,7 +1,6 @@
 package edu.berkeley.cs160.familiarfoods;
 
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 
@@ -15,6 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 public class AdventureMode extends Activity {
@@ -28,26 +28,60 @@ public class AdventureMode extends Activity {
      * critical to Adventure Mode showing a "random" result.
      */
     List<String> foods;
-    ListIterator<String> foodIterator;
+    private int currFoodIndex = 0;
+    private int numFoods;
     String displayedFood;
+
+    /** TextView for displaying the current food's name. */
+    TextView foodName;
+    /** TextView for displaying the cuisine of the current food. */
+    TextView cuisineName;
+    /** ImageView for displaying a picture of the current food. */
+    ImageView foodImage;
+
+    /** Button to go to the next food. */
+    Button nextButton;
+    /** Button to go to the previous food. */
+    Button prevButton;
+
+    private static final byte NEXT = 1;
+    private static final byte PREV = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_adventure_mode);
+
         // Show the Up button in the action bar.
         setupActionBar();
-        startListeners();
+
         // Get the database:
         db = ((FamiliarFoodsDatabase) getApplication());
 
-        List<String> cuisines = db.getAllCuisines();
+        // Get views on the screen:
+        foodName = (TextView) findViewById(R.id.currentFood);
+        cuisineName = (TextView) findViewById(R.id.currentCuisine);
+        foodImage = (ImageView) findViewById(R.id.currentDisplayedFood);
+        nextButton = (Button) findViewById(R.id.nextFoodButton);
+        prevButton = (Button) findViewById(R.id.previousFoodButton);
+
+        // Hack to ensure that db initialization is complete
+        while (!db.isInitializingFinished()) {
+            try {
+                Thread.sleep(5);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
 
         // TODO: Add filtering of cuisines (via user-chosen filter), instead of
         // always using all of them:
+        List<String> cuisines = db.getAllCuisines();
         setFoods(cuisines);
-        rotateThroughFoods("next");
-        rotateThroughFoods("next");
+
+        // Start the button click listeners
+        startListeners();
+
         displayFood();
     }
 
@@ -67,22 +101,18 @@ public class AdventureMode extends Activity {
         getMenuInflater().inflate(R.menu.adventure_mode, menu);
         return true;
     }
-    
+
     protected void startListeners() {
-    	Button nextButton = (Button) findViewById(R.id.nextFoodButton);
 		nextButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View arg0) {
-				rotateThroughFoods("next");
-				displayFood();
+				rotateThroughFoods(NEXT);
 			}
     	});
-		Button prevButton = (Button) findViewById(R.id.previousFoodButton);
 		prevButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View arg0) {
-				rotateThroughFoods("prev");
-				displayFood();
+				rotateThroughFoods(PREV);
 			}
     	});
     }
@@ -115,25 +145,27 @@ public class AdventureMode extends Activity {
      */
     protected void setFoods(List<String> cuisines) {
         foods = db.getFoodsForCuisines(cuisines);
-        foodIterator = foods.listIterator();
+        numFoods = foods.size();
 
         // Randomize the order of the foods shown:
         Collections.shuffle(foods);
     }
-    
-    protected void rotateThroughFoods(String direction) {
-    	if (direction == "next") {
-    		displayedFood = foodIterator.next();
+
+    protected void rotateThroughFoods(byte direction) {
+    	if (direction == NEXT) {
+    	    currFoodIndex++;
+    	} else {
+    	    currFoodIndex--;
     	}
-    	if (direction == "prev") {
-    		displayedFood = foodIterator.previous();
-    	}
+    	nextButton.setEnabled(currFoodIndex < (numFoods - 1));
+    	prevButton.setEnabled(currFoodIndex > 0);
+    	displayFood();
     }
-    
+
     protected void displayFood() {
-    	TextView foodName = (TextView) findViewById(R.id.currentFood);
-    	TextView cuisineName = (TextView) findViewById(R.id.currentCuisine);
+        displayedFood = foods.get(currFoodIndex);
     	foodName.setText(displayedFood);
     	cuisineName.setText(db.getCuisineForFood(displayedFood));
+    	foodImage.setImageBitmap(db.getFoodPhoto(displayedFood));
     }
 }
