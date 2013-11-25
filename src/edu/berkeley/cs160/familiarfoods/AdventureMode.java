@@ -103,18 +103,18 @@ public class AdventureMode extends Activity {
     }
 
     protected void startListeners() {
-		nextButton.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View arg0) {
-				rotateThroughFoods(NEXT);
-			}
-    	});
-		prevButton.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View arg0) {
-				rotateThroughFoods(PREV);
-			}
-    	});
+        nextButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View arg0) {
+                rotateThroughFoods(NEXT);
+            }
+        });
+        prevButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View arg0) {
+                rotateThroughFoods(PREV);
+            }
+        });
     }
 
     @Override
@@ -152,20 +152,20 @@ public class AdventureMode extends Activity {
     }
 
     protected void rotateThroughFoods(byte direction) {
-    	if (direction == NEXT) {
-    	    currFoodIndex++;
-    	} else {
-    	    currFoodIndex--;
-    	}
-    	nextButton.setEnabled(currFoodIndex < (numFoods - 1));
-    	prevButton.setEnabled(currFoodIndex > 0);
-    	displayFood();
+        if (direction == NEXT) {
+            currFoodIndex++;
+        } else {
+            currFoodIndex--;
+        }
+        nextButton.setEnabled(currFoodIndex < (numFoods - 1));
+        prevButton.setEnabled(currFoodIndex > 0);
+        displayFood();
     }
 
     protected void displayFood() {
         displayedFood = foods.get(currFoodIndex);
-    	foodName.setText(displayedFood);
-    	cuisineName.setText(db.getCuisineForFood(displayedFood));
-    	foodImage.setImageBitmap(db.getFoodPhoto(displayedFood));
+        foodName.setText(displayedFood);
+        cuisineName.setText(db.getCuisineForFood(displayedFood));
+        foodImage.setImageBitmap(db.getFoodPhoto(displayedFood));
     }
 }
