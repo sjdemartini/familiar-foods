@@ -1,9 +1,11 @@
 package edu.berkeley.cs160.familiarfoods;
 
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 
-import com.example.familiar_foods.R;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
@@ -12,6 +14,11 @@ import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 
 public class AdventureMode extends Activity {
 
@@ -24,6 +31,8 @@ public class AdventureMode extends Activity {
      * critical to Adventure Mode showing a "random" result.
      */
     List<String> foods;
+    HashMap<String, String> hardHash;
+    int foodIndex = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,15 +40,41 @@ public class AdventureMode extends Activity {
         setContentView(R.layout.activity_adventure_mode);
         // Show the Up button in the action bar.
         setupActionBar();
+        startListeners();
 
         // Get the database:
-        db = ((FamiliarFoodsDatabase) getApplication());
+        //db = ((FamiliarFoodsDatabase) getApplication());
 
-        List<String> cuisines = db.getAllCuisines();
+        //List<String> cuisines = db.getAllCuisines();
 
         // TODO: Add filtering of cuisines (via user-chosen filter), instead of
         // always using all of them:
+        List<String> cuisines = new LinkedList<String>();
         setFoods(cuisines);
+        
+        displayFoodSuggestion();
+    }
+    
+    protected void startListeners() {
+    	Button nextButton = (Button) findViewById(R.id.nextFoodButton);
+		
+		nextButton.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View arg0) {
+				foodIndex+=1;
+				displayFoodSuggestion();
+			}
+    	});
+		
+		Button prevButton = (Button) findViewById(R.id.previousFoodButton);
+		
+		prevButton.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View arg0) {
+				foodIndex-=1;
+				displayFoodSuggestion();
+			}
+    	});
     }
 
     /**
@@ -86,9 +121,38 @@ public class AdventureMode extends Activity {
      * @param cuisines The list of cuisines to be used for filtering.
      */
     protected void setFoods(List<String> cuisines) {
-        foods = db.getFoodsForCuisines(cuisines);
+    	//real implementation
+    	
+    	/* foods = db.getFoodsForCuisines(cuisines);
 
         // Randomize the order of the foods shown:
-        Collections.shuffle(foods);
+        Collections.shuffle(foods); **/
+    	
+
+        //Temporary hard-coding for the project
+        List<String> hardCodedFood = new LinkedList<String>();
+        hardCodedFood.add("Green curry (eggplant)");
+        hardCodedFood.add("Chicken Vindaloo");
+        hardCodedFood.add("Enchiladas");
+        foods = hardCodedFood;
+        
+        hardHash = new HashMap<String, String>();
+    	hardHash.put("Green curry (eggplant)", "Thai");
+    	hardHash.put("Chicken Vindaloo", "Indian");
+    	hardHash.put("Enchiladas", "Mexican");
+    }
+    
+    protected void displayFoodSuggestion() {
+    	if (foodIndex < 0) {
+			foodIndex = foods.size()-1;
+		}
+    	if (foodIndex >= foods.size()) {
+    		foodIndex = 0;
+    	}
+    	String displayedFood = ((LinkedList<String>) foods).get(foodIndex);
+    	TextView foodName = (TextView)findViewById(R.id.currentFood);
+    	foodName.setText(displayedFood);
+    	TextView cuisineName = (TextView)findViewById(R.id.currentCuisine);
+    	cuisineName.setText(hardHash.get(displayedFood));
     }
 }
