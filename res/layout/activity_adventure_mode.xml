@@ -1,100 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="fill_parent"
-              android:layout_height="fill_parent"
-              android:id="@+id/linearLayout1"
-              android:background="@color/white"
-
-
-        >
+    android:id="@+id/linearLayout1"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/white"
+    android:orientation="vertical" >
 
     <LinearLayout
-            android:id="@+id/linearLayout2"
-            android:orientation="horizontal"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:layout_gravity="center"
-            android:padding="20dp"
-
-            >
-
-       <Button
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:id="@+id/filterResultsButton"
-            android:text="@string/filter_button"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textSize="20sp"
-            android:textColor="@color/white"
-            android:background="@drawable/filter_button"
-            android:padding="5dp"
-            android:layout_marginRight="20dp"
-
-
-
-/>
+        android:id="@+id/linearLayout2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="horizontal"
+        android:padding="20dp" >
 
         <Button
-                android:layout_height="fill_parent"
-                android:layout_width="fill_parent"
-                android:id="@+id/helpButton"
-                android:text="@string/help_button"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textSize="20sp"
-                android:textColor="@color/white"
-                android:background="@drawable/help_button"
-                android:padding="9dp"
-                android:layout_marginLeft="15dp"
-                />
+            android:id="@+id/filterResultsButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/filter_button"
+            android:padding="5dp"
+            android:text="@string/filter_button"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
 
+        <Button
+            android:id="@+id/helpButton"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_marginLeft="15dp"
+            android:background="@drawable/help_button"
+            android:padding="9dp"
+            android:text="@string/help_button"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
     </LinearLayout>
 
-
-
-
-
-
     <LinearLayout
-            android:id="@+id/linearLayout3"
-            android:orientation="horizontal"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:padding="5dp"
-            >
+        android:id="@+id/linearLayout3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="5dp" >
 
         <TextView
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:text="@string/suggestion_prompt"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:textColor="@color/blue"
-                android:background="@color/white"
-                android:textStyle="bold|italic"
-                android:layout_margin="10dp"
-
-
-                />
-
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@color/white"
+            android:text="@string/suggestion_prompt"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/blue"
+            android:textStyle="bold|italic" />
     </LinearLayout>
 
-
     <LinearLayout
-            android:id="@+id/linearLayout4"
-            android:orientation="horizontal"
-            android:layout_height="wrap_content"
-            android:layout_width="fill_parent"
-            android:layout_gravity="center"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            >
+        android:id="@+id/linearLayout4"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="horizontal"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp" >
 
         <Button
             android:id="@+id/previousFoodButton"
             android:layout_width="40dp"
             android:layout_height="wrap_content"
-            android:background="@drawable/previous_button"
             android:layout_gravity="left|center_vertical"
+            android:background="@drawable/previous_button"
             android:paddingLeft="5dp"
             android:paddingRight="10dp"
             android:text="@string/previous_food"
@@ -108,90 +85,77 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal|top"
             android:layout_weight="1"
+            android:adjustViewBounds="true"
             android:maxHeight="150dip"
             android:maxWidth="150dip"
             android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            android:adjustViewBounds="true" />
+            android:paddingRight="10dp" />
 
         <Button
             android:id="@+id/nextFoodButton"
             android:layout_width="40dp"
             android:layout_height="wrap_content"
-            android:background="@drawable/next_button"
             android:layout_gravity="right|center_vertical"
+            android:background="@drawable/next_button"
             android:paddingLeft="10dp"
             android:paddingRight="5dp"
             android:text="@string/next_food"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textColor="@color/white"
             android:textSize="20sp" />
-
     </LinearLayout>
 
-
-
-
-
     <LinearLayout
-            android:id="@+id/linearLayout5"
-            android:orientation="vertical"
-            android:layout_height="0dp"
-            android:layout_width="fill_parent"
-            android:layout_gravity="bottom|center_horizontal"
-            android:layout_weight="0.5"
-            android:padding="20dp"
-            >
+        android:id="@+id/linearLayout5"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_weight="0.5"
+        android:orientation="vertical"
+        android:padding="20dp" >
 
         <TextView
-                android:id="@+id/cuisine"
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:text="@string/cuisine"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:layout_gravity="center"
-                android:textColor="@color/blue"
-                android:background="@color/white"
-                android:textStyle="bold"
-
-                />
+            android:id="@+id/cuisine"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@color/white"
+            android:text="@string/cuisine"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/blue"
+            android:textStyle="bold" />
 
         <TextView
-                android:id="@+id/currentCuisine"
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:text="@string/cuisine_type"
-                android:layout_gravity="center"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:textColor="@color/blue"
-                android:background="@color/white"
-                />
+            android:id="@+id/currentCuisine"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@color/white"
+            android:text="@string/cuisine_type"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/blue" />
 
         <TextView
-                android:id="@+id/food"
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:text="@string/food"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:layout_gravity="center"
-                android:textColor="@color/blue"
-                android:background="@color/white"
-                android:textStyle="bold"
-                android:paddingTop="20dp"
-                />
+            android:id="@+id/food"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@color/white"
+            android:paddingTop="20dp"
+            android:text="@string/food"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/blue"
+            android:textStyle="bold" />
 
         <TextView
-                android:id="@+id/currentFood"
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:layout_gravity="center"
-                android:text="@string/food_name"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:textColor="@color/blue"
-                android:background="@color/white"
-                />
-
+            android:id="@+id/currentFood"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@color/white"
+            android:text="@string/food_name"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/blue" />
     </LinearLayout>
 
 </LinearLayout>
-
