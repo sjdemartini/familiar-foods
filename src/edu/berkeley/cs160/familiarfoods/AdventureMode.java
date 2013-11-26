@@ -6,6 +6,7 @@ import java.util.ListIterator;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
@@ -43,6 +44,8 @@ public class AdventureMode extends Activity {
     Button nextButton;
     /** Button to go to the previous food. */
     Button prevButton;
+    /** Button to go to the filter foods. */
+    Button filterButton;
 
     private static final byte NEXT = 1;
     private static final byte PREV = -1;
@@ -64,6 +67,7 @@ public class AdventureMode extends Activity {
         foodImage = (ImageView) findViewById(R.id.currentDisplayedFood);
         nextButton = (Button) findViewById(R.id.nextFoodButton);
         prevButton = (Button) findViewById(R.id.previousFoodButton);
+        filterButton = (Button) findViewById(R.id.filterResultsButton);
 
         // Hack to ensure that db initialization is complete
         while (!db.isInitializingFinished()) {
@@ -114,6 +118,12 @@ public class AdventureMode extends Activity {
             public void onClick(View arg0) {
                 rotateThroughFoods(PREV);
             }
+        });
+        filterButton.setOnClickListener(new OnClickListener() {
+        	@Override
+        	public void onClick(View arg0) {
+        		startFilterActivity();
+        	}
         });
     }
 
@@ -167,5 +177,10 @@ public class AdventureMode extends Activity {
         foodName.setText(displayedFood);
         cuisineName.setText(db.getCuisineForFood(displayedFood));
         foodImage.setImageBitmap(db.getFoodPhoto(displayedFood));
+    }
+    
+    protected void startFilterActivity() {
+		Intent openFilterIntent = new Intent(this, Filter.class);
+        startActivity(openFilterIntent);
     }
 }
