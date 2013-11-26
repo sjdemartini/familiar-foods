@@ -1,5 +1,6 @@
 package edu.berkeley.cs160.familiarfoods;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.ListIterator;
@@ -77,10 +78,15 @@ public class AdventureMode extends Activity {
                 e.printStackTrace();
             }
         }
-
-        // TODO: Add filtering of cuisines (via user-chosen filter), instead of
-        // always using all of them:
-        List<String> cuisines = db.getAllCuisines();
+        
+        // Filter by foods
+        Intent i = getIntent();
+        List<String> cuisines;
+        if (i.getExtras() != null) {
+        	cuisines = i.getStringArrayListExtra("cuisines");
+        } else {
+        	cuisines = db.getAllCuisines();
+        }
         setFoods(cuisines);
 
         // Start the button click listeners
