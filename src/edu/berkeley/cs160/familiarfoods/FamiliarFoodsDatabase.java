@@ -270,7 +270,7 @@ public class FamiliarFoodsDatabase extends Application {
      * @return a sorted list of all cuisines.
      */
     public List<String> getAllCuisines() {
-        return Arrays.asList(cuisines);
+        return new ArrayList<String>(Arrays.asList(cuisines));
     }
 
     /**
@@ -363,7 +363,7 @@ public class FamiliarFoodsDatabase extends Application {
      * @param cuisine The name of the cuisine type.
      * @param description The descriptors for this food.
      * @param photoFile The filename for the photo.
-     * 
+     *
      */
     public void addFoodToDatabase(String foodName, String cuisine,
             String[] descriptors, String photoFile) {

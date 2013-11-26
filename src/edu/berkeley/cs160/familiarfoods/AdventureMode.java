@@ -24,6 +24,8 @@ public class AdventureMode extends Activity {
     /** The database for this app. */
     FamiliarFoodsDatabase db;
 
+    /** A list of the cuisines for which foods are currently shown. */
+    List<String> cuisines;
     /**
      * A list of the foods that can be shown for adventure mode based on any
      * filters on cuisine. The foods list is in randomized order, as that is
@@ -73,17 +75,16 @@ public class AdventureMode extends Activity {
         // Hack to ensure that db initialization is complete
         while (!db.isInitializingFinished()) {
             try {
-                Thread.sleep(5);
+                Thread.sleep(500);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
-        
+
         // Filter by foods
         Intent i = getIntent();
-        List<String> cuisines;
         if (i.getExtras() != null) {
-        	cuisines = i.getStringArrayListExtra("cuisines");
+            cuisines = i.getStringArrayListExtra("cuisines");
         } else {
         	cuisines = db.getAllCuisines();
         }
@@ -167,10 +168,26 @@ public class AdventureMode extends Activity {
         Collections.shuffle(foods);
     }
 
+    /**
+     * Go to the next or previous food, depending on the given direction.
+     *
+     * The function silently ignores the command if there are no more foods in
+     * the given direction.
+     *
+     * @param direction one of NEXT or PREV direction constants.
+     */
     protected void rotateThroughFoods(byte direction) {
         if (direction == NEXT) {
+            if (currFoodIndex >= (numFoods - 1)) {
+                // Ignore the command if there are no more "next" foods
+                return;
+            }
             currFoodIndex++;
         } else {
+            if (currFoodIndex < 1) {
+                // Ignore the command if there are no more "previous" foods
+                return;
+            }
             currFoodIndex--;
         }
         nextButton.setEnabled(currFoodIndex < (numFoods - 1));
@@ -184,9 +201,11 @@ public class AdventureMode extends Activity {
         cuisineName.setText(db.getCuisineForFood(displayedFood));
         foodImage.setImageBitmap(db.getFoodPhoto(displayedFood));
     }
-    
+
     protected void startFilterActivity() {
 		Intent openFilterIntent = new Intent(this, Filter.class);
+		openFilterIntent.putStringArrayListExtra(
+		        "cuisines", (ArrayList<String>) cuisines);
         startActivity(openFilterIntent);
     }
 }

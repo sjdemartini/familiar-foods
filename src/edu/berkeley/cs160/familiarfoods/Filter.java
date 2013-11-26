@@ -2,7 +2,9 @@ package edu.berkeley.cs160.familiarfoods;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import android.app.Activity;
 import android.content.Context;
@@ -25,6 +27,7 @@ import android.widget.Toast;
 public class Filter extends Activity {
 	FamiliarFoodsDatabase db;
 	Button selectAll, selectNone;
+	ListView filterList;
 	List<String> cuisines;
 
 	@Override
@@ -32,6 +35,8 @@ public class Filter extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.filter_foods);
 
+
+		filterList = (ListView) findViewById(R.id.filterList);
 		selectAll = (Button) findViewById(R.id.AllButton);
 		selectNone = (Button) findViewById(R.id.NoneButton);
 
@@ -39,42 +44,46 @@ public class Filter extends Activity {
 
 		cuisines = db.getAllCuisines();
 
-		startListeners();
+		List<String> currSelectedCuisines;
 
+		// Get the current set of checked cuisines from Adventure Mode:
+		Intent i = getIntent();
+		currSelectedCuisines = i.getStringArrayListExtra("cuisines");
+
+		startListeners();
 		setUpAdapter();
+		setSelectedCuisines(currSelectedCuisines);
 	}
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		final ListView lv = (ListView) findViewById(R.id.filterList);
-		Toast.makeText(this, String.valueOf(lv.getCheckedItemCount()),
-				Toast.LENGTH_LONG).show();
+//		Toast.makeText(this, String.valueOf(lv.getCheckedItemCount()),
+//				Toast.LENGTH_LONG).show();
 		switch (item.getItemId()) {
-		case android.R.id.home:
-			// This ID represents the Home or Up button. In the case of this
-			// activity, the Up button is shown. Use NavUtils to allow users
-			// to navigate up one level in the application structure. For
-			// more details, see the Navigation pattern on Android Design:
-			//
-			// http://developer.android.com/design/patterns/navigation.html#up-vs-back
-			//
-			NavUtils.navigateUpFromSameTask(this);
-			return true;
-		case R.id.done:
-			// Go back to Adventure mode
-            List<String> my_sel_items = new ArrayList();
-            SparseBooleanArray a = lv.getCheckedItemPositions();
-            
-            for(int i = 0; i < a.size() ; i++) {
-                if (a.valueAt(i)) {
-                	//TODO: is this the right index in the list view?
-                	int idx = a.keyAt(i);
-                    my_sel_items.add((String) lv.getAdapter().getItem(idx));
+    		case android.R.id.home:
+    			// This ID represents the Home or Up button. In the case of this
+    			// activity, the Up button is shown. Use NavUtils to allow users
+    			// to navigate up one level in the application structure. For
+    			// more details, see the Navigation pattern on Android Design:
+    			//
+    			// http://developer.android.com/design/patterns/navigation.html#up-vs-back
+    			//
+    			NavUtils.navigateUpFromSameTask(this);
+    			return true;
+    		case R.id.done:
+    			// Go back to Adventure mode
+                List<String> my_sel_items = new ArrayList<String>();
+                SparseBooleanArray a = filterList.getCheckedItemPositions();
+
+                for(int i = 0; i < a.size() ; i++) {
+                    if (a.valueAt(i)) {
+                    	int idx = a.keyAt(i);
+                        my_sel_items.add((String) filterList.getAdapter().getItem(idx));
+                    }
                 }
-            }
-            Intent returnToAdventureIntent = new Intent(this, AdventureMode.class);
-            returnToAdventureIntent.putStringArrayListExtra("cuisines", (ArrayList<String>) my_sel_items);
-            startActivity(returnToAdventureIntent);
+                Intent returnToAdventureIntent = new Intent(this, AdventureMode.class);
+                returnToAdventureIntent.putStringArrayListExtra("cuisines", (ArrayList<String>) my_sel_items);
+                startActivity(returnToAdventureIntent);
 		}
 		return super.onOptionsItemSelected(item);
 	}
@@ -86,10 +95,22 @@ public class Filter extends Activity {
 		return true;
 	}
 
-	public List<String> getSelectedCuisines() {
-		ListView lv = (ListView) findViewById(R.id.filterList);
-		return (List<String>) lv.getCheckedItemPositions();
+	@SuppressWarnings("unchecked")
+    public List<String> getSelectedCuisines() {
+		return (List<String>) filterList.getCheckedItemPositions();
 	}
+
+    protected void setSelectedCuisines(List<String> selectedCuisines) {
+        // Create a Set of the selected cuisines for constant-time lookup
+        Set<String> selectedCuisinesSet = new HashSet<String>(selectedCuisines);
+        int numCuisines = cuisines.size();
+        for (int i = 0; i < numCuisines; i++) {
+            String currCuisine = cuisines.get(i);
+            if (selectedCuisinesSet.contains(currCuisine)) {
+                filterList.setItemChecked(i, true);
+            }
+        }
+    }
 
 	protected void startListeners() {
 		selectAll.setOnClickListener(new OnClickListener() {
