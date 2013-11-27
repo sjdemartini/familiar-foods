@@ -7,6 +7,8 @@ import java.util.ListIterator;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -49,6 +51,10 @@ public class AdventureMode extends Activity {
     Button prevButton;
     /** Button to go to the filter foods. */
     Button filterButton;
+    /** Button to go to the help menu. */
+    Button helpButton;
+    /** Filter help dialog */
+    AlertDialog.Builder alt_bld;
 
     private static final byte NEXT = 1;
     private static final byte PREV = -1;
@@ -71,6 +77,7 @@ public class AdventureMode extends Activity {
         nextButton = (Button) findViewById(R.id.nextFoodButton);
         prevButton = (Button) findViewById(R.id.previousFoodButton);
         filterButton = (Button) findViewById(R.id.filterResultsButton);
+        helpButton = (Button) findViewById(R.id.helpButton);
 
         // Hack to ensure that db initialization is complete
         while (!db.isInitializingFinished()) {
@@ -90,6 +97,8 @@ public class AdventureMode extends Activity {
         }
         setFoods(cuisines);
 
+        alt_bld = new AlertDialog.Builder(this);
+		
         // Start the button click listeners
         startListeners();
 
@@ -130,6 +139,19 @@ public class AdventureMode extends Activity {
         	@Override
         	public void onClick(View arg0) {
         		startFilterActivity();
+        	}
+        });
+        helpButton.setOnClickListener(new OnClickListener() {
+        	@Override
+        	public void onClick(View arg0) {
+        		alt_bld.setMessage("By filtering, you can select one or more cuisines that you wish to see in the results.")
+        			.setPositiveButton("Got it!", new DialogInterface.OnClickListener() {
+        				public void onClick(DialogInterface dialog, int id) {
+        					dialog.cancel();
+        				}
+        			});
+        		
+        		alt_bld.show();
         	}
         });
     }
