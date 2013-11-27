@@ -3,42 +3,49 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
+    <LinearLayout
+        android:id="@+id/linearLayout1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:orientation="horizontal"
+        android:padding="5.0dip" >
+
+        <Button
+            android:id="@+id/AllButton"
+            android:layout_width="0.0dip"
+            android:layout_height="fill_parent"
+            android:layout_weight="1.0"
+            android:layout_gravity="left|center"
+            android:layout_marginRight="15dp"
+            android:background="@drawable/select_button"
+            android:padding="3dp"
+            android:text="@string/select_all"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/NoneButton"
+            android:layout_width="0.0dip"
+            android:layout_height="fill_parent"
+            android:layout_weight="1.0"
+            android:layout_gravity="right|center"
+            android:background="@drawable/select_button"
+            android:padding="3dp"
+            android:text="@string/select_none"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+    </LinearLayout>
+
     <ListView
         android:id="@+id/filterList"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/AllButton"
+        android:layout_below="@+id/linearLayout1"
+        android:layout_centerHorizontal="true"
         android:background="@drawable/list_border" >
-
     </ListView>
 
-    <Button
-        android:id="@+id/AllButton"
-        android:layout_width="130dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginRight="15dp"
-        android:background="@drawable/select_button"
-        android:padding="9dp"
-        android:text="@string/select_all"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textColor="@color/white"
-        android:textSize="20sp" />
-
-    <Button
-        android:id="@+id/NoneButton"
-        android:layout_width="130dp"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/filterList"
-        android:layout_marginRight="15dp"
-        android:layout_toLeftOf="@+id/AllButton"
-        android:background="@drawable/select_button"
-        android:padding="9dp"
-        android:text="@string/select_none"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textColor="@color/white"
-        android:textSize="20sp" />
-    
 </RelativeLayout>
