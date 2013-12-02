@@ -29,7 +29,7 @@ public class AddFood extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_adventure_mode);
+        setContentView(R.layout.add_food);
 
         // Show the Up button in the action bar.
         setupActionBar();
@@ -53,7 +53,7 @@ public class AddFood extends Activity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.adventure_mode, menu);
+        getMenuInflater().inflate(R.menu.done, menu);
         return true;
     }
 
