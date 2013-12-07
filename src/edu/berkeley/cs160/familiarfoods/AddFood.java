@@ -1,25 +1,12 @@
 package edu.berkeley.cs160.familiarfoods;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.ListIterator;
-
 import android.annotation.TargetApi;
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 public class AddFood extends Activity {
 
@@ -37,7 +24,6 @@ public class AddFood extends Activity {
         // Get the database:
         db = ((FamiliarFoodsDatabase) getApplication());
 
-      
     }
 
     /**
@@ -74,4 +60,7 @@ public class AddFood extends Activity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+    // TODO: when food should be submitted use:
+    // db.addFoodToDatabase(foodName, cuisine, descriptors, photoFile)
 }

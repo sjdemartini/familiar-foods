@@ -16,6 +16,8 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Set;
+import java.util.TreeSet;
 
 import android.app.Application;
 import android.content.Context;
@@ -46,6 +48,12 @@ public class FamiliarFoodsDatabase extends Application {
     public static final String FOOD_TO_PHOTO_FILE = "foodToPhoto";
 
     /**
+     * The file name for storing a mapping from food name to a file path for
+     * a photo of that food.
+     */
+    public static final String FOOD_TO_LINKS_FILE = "foodToLinks";
+
+    /**
      * The file name for storing a mapping from cuisine type to a list of foods
      * in that cuisine.
      */
@@ -59,6 +67,9 @@ public class FamiliarFoodsDatabase extends Application {
 
     /** Local copy of food to photo hashmap. */
     protected HashMap<String, String> foodToPhoto;
+
+    /** Local copy of food to FoodLinks hashmap. */
+    protected HashMap<String, TreeSet<FoodLink>> foodToLinks;
 
     /** Local copy of cuisine to food hashmap. */
     protected HashMap<String, List<String>> cuisineToFood;
@@ -88,6 +99,129 @@ public class FamiliarFoodsDatabase extends Application {
             "Thai",
             "Vietnamese"
     };
+
+    /**
+     * Maintain a set of all the food links for this app.
+     *
+     * Useful for checking whether a given foodlink already exists.
+     */
+    protected Set<FoodLink> allFoodLinks;
+
+    /**
+     * A class used to represent a link between two foods in the database.
+     * The foods are stored in alphabetical order for food1 and food2.
+     */
+    private class FoodLink implements Comparable<FoodLink> {
+        String food1;
+        String food2;
+        /** Number of net upvotes/downvotes for this food link. */
+        int numVotes = 0;
+
+        public FoodLink(String food1, String food2) {
+            // Store the foods in alphabetical order
+            int compare = food1.compareToIgnoreCase(food2);
+            if (compare == 0) {
+                throw new IllegalArgumentException(
+                        "Can't link the same food to itself.");
+            } else if (compare < 0) {
+                this.food1 = food1;
+                this.food2 = food2;
+            } else {
+                this.food2 = food1;
+                this.food1 = food2;
+            }
+            numVotes = 1;
+        }
+
+        /**
+         * Up-vote this food link.
+         * @return the total number of votes after the up-voting.
+         */
+        public int upVote() {
+            numVotes++;
+            return getNumVotes();
+        }
+
+        /**
+         * Down-vote this food link.
+         * @return the total number of votes after the down-voting.
+         */
+        public int downVote() {
+            numVotes--;
+            return getNumVotes();
+        }
+
+        public int getNumVotes() {
+            return numVotes;
+        }
+
+        /**
+         * Given a food name for one of the foods in this link, return the
+         * other food that is part of the link.
+         *
+         * @param foodName
+         * @return
+         */
+        public String getOtherFood(String foodName) {
+            if (food1.equals(foodName)) {
+                return food2;
+            } else if (food2.equals(foodName)) {
+                return food1;
+            }
+            throw new IllegalArgumentException(
+                    "This food is not part of this link.");
+        }
+
+        @Override
+        public int hashCode() {
+            final int prime = 31;
+            int result = 1;
+            result = prime * result + getOuterType().hashCode();
+            result = prime * result + ((food1 == null) ? 0 : food1.hashCode());
+            result = prime * result + ((food2 == null) ? 0 : food2.hashCode());
+            return result;
+        }
+
+        /*
+         * Two FoodLinks are "equals" if the respective food1 and food2 Strings
+         * are equal.
+         */
+        @Override
+        public boolean equals(Object obj) {
+            if (this == obj)
+                return true;
+            if (obj == null)
+                return false;
+            if (getClass() != obj.getClass())
+                return false;
+            FoodLink other = (FoodLink) obj;
+            if (!getOuterType().equals(other.getOuterType()))
+                return false;
+            if (food1 == null) {
+                if (other.food1 != null)
+                    return false;
+            } else if (!food1.equals(other.food1))
+                return false;
+            if (food2 == null) {
+                if (other.food2 != null)
+                    return false;
+            } else if (!food2.equals(other.food2))
+                return false;
+            return true;
+        }
+
+        private FamiliarFoodsDatabase getOuterType() {
+            return FamiliarFoodsDatabase.this;
+        }
+
+        @Override
+        public int compareTo(FoodLink another) {
+            // Have the comparison flipped so that highest votes come first
+            // in ordering
+            return Integer.valueOf(another.getNumVotes()).compareTo(
+                    Integer.valueOf(getNumVotes()));
+        }
+    }
 
     @Override
     public void onCreate() {
@@ -124,6 +258,10 @@ public class FamiliarFoodsDatabase extends Application {
             foodToPhoto = new HashMap<String, String>();
             saveFoodToPhoto();
         }
+        if (foodToLinks == null) {
+            foodToLinks = new HashMap<String, TreeSet<FoodLink>>();
+            saveFoodToLinks();
+        }
         if (cuisineToFood == null) {
             cuisineToFood = new HashMap<String, List<String>>();
             for (String cuisine : cuisines) {
@@ -151,6 +289,7 @@ public class FamiliarFoodsDatabase extends Application {
         saveFoodToCuisine();
         saveFoodToDesc();
         saveFoodToPhoto();
+        saveFoodToLinks();
         saveCusineToFood();
     }
 
@@ -179,6 +318,15 @@ public class FamiliarFoodsDatabase extends Application {
      */
     protected void saveFoodToPhoto() {
         saveObjectToFile(foodToPhoto, FOOD_TO_PHOTO_FILE);
+    }
+
+    /**
+     * Save to file the foodToLinks map.
+     *
+     * This ensures the data persists between sessions.
+     */
+    protected void saveFoodToLinks() {
+        saveObjectToFile(foodToLinks, FOOD_TO_LINKS_FILE);
     }
 
     /**
@@ -260,6 +408,16 @@ public class FamiliarFoodsDatabase extends Application {
      */
     public boolean isInitializingFinished() {
         return isInitializingFinished;
+    }
+
+    /**
+     * Return a list of all foods (in no particular order) used in this app.
+     * Useful for autcomplete on food name.
+     *
+     * @return a list of all foods in the app.
+     */
+    public List<String> getAllFoods() {
+        return new ArrayList<String>(foodToCuisine.keySet());
     }
 
     /**
@@ -357,6 +515,47 @@ public class FamiliarFoodsDatabase extends Application {
     }
 
     /**
+     * Get a list of the foods linked to this food, in order from most votes
+     * to least.
+     *
+     * This method should be used in conjunction with getLinkVotes, which
+     * returns a list in the same order, where the net votes correspond to the
+     * food linked.
+     *
+     * @param foodName
+     * @return list of foods in the same order as the net votes for
+     *  getLinkVotes (most votes to least).
+     */
+    public List<String> getLinkedFoods(String foodName) {
+        List<String> foods = new ArrayList<String>();
+        TreeSet<FoodLink> links = foodToLinks.get(foodName);
+        for (FoodLink link : links) {
+            foods.add(link.getOtherFood(foodName));
+        }
+        return foods;
+    }
+
+    /**
+     * Get a list of the net votes for foods linked to this food, from most
+     * votes to least.
+     *
+     * This method should be used in conjunction with getLinkedFoods, which
+     * returns a list of foods.
+     *
+     * @param foodName
+     * @return list of net votes for this food in the same order as the
+     *  foods for getLinkedFoods.
+     */
+    public List<Integer> getLinkVotes(String foodName) {
+        List<Integer> votes = new ArrayList<Integer>();
+        TreeSet<FoodLink> links = foodToLinks.get(foodName);
+        for (FoodLink link : links) {
+            votes.add(link.getNumVotes());
+        }
+        return votes;
+    }
+
+    /**
      * Add a food with its parameters to the database.
      *
      * @param foodName The name of the food to add.
@@ -388,6 +587,89 @@ public class FamiliarFoodsDatabase extends Application {
         saveAllData();
         System.out.println("Added " + foodName);
     }
+
+    /**
+     * Store in the database a link between two foods.
+     *
+     * @param foodName1
+     * @param foodName2
+     */
+    public void linkFoods(String foodName1, String foodName2) {
+        FoodLink link = new FoodLink(foodName1, foodName2);
+        if (allFoodLinks.contains(link)) {
+            // If a link between these foods already exists, find it and
+            // up-vote the link:
+            TreeSet<FoodLink> links = foodToLinks.get(foodName1);
+            for (FoodLink foodLink : links) {
+                if (foodLink.equals(link)) {
+                    foodLink.upVote();
+                    return;
+                }
+            }
+            return;
+        }
+        addLinkForFood(foodName1, link);
+        addLinkForFood(foodName2, link);
+        allFoodLinks.add(link);
+    }
+
+    /**
+     * Ensure that the foodToLinks hashmap is updated, so that the list mapped
+     * to from the given food name adds the given link.
+     *
+     * @param foodName
+     * @param link
+     */
+    private void addLinkForFood(String foodName, FoodLink link) {
+        TreeSet<FoodLink> list;
+        if (foodToLinks.containsKey(foodName)) {
+            list = foodToLinks.get(foodName);
+        } else {
+            list = new TreeSet<FoodLink>();
+        }
+        list.add(link);
+    }
+
+    /**
+     * Up-vote a link between two foods.
+     */
+    public void upVoteLink(String foodName1, String foodName2) {
+        FoodLink link = new FoodLink(foodName1, foodName2);
+        if (! allFoodLinks.contains(link)) {
+            // Can't up-vote a link that does not exist
+            return;
+        }
+
+        // If a link between these foods exists, find it and upvote it
+        TreeSet<FoodLink> links = foodToLinks.get(foodName1);
+        for (FoodLink foodLink : links) {
+            if (foodLink.equals(link)) {
+                foodLink.upVote();
+                return;
+            }
+        }
+    }
+
+    /**
+     * Up-vote a link between two foods.
+     */
+    public void downVoteLink(String foodName1, String foodName2) {
+        FoodLink link = new FoodLink(foodName1, foodName2);
+        if (! allFoodLinks.contains(link)) {
+            // Can't down-vote a link that does not exist
+            return;
+        }
+
+        // If a link between these foods exists, find it and down-vote it
+        TreeSet<FoodLink> links = foodToLinks.get(foodName1);
+        for (FoodLink foodLink : links) {
+            if (foodLink.equals(link)) {
+                foodLink.downVote();
+                return;
+            }
+        }
+    }
+
 
 
     /**
