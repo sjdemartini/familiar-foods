@@ -7,22 +7,25 @@ import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 public class HomeActivity extends Activity {
 
     public static final String TAG = "FF_Home";
-    Button adventureModeButton;
-    Button addFoodButton;
-    Button linkFoodButton;
+    ImageButton adventureModeButton;
+    ImageButton addFoodButton;
+    ImageButton linkFoodButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         
-        adventureModeButton = (Button) findViewById(R.id.adventureModeButton);
-        addFoodButton = (Button) findViewById(R.id.addNewFoodButton);
-        linkFoodButton = (Button) findViewById(R.id.linkSimilarFoodsButton);
+        adventureModeButton = (ImageButton) findViewById(R.id.AdventureModeButton);
+        addFoodButton = (ImageButton) findViewById(R.id.AddNewFoodButton);
+        linkFoodButton = (ImageButton) findViewById(R.id.LinkFoodsButton);
+        
+        startListeners();
     }
 
     @Override

@@ -1,9 +1,138 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/linearLayout1"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:background="@color/white"
-    android:orientation="vertical" >
 
-</LinearLayout>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/white"
+        >
+
+    <ImageView
+            android:id="@+id/linkSimilarFoodsBanner"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:background="@drawable/link_similar_foods_banner"
+            android:layout_marginBottom="15dp"
+
+            />
+
+    <ImageView
+            android:id="@+id/food1"
+            android:background="@drawable/food1"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_below="@id/linkSimilarFoodsBanner"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="40dp"
+            />
+
+    <ImageView
+            android:id="@+id/cuisineLinkSimilarFoods"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:background="@drawable/cuisine_link"
+            android:layout_below="@id/food1"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="45dp"
+            />
+    <Spinner
+            android:id="@+id/linkSimilarCuisineSpinner1"
+            android:layout_height="24dp"
+            android:layout_width="110dp"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="135dp"
+            android:layout_below="@+id/food1"/>
+
+     <ImageView
+             android:id="@+id/foodLinkSimilarFood"
+             android:layout_height="wrap_content"
+             android:layout_width="wrap_content"
+             android:background="@drawable/food_link"
+             android:layout_below="@id/cuisineLinkSimilarFoods"
+             android:layout_marginLeft="45dp"
+             android:layout_marginBottom="10dp"
+             />
+
+    <Spinner
+            android:id="@+id/linkSimilarFoodSpinner1"
+            android:layout_height="24dp"
+            android:layout_width="110dp"
+            android:layout_alignLeft="@+id/linkSimilarCuisineSpinner1"
+            android:layout_below="@+id/cuisineLinkSimilarFoods"/>
+
+    <ImageView
+            android:id="@+id/isSimilarTo"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:background="@drawable/similar_to_text"
+            android:layout_below="@id/foodLinkSimilarFood"
+            android:layout_marginBottom="10dp"
+            />
+
+    <ImageView
+            android:id="@+id/food2"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:background="@drawable/food2"
+            android:layout_below="@id/isSimilarTo"
+            android:layout_marginLeft="40dp"
+            android:layout_marginBottom="5dp"
+            />
+
+    <ImageView
+            android:id="@+id/cuisine2LinkSimilarFoods"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:background="@drawable/cuisine_link"
+            android:layout_below="@id/food2"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="45dp"
+            />
+
+
+    <Spinner
+           android:id="@+id/linkSimilarCuisineSpinner2"
+           android:layout_height="24dp"
+           android:layout_width="110dp"
+           android:layout_alignLeft="@+id/linkSimilarCuisineSpinner1"
+           android:layout_below="@id/food2"
+
+            />
+    <ImageView
+            android:id="@+id/food2LinkSimilarFood"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:background="@drawable/food_link"
+            android:layout_below="@id/cuisine2LinkSimilarFoods"
+            android:layout_marginLeft="45dp"
+            android:layout_marginBottom="10dp"
+            />
+
+    <Spinner
+            android:id="@+id/linkSimilarFoodSpinner2"
+            android:layout_height="24dp"
+            android:layout_width="110dp"
+            android:layout_alignLeft="@+id/linkSimilarCuisineSpinner1"
+            android:layout_below="@+id/cuisine2LinkSimilarFoods"
+            android:layout_marginBottom="10dp"
+            />
+
+    <ImageButton
+            android:id="@+id/addDetailsButton"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+             android:background="@drawable/add_details_button"
+             android:layout_below="@id/food2LinkSimilarFood"
+             android:layout_marginLeft="80dp"
+             android:layout_marginRight="10dp"
+            />
+
+    <ImageButton
+            android:id="@+id/submitButton"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:background="@drawable/submit_button"
+            android:layout_toRightOf="@id/addDetailsButton"
+            android:layout_below="@id/linkSimilarFoodSpinner2"
+            />
+
+</RelativeLayout>

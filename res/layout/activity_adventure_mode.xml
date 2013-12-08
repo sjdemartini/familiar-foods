@@ -1,161 +1,124 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/linearLayout1"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:background="@color/white"
-    android:orientation="vertical" >
 
-    <LinearLayout
-        android:id="@+id/linearLayout2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:orientation="horizontal"
-        android:padding="20dp" >
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:orientation="vertical"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:background="@color/white"
 
-        <Button
-            android:id="@+id/filterResultsButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="20dp"
-            android:background="@drawable/filter_button"
-            android:padding="5dp"
-            android:text="@string/filter_button"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textColor="@color/white"
-            android:textSize="20sp" />
+        >
 
-        <Button
-            android:id="@+id/helpButton"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:layout_marginLeft="15dp"
-            android:background="@drawable/help_button"
-            android:padding="9dp"
-            android:text="@string/help_button"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textColor="@color/white"
-            android:textSize="20sp" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/linearLayout3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="5dp" >
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:background="@color/white"
-            android:text="@string/suggestion_prompt"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="@color/blue"
-            android:textStyle="bold|italic" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/linearLayout4"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:orientation="horizontal"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp" >
-
-        <Button
-            android:id="@+id/previousFoodButton"
-            style="?android:attr/borderlessButtonStyle"
-            android:layout_width="40dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="left|center_vertical"
-            android:drawableTop="@drawable/left"
-            android:paddingLeft="5dp"
-            android:paddingRight="10dp"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textColor="@color/white"
-            android:textSize="20sp" />
 
         <ImageView
-            android:id="@+id/currentDisplayedFood"
-            android:layout_width="0dp"
+                android:id="@+id/adventureModeBanner"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:background="@drawable/adventure_mode_banner"
+                android:layout_marginBottom="5dp"
+
+                />
+
+    <ImageButton
+             android:id="@+id/filterResultsButton"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:background="@drawable/filter_results_button"
+             android:layout_below="@id/adventureModeBanner"
+             android:layout_marginLeft="80dp"
+
+            />
+
+    <ImageButton
+            android:id="@+id/helpButton"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal|top"
-            android:layout_weight="1"
-            android:adjustViewBounds="true"
-            android:maxHeight="150dip"
-            android:maxWidth="150dip"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp" />
+            android:layout_width="wrap_content"
+            android:background="@drawable/help_button"
+            android:layout_below="@id/adventureModeBanner"
+            android:layout_toRightOf="@id/filterResultsButton"
+            android:layout_marginLeft="20dp"
 
-        <Button
-            android:id="@+id/nextFoodButton"
-            style="?android:attr/borderlessButtonStyle"
-            android:layout_width="40dp"
+            />
+
+
+
+
+
+    <ImageView
+            android:id="@+id/suggestionText"
             android:layout_height="wrap_content"
-            android:layout_gravity="right|center_vertical"
-            android:drawableTop="@drawable/right"
-            android:paddingLeft="10dp"
-            android:paddingRight="5dp"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textColor="@color/white"
-            android:textSize="20sp" />
-    </LinearLayout>
+            android:layout_width="wrap_content"
+            android:background="@drawable/why_dont_you_try"
+            android:layout_below="@id/helpButton"
+            android:layout_marginTop="15dp"
 
-    <LinearLayout
-        android:id="@+id/linearLayout5"
-        android:layout_width="fill_parent"
-        android:layout_height="0dp"
-        android:layout_gravity="bottom|center_horizontal"
-        android:layout_weight="0.5"
-        android:orientation="vertical"
-        android:padding="20dp" >
+            />
 
-        <TextView
+    <ImageButton
+            android:id="@+id/previousFoodButton"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:background="@drawable/previous_button"
+            android:layout_below="@id/suggestionText"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            />
+
+    <ImageButton
+        android:id="@+id/nextFoodButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/suggestionText"
+        android:layout_marginTop="20dp"
+        android:layout_toRightOf="@+id/helpButton"
+        android:background="@drawable/next_button" />
+
+    <TextView
+            android:id="@+id/currentFood"
+            android:textColor="@color/dark_blue"
+            android:text="@string/food_type"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_below="@id/previousFoodButton"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="50dp"
+            android:textSize="25dp"
+            android:textStyle="bold"
+
+            />
+
+    <ImageView
             android:id="@+id/cuisine"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:background="@color/white"
-            android:text="@string/cuisine"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textColor="@color/blue"
-            android:textStyle="bold" />
+            android:background="@drawable/cuisine_text"
+            android:layout_below="@id/currentFood"
+            android:layout_marginTop="5dp"
+            />
 
-        <TextView
+    <TextView
             android:id="@+id/currentCuisine"
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:background="@color/white"
+            android:layout_width="wrap_content"
             android:text="@string/cuisine_type"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="@color/blue" />
+            android:layout_below="@id/cuisine"
+            android:layout_centerHorizontal="true"
+            android:textColor="@color/dark_blue"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:layout_marginTop="5dp"
+            />
 
-        <TextView
-            android:id="@+id/food"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:background="@color/white"
-            android:paddingTop="20dp"
-            android:text="@string/food"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textColor="@color/blue"
-            android:textStyle="bold" />
+    <ImageView
+        android:id="@+id/currentDisplayedFood"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/currentFood"
+        android:layout_centerHorizontal="true"
+        android:layout_weight="1"
+        android:adjustViewBounds="true"
+        android:maxHeight="150dip"
+        android:maxWidth="150dip"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp" />
 
-        <TextView
-            android:id="@+id/currentFood"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:background="@color/white"
-            android:text="@string/food_name"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="@color/blue" />
-    </LinearLayout>
-
-</LinearLayout>
+</RelativeLayout>

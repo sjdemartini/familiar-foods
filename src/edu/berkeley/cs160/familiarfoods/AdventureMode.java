@@ -18,6 +18,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -46,13 +47,13 @@ public class AdventureMode extends Activity {
     ImageView foodImage;
 
     /** Button to go to the next food. */
-    Button nextButton;
+    ImageButton nextButton;
     /** Button to go to the previous food. */
-    Button prevButton;
+    ImageButton prevButton;
     /** Button to go to the filter foods. */
-    Button filterButton;
+    ImageButton filterButton;
     /** Button to go to the help menu. */
-    Button helpButton;
+    ImageButton helpButton;
     /** Filter help dialog */
     AlertDialog.Builder alt_bld;
 
@@ -74,10 +75,10 @@ public class AdventureMode extends Activity {
         foodName = (TextView) findViewById(R.id.currentFood);
         cuisineName = (TextView) findViewById(R.id.currentCuisine);
         foodImage = (ImageView) findViewById(R.id.currentDisplayedFood);
-        nextButton = (Button) findViewById(R.id.nextFoodButton);
-        prevButton = (Button) findViewById(R.id.previousFoodButton);
-        filterButton = (Button) findViewById(R.id.filterResultsButton);
-        helpButton = (Button) findViewById(R.id.helpButton);
+        nextButton = (ImageButton) findViewById(R.id.nextFoodButton);
+        prevButton = (ImageButton) findViewById(R.id.previousFoodButton);
+        filterButton = (ImageButton) findViewById(R.id.filterResultsButton);
+        helpButton = (ImageButton) findViewById(R.id.helpButton);
 
         // Hack to ensure that db initialization is complete
         while (!db.isInitializingFinished()) {

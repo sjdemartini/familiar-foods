@@ -1,18 +1,104 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/linearLayout1"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:background="@color/white"
-    android:orientation="vertical" >
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/white"
+        >
+
+
+    <ImageView
+            android:id="@+id/addFoodBanner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/add_new_food_banner"
+            android:layout_marginBottom="10dp"
+            />
+
+    <ImageView
+            android:id="@+id/cuisineAddFood"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:background="@drawable/cuisine_text_no_background"
+            android:layout_below="@id/addFoodBanner"
+            android:layout_marginLeft="50dp"
+            />
+
+    <Spinner
+            android:id="@+id/cuisineSpinner"
+            android:layout_height="26dp"
+            android:layout_width="110dp"
+            android:layout_toRightOf="@id/cuisineAddFood"
+            android:layout_below="@id/addFoodBanner"
+            android:layout_marginLeft="60dp"
+
+
+            />
+
+    <ImageView
+            android:id="@+id/foodNameAddFood"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:background="@drawable/food_name_add_food_text"
+            android:layout_below="@id/cuisineAddFood"
+            android:layout_marginLeft="50dp"
+
+            />
 
     <EditText
-        android:id="@+id/foodName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10" >
+            android:id="@+id/foodNameEditText"
+            android:layout_height="26dp"
+            android:layout_width="110dp"
+            android:layout_alignLeft="@+id/cuisineSpinner"
+            android:layout_below="@+id/cuisineAddFood"/>
 
-        <requestFocus />
-    </EditText>
+    <ImageView
+            android:id="@+id/addPicture"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/add_picture_text"
+            android:layout_below="@id/foodNameAddFood"
+            android:layout_marginLeft="50dp"
+            />
 
-</LinearLayout>
+    <ImageView
+            android:id="@+id/addPictureIcon"
+            android:layout_height="32dp"
+            android:layout_width="35dp"
+            android:background="@drawable/camera_icon"
+
+            android:layout_alignRight="@+id/cuisineSpinner"
+            android:layout_alignBottom="@+id/addPicture"/>
+
+    <ImageView
+            android:id="@+id/descriptors"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:background="@drawable/description_text"
+            android:layout_below="@id/addPicture"
+            android:layout_marginTop="10dp"
+            />
+
+    <ScrollView
+            android:id="@+id/addFoodScrollView"
+            android:layout_width="fill_parent"
+            android:layout_height="130dp"
+            android:layout_below="@id/descriptors"
+            android:background="@color/gray"
+            />
+
+
+
+    <ImageButton
+            android:id="@+id/doneButton"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:background="@drawable/done_button"
+            android:layout_below="@id/addFoodScrollView"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            />
+
+
+
+</RelativeLayout>

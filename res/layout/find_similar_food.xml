@@ -1,7 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:background="@color/white" >
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/white"
+        >
+
+    <ImageView
+            android:id="@+id/findSimilarFoodBanner"
+            android:layout_height="59dp"
+            android:layout_width="wrap_content"
+            android:src="@drawable/find_similar_food_banner"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"/>
+
+    <SearchView
+            android:id="@+id/similarFoodSearchView"
+            android:layout_height="30dp"
+            android:layout_width="270dp"
+            android:background="@drawable/search_view"
+            android:layout_below="@id/findSimilarFoodBanner"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="5dp"
+                                                      />
+
+    <ImageView
+            android:id="@+id/cuisineFindSimilarFood"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:src="@drawable/cuisine_text_no_background"
+            android:layout_below="@id/similarFoodSearchView"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="20dp"
+
+
+            />
+
+    <Spinner
+            android:id="@+id/findSimilarFoodSpinner"
+            android:layout_height="26dp"
+            android:layout_width="150dp"
+            android:layout_alignRight="@+id/similarFoodSearchView"
+            android:layout_alignTop="@+id/cuisineFindSimilarFood"/>
+
+    <ImageButton
+            android:id="@+id/filterButtonSimilarFood"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:background="@drawable/filter_results_button"
+            android:layout_below="@id/cuisineFindSimilarFood"
+            android:layout_marginLeft="80dp"
+            android:layout_marginTop="15dp"
+            />
+
+    <ImageButton
+            android:id="@+id/helpButtonFindSimilarFood"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:background="@drawable/help_button"
+            android:layout_toRightOf="@+id/filterButtonSimilarFood"
+            android:layout_alignTop="@+id/filterButtonSimilarFood"
+            android:layout_marginLeft="30dp"
+            />
+
+    <ScrollView
+            android:id="@+id/findSimilarFoodScrollView"
+            android:layout_width="fill_parent"
+            android:layout_height="180dp"
+            android:background="@color/gray"
+            android:layout_below="@id/helpButtonFindSimilarFood"
+            android:layout_marginTop="20dp"
+
+            />
+
+
+
+
 
 </RelativeLayout>

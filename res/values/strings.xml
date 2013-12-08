@@ -11,7 +11,7 @@
     <string name="friends_foods">Friend\'s Foods</string>
     <string name="filter_button">Filter Results</string>
     <string name="help_button">\?</string>
-    <string name="suggestion_prompt">Why don\'t you try&#8230;</string>
+    <string name="suggestion_prompt">Why don\'t you try</string>
     <string name="previous_food">&lt;</string>
     <string name="next_food">&gt;</string>
     <string name="cuisine">Cuisine</string>
@@ -21,5 +21,6 @@
     <string name="select_none">Select None</string>
     <string name="select_all">Select All</string>
     <string name="done">Done</string>
+    <string name="food_type">Food Type</string>
 
 </resources>
