@@ -1,5 +1,7 @@
 package edu.berkeley.cs160.familiarfoods;
 
+import java.util.ArrayList;
+
 import android.app.Activity;
 import android.app.SearchManager;
 import android.content.Context;
@@ -11,6 +13,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.SearchView;
+import android.widget.SearchView.OnQueryTextListener;
 
 public class HomeActivity extends Activity {
 
@@ -18,6 +21,7 @@ public class HomeActivity extends Activity {
     ImageButton adventureModeButton;
     ImageButton addFoodButton;
     ImageButton linkFoodButton;
+    SearchView searchView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,10 +37,12 @@ public class HomeActivity extends Activity {
         adventureModeButton = (ImageButton) findViewById(R.id.AdventureModeButton);
         addFoodButton = (ImageButton) findViewById(R.id.AddNewFoodButton);
         linkFoodButton = (ImageButton) findViewById(R.id.LinkFoodsButton);
+
+        searchView = (SearchView) findViewById(R.id.SearchBar);
         
         startListeners();
     }
-
+    
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -63,8 +69,30 @@ public class HomeActivity extends Activity {
                 startLinkFoodActivity(arg0);
             }
         });
+    	searchView.setOnQueryTextListener(new OnQueryTextListener() {
+
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                // Do something when user his enter on keyboard
+            	return startFindFoodActivity(query);
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                // Do something while user is entering text
+                return false;
+            }
+        });
+
     }
 
+    private boolean startFindFoodActivity(String query) {
+    	Intent openFindFood = new Intent(this, FindFood.class);
+    	openFindFood.putExtra("query", query);
+    	startActivity(openFindFood);
+    	return false;
+    }
+    
     public void startAdventureModeActivity(View v){
         Intent openAdventureIntent = new Intent(this, AdventureMode.class);
         startActivity(openAdventureIntent);
