@@ -17,12 +17,14 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class LinkFood extends Activity {
 
@@ -45,28 +47,9 @@ public class LinkFood extends Activity {
         // Get the database:
         db = ((FamiliarFoodsDatabase) getApplication());
 
-        ArrayList<String> cuisines = (ArrayList<String>) db.getAllCuisines();
-        ArrayAdapter adapter = new ArrayAdapter(this,
-        android.R.layout.simple_spinner_item, cuisines);
-        
-        linkCuisineSpinner1 = (Spinner) findViewById(R.id.linkSimilarCuisineSpinner1);
-        linkCuisineSpinner2 = (Spinner) findViewById(R.id.linkSimilarCuisineSpinner2);
-        
-        linkCuisineSpinner1.setAdapter(adapter);
-        linkCuisineSpinner2.setAdapter(adapter);
-        
-        ArrayList<String> foods = (ArrayList<String>) db.getAllFoods();
-        ArrayAdapter foodAdapter = new ArrayAdapter(this,
-        android.R.layout.simple_spinner_item, foods);
-        
-        linkFoodSpinner1 = (Spinner) findViewById(R.id.linkSimilarFoodSpinner1);
-        linkFoodSpinner2 = (Spinner) findViewById(R.id.linkSimilarFoodSpinner2);
-        
-        linkFoodSpinner1.setAdapter(foodAdapter);
-        linkFoodSpinner2.setAdapter(foodAdapter);
+        setUpSpinners();
         
         startListeners();
-      
     }
 
     /**
@@ -114,9 +97,67 @@ public class LinkFood extends Activity {
         return super.onOptionsItemSelected(item);
     }
     
+    public void setUpSpinners() {
+    	ArrayList<String> cuisines = (ArrayList<String>) db.getAllCuisines();
+        ArrayAdapter adapter = new ArrayAdapter(this,
+        android.R.layout.simple_spinner_item, cuisines);
+        
+        linkCuisineSpinner1 = (Spinner) findViewById(R.id.linkSimilarCuisineSpinner1);
+        linkCuisineSpinner2 = (Spinner) findViewById(R.id.linkSimilarCuisineSpinner2);
+        
+        linkCuisineSpinner1.setAdapter(adapter);
+        linkCuisineSpinner2.setAdapter(adapter);
+        
+        linkCuisineSpinner1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
+                Object item = parent.getItemAtPosition(pos);
+                filterFoodSpinner1(item.toString());
+            }
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
+        linkCuisineSpinner2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
+                Object item = parent.getItemAtPosition(pos);
+                filterFoodSpinner2(item.toString());
+            }
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
+    }
+    
+    public void filterFoodSpinner1(String cuisine) {
+    	ArrayList<String> foods = (ArrayList<String>) db.getFoodsForCuisine(cuisine);
+        ArrayAdapter foodAdapter = new ArrayAdapter(this,
+        android.R.layout.simple_spinner_item, foods);
+        
+        linkFoodSpinner1 = (Spinner) findViewById(R.id.linkSimilarFoodSpinner1);        
+        linkFoodSpinner1.setAdapter(foodAdapter);
+    }
+    
+    public void filterFoodSpinner2(String cuisine) {
+        ArrayList<String> foods = (ArrayList<String>) db.getFoodsForCuisine(cuisine);
+        ArrayAdapter foodAdapter = new ArrayAdapter(this,
+        android.R.layout.simple_spinner_item, foods);
+        
+        linkFoodSpinner2 = (Spinner) findViewById(R.id.linkSimilarFoodSpinner2);        
+        linkFoodSpinner2.setAdapter(foodAdapter);
+    }
+    
     public void addLink() {
     	String foodName1 = linkFoodSpinner1.getSelectedItem().toString();
     	String foodName2 = linkFoodSpinner2.getSelectedItem().toString();
+    	ArrayList<String> linkedFoods = (ArrayList<String>)db.getLinkedFoods(foodName1);
+    	for (String food: linkedFoods) {
+    		if (linkedFoods.equals(foodName2)) {
+    			// Don't allow an existing food to be added
+                Toast.makeText(
+                        this,
+                        "That food already exists!",
+                        Toast.LENGTH_SHORT).show();
+                return;
+    		}
+    	}
     	db.linkFoods(foodName1, foodName2);
     }
 }
