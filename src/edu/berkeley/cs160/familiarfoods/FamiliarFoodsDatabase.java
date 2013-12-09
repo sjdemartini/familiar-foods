@@ -14,6 +14,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Set;
@@ -106,6 +107,14 @@ public class FamiliarFoodsDatabase extends Application {
      * Useful for checking whether a given foodlink already exists.
      */
     protected Set<FoodLink> allFoodLinks;
+
+    /**
+     * Maintain a set of all the foods in the app, stored in lower-case and
+     * stripped of all non-word characters.
+     *
+     * Useful for checking whether a given food already exists.
+     */
+    protected Set<String> allFoods;
 
     /**
      * A class used to represent a link between two foods in the database.
@@ -239,18 +248,24 @@ public class FamiliarFoodsDatabase extends Application {
         foodToDesc = (HashMap<String, List<String>>) loadObjectFromFile(
                 FOOD_TO_DESCRIPTION_FILE);
         foodToPhoto = (HashMap<String, String>) loadObjectFromFile(
-                FOOD_TO_PHOTO_FILE);;
+                FOOD_TO_PHOTO_FILE);
         foodToLinks = (HashMap<String, TreeSet<FoodLink>>) loadObjectFromFile(
-                FOOD_TO_LINKS_FILE);;
+                FOOD_TO_LINKS_FILE);
         cuisineToFood = (HashMap<String, List<String>>) loadObjectFromFile(
                 CUISINE_TO_FOOD_FILE);
 
         // If any value was not found from the file (in which case the file
         // did not yet exist, initialize the fields to be empty and write them
         // to the files:
+        allFoods = new HashSet<String>();
         if (foodToCuisine == null) {
             foodToCuisine = new HashMap<String, String>();
             saveFoodToCuisine();
+        } else {
+            // Initialize the allFoods set
+            for (String foodName : foodToCuisine.keySet()) {
+                allFoods.add(stripFoodName(foodName));
+            }
         }
         if (foodToDesc == null) {
             foodToDesc = new HashMap<String, List<String>>();
@@ -260,9 +275,17 @@ public class FamiliarFoodsDatabase extends Application {
             foodToPhoto = new HashMap<String, String>();
             saveFoodToPhoto();
         }
+        allFoodLinks = new HashSet<FoodLink>();
         if (foodToLinks == null) {
             foodToLinks = new HashMap<String, TreeSet<FoodLink>>();
             saveFoodToLinks();
+        } else {
+            // Initialize the allFoodLinks set based on the new value
+            for (TreeSet<FoodLink> linkSet : foodToLinks.values()) {
+                for (FoodLink link : linkSet) {
+                    allFoodLinks.add(link);
+                }
+            }
         }
         if (cuisineToFood == null) {
             cuisineToFood = new HashMap<String, List<String>>();
@@ -272,6 +295,17 @@ public class FamiliarFoodsDatabase extends Application {
             }
             saveCusineToFood();
         }
+    }
+
+    /**
+     * Strip the food name of all non-alphanumeric characters and make lower
+     * case. Used for the allFoods set.
+     *
+     * @param foodName
+     * @return the foodName stripped and lower-cased.
+     */
+    private String stripFoodName(String foodName) {
+        return foodName.trim().toLowerCase().replaceAll("[^a-z0-9]", "");
     }
 
     /**
@@ -410,6 +444,18 @@ public class FamiliarFoodsDatabase extends Application {
      */
     public boolean isInitializingFinished() {
         return isInitializingFinished;
+    }
+
+    /**
+     * Return true if the food exists in the database.
+     *
+     * Note that this method is case-sensitive.
+     * @param foodName
+     * @return
+     */
+    public boolean doesFoodExist(String foodName) {
+        foodName = stripFoodName(foodName);
+        return allFoods.contains(foodName);
     }
 
     /**
@@ -570,10 +616,7 @@ public class FamiliarFoodsDatabase extends Application {
             String[] descriptors, String photoFile) {
         foodName = foodName.trim();
         cuisine = cuisine.trim();
-        for (int i=0; i<descriptors.length; i++) {
-            descriptors[i] = descriptors[i].trim().toLowerCase(Locale.US);
-        }
-        if (foodToCuisine.containsKey(foodName)) {
+        if (allFoods.contains(stripFoodName(foodName))) {
             throw new IllegalArgumentException(
                     String.format(
                             "The food %s is already in the database.", foodName));
@@ -582,6 +625,10 @@ public class FamiliarFoodsDatabase extends Application {
             throw new IllegalArgumentException(
                     "The " + cuisine + " cuisine does not exist.");
         }
+        for (int i=0; i<descriptors.length; i++) {
+            descriptors[i] = descriptors[i].trim().toLowerCase(Locale.US);
+        }
+        allFoods.add(foodName);
         foodToCuisine.put(foodName, cuisine);
         foodToDesc.put(foodName, Arrays.asList(descriptors));
         foodToPhoto.put(foodName, photoFile);

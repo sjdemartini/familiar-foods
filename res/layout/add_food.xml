@@ -93,18 +93,13 @@
 
     </ScrollView>
 
-
-
     <ImageButton
-            android:id="@+id/doneButton"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:background="@drawable/done_button"
-            android:layout_below="@id/addFoodScrollView"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="10dp"
-            />
-
-
+        android:id="@+id/doneButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="24dp"
+        android:background="@drawable/done_button" />
 
 </RelativeLayout>
