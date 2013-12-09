@@ -24,17 +24,7 @@
             android:layout_marginTop="5dp"
                                                       />
 
-    <ImageView
-            android:id="@+id/cuisineFindSimilarFood"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:src="@drawable/cuisine_text_no_background"
-            android:layout_below="@id/similarFoodSearchView"
-            android:layout_marginLeft="25dp"
-            android:layout_marginTop="20dp"
 
-
-            />
 
     <Spinner
             android:id="@+id/findSimilarFoodSpinner"
