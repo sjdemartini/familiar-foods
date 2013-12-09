@@ -240,6 +240,8 @@ public class FamiliarFoodsDatabase extends Application {
                 FOOD_TO_DESCRIPTION_FILE);
         foodToPhoto = (HashMap<String, String>) loadObjectFromFile(
                 FOOD_TO_PHOTO_FILE);;
+        foodToLinks = (HashMap<String, TreeSet<FoodLink>>) loadObjectFromFile(
+                FOOD_TO_LINKS_FILE);;
         cuisineToFood = (HashMap<String, List<String>>) loadObjectFromFile(
                 CUISINE_TO_FOOD_FILE);
 
