@@ -65,6 +65,7 @@ public class AddFood extends Activity {
         cuisineSpinner = (Spinner) findViewById(R.id.cuisineSpinner);
         // Get the database:
         db = ((FamiliarFoodsDatabase) getApplication());
+        
         ArrayList<String> cuisines = (ArrayList<String>) db.getAllCuisines();
         ArrayAdapter adapter = new ArrayAdapter(this,
         android.R.layout.simple_spinner_item, cuisines);

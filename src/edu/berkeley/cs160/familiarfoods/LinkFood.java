@@ -17,14 +17,22 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 public class LinkFood extends Activity {
 
     /** The database for this app. */
     FamiliarFoodsDatabase db;
+    
+    Spinner linkFoodSpinner1;
+    Spinner linkFoodSpinner2;
+    Spinner linkCuisineSpinner1;
+    Spinner linkCuisineSpinner2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,9 +42,29 @@ public class LinkFood extends Activity {
         // Show the Up button in the action bar.
         setupActionBar();
 
+        ArrayList<String> cuisines = (ArrayList<String>) db.getAllCuisines();
+        ArrayAdapter adapter = new ArrayAdapter(this,
+        android.R.layout.simple_spinner_item, cuisines);
+        
+        linkCuisineSpinner1 = (Spinner) findViewById(R.id.linkSimilarCuisineSpinner1);
+        linkCuisineSpinner2 = (Spinner) findViewById(R.id.linkSimilarCuisineSpinner2);
+        
+        linkCuisineSpinner1.setAdapter(adapter);
+        linkCuisineSpinner2.setAdapter(adapter);
+        
+        ArrayList<String> foods = (ArrayList<String>) db.getAllFoods();
+        ArrayAdapter foodAdapter = new ArrayAdapter(this,
+        android.R.layout.simple_spinner_item, cuisines);
+        
+        linkFoodSpinner1 = (Spinner) findViewById(R.id.linkSimilarFoodSpinner1);
+        linkFoodSpinner2 = (Spinner) findViewById(R.id.linkSimilarFoodSpinner2);
+        
+        linkFoodSpinner1.setAdapter(foodAdapter);
+        linkFoodSpinner2.setAdapter(foodAdapter);
+        
         // Get the database:
         db = ((FamiliarFoodsDatabase) getApplication());
-
+        startListeners();
       
     }
 
@@ -50,6 +78,16 @@ public class LinkFood extends Activity {
         }
     }
 
+    public void startListeners() {
+    	ImageButton submitButton = (ImageButton) findViewById(R.id.submitButton);
+    	submitButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View arg0) {
+                addLink();
+            }
+        });
+    }
+    
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -73,5 +111,11 @@ public class LinkFood extends Activity {
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+    
+    public void addLink() {
+    	String foodName1 = linkFoodSpinner1.getSelectedItem().toString();
+    	String foodName2 = linkFoodSpinner2.getSelectedItem().toString();
+    	db.linkFoods(foodName1, foodName2);
     }
 }
