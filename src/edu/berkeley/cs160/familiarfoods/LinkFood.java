@@ -19,6 +19,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -46,8 +47,17 @@ public class LinkFood extends Activity {
         
         // Get the database:
         db = ((FamiliarFoodsDatabase) getApplication());
-
-        setUpSpinners();
+        
+     // Get a reference to the AutoCompleteTextView in the layout
+        AutoCompleteTextView textView1 = (AutoCompleteTextView) findViewById(R.id.autoCompleteFood1);
+        AutoCompleteTextView textView2 = (AutoCompleteTextView) findViewById(R.id.autoCompleteFood2);
+        // Get the string array
+        ArrayList<String> foods = (ArrayList<String>) db.getAllFoods();
+        // Create the adapter and set it to the AutoCompleteTextView 
+        ArrayAdapter<String> adapter = 
+                new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, foods);
+        textView1.setAdapter(adapter);
+        textView2.setAdapter(adapter);
         
         startListeners();
     }
@@ -97,59 +107,25 @@ public class LinkFood extends Activity {
         return super.onOptionsItemSelected(item);
     }
     
-    public void setUpSpinners() {
-    	ArrayList<String> cuisines = (ArrayList<String>) db.getAllCuisines();
-        ArrayAdapter adapter = new ArrayAdapter(this,
-        android.R.layout.simple_spinner_item, cuisines);
-        
-        linkCuisineSpinner1 = (Spinner) findViewById(R.id.linkSimilarCuisineSpinner1);
-        linkCuisineSpinner2 = (Spinner) findViewById(R.id.linkSimilarCuisineSpinner2);
-        
-        linkCuisineSpinner1.setAdapter(adapter);
-        linkCuisineSpinner2.setAdapter(adapter);
-        
-        linkCuisineSpinner1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
-                Object item = parent.getItemAtPosition(pos);
-                filterFoodSpinner1(item.toString());
-            }
-            public void onNothingSelected(AdapterView<?> parent) {
-            }
-        });
-        linkCuisineSpinner2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
-                Object item = parent.getItemAtPosition(pos);
-                filterFoodSpinner2(item.toString());
-            }
-            public void onNothingSelected(AdapterView<?> parent) {
-            }
-        });
-    }
     
-    public void filterFoodSpinner1(String cuisine) {
-    	ArrayList<String> foods = (ArrayList<String>) db.getFoodsForCuisine(cuisine);
-        ArrayAdapter foodAdapter = new ArrayAdapter(this,
-        android.R.layout.simple_spinner_item, foods);
-        
-        linkFoodSpinner1 = (Spinner) findViewById(R.id.linkSimilarFoodSpinner1);        
-        linkFoodSpinner1.setAdapter(foodAdapter);
-    }
-    
-    public void filterFoodSpinner2(String cuisine) {
-        ArrayList<String> foods = (ArrayList<String>) db.getFoodsForCuisine(cuisine);
-        ArrayAdapter foodAdapter = new ArrayAdapter(this,
-        android.R.layout.simple_spinner_item, foods);
-        
-        linkFoodSpinner2 = (Spinner) findViewById(R.id.linkSimilarFoodSpinner2);        
-        linkFoodSpinner2.setAdapter(foodAdapter);
-    }
-    
+
     public void addLink() {
-    	String foodName1 = linkFoodSpinner1.getSelectedItem().toString();
-    	String foodName2 = linkFoodSpinner2.getSelectedItem().toString();
+    	AutoCompleteTextView textView1 = (AutoCompleteTextView) findViewById(R.id.autoCompleteFood1);
+        AutoCompleteTextView textView2 = (AutoCompleteTextView) findViewById(R.id.autoCompleteFood2);
+    	
+    	String foodName1 = textView1.getText().toString();
+    	String foodName2 = textView2.getText().toString();
+    	if (foodName1.equals(foodName2)) {
+			// Don't allow an existing food to be added
+            Toast.makeText(
+                    this,
+                    "Can't link a food with itself!",
+                    Toast.LENGTH_SHORT).show();
+            return;
+    	}
     	ArrayList<String> linkedFoods = (ArrayList<String>)db.getLinkedFoods(foodName1);
     	for (String food: linkedFoods) {
-    		if (linkedFoods.equals(foodName2)) {
+    		if (food.equals(foodName2)) {
     			// Don't allow an existing food to be added
                 Toast.makeText(
                         this,
