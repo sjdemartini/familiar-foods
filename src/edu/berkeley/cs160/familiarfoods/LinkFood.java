@@ -41,6 +41,9 @@ public class LinkFood extends Activity {
 
         // Show the Up button in the action bar.
         setupActionBar();
+        
+        // Get the database:
+        db = ((FamiliarFoodsDatabase) getApplication());
 
         ArrayList<String> cuisines = (ArrayList<String>) db.getAllCuisines();
         ArrayAdapter adapter = new ArrayAdapter(this,
@@ -54,7 +57,7 @@ public class LinkFood extends Activity {
         
         ArrayList<String> foods = (ArrayList<String>) db.getAllFoods();
         ArrayAdapter foodAdapter = new ArrayAdapter(this,
-        android.R.layout.simple_spinner_item, cuisines);
+        android.R.layout.simple_spinner_item, foods);
         
         linkFoodSpinner1 = (Spinner) findViewById(R.id.linkSimilarFoodSpinner1);
         linkFoodSpinner2 = (Spinner) findViewById(R.id.linkSimilarFoodSpinner2);
@@ -62,8 +65,6 @@ public class LinkFood extends Activity {
         linkFoodSpinner1.setAdapter(foodAdapter);
         linkFoodSpinner2.setAdapter(foodAdapter);
         
-        // Get the database:
-        db = ((FamiliarFoodsDatabase) getApplication());
         startListeners();
       
     }

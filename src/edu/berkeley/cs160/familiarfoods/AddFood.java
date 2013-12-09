@@ -150,10 +150,14 @@ public class AddFood extends Activity {
     	    }
     	}
     	
-    	String[] descriptorArray = (String[])desc.toArray();
+    	Object[] descriptionArray = desc.toArray();
+    	String[] descriptionStringArray = new String[descriptionArray.length];
+    	for(int i=0; i<descriptionArray.length; i++) {
+    		descriptionStringArray[i] = descriptionArray[i].toString();
+    	}
     	
     	if (foodNameEditText.getText() != null && cuisineSpinner.getSelectedItem() != null) {
-    		db.addFoodToDatabase(foodNameEditText.getText().toString(), cuisineSpinner.getSelectedItem().toString(), descriptorArray, "");
+    		db.addFoodToDatabase(foodNameEditText.getText().toString(), cuisineSpinner.getSelectedItem().toString(), descriptionStringArray, "");
     	}
     }
 
