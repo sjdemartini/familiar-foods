@@ -230,6 +230,11 @@ public class FamiliarFoodsDatabase extends Application {
             return Integer.valueOf(another.getNumVotes()).compareTo(
                     Integer.valueOf(getNumVotes()));
         }
+
+        @Override
+        public String toString() {
+            return String.format("%s <--> %s (%s)", food1, food2, numVotes);
+        }
     }
 
     @Override
@@ -577,8 +582,10 @@ public class FamiliarFoodsDatabase extends Application {
     public List<String> getLinkedFoods(String foodName) {
         List<String> foods = new ArrayList<String>();
         TreeSet<FoodLink> links = foodToLinks.get(foodName);
-        for (FoodLink link : links) {
-            foods.add(link.getOtherFood(foodName));
+        if (links != null) {
+            for (FoodLink link : links) {
+                foods.add(link.getOtherFood(foodName));
+            }
         }
         return foods;
     }
@@ -597,8 +604,10 @@ public class FamiliarFoodsDatabase extends Application {
     public List<Integer> getLinkVotes(String foodName) {
         List<Integer> votes = new ArrayList<Integer>();
         TreeSet<FoodLink> links = foodToLinks.get(foodName);
-        for (FoodLink link : links) {
-            votes.add(link.getNumVotes());
+        if (links != null) {
+            for (FoodLink link : links) {
+                votes.add(link.getNumVotes());
+            }
         }
         return votes;
     }
@@ -670,13 +679,14 @@ public class FamiliarFoodsDatabase extends Application {
      * @param link
      */
     private void addLinkForFood(String foodName, FoodLink link) {
-        TreeSet<FoodLink> list;
+        TreeSet<FoodLink> links;
         if (foodToLinks.containsKey(foodName)) {
-            list = foodToLinks.get(foodName);
+            links = foodToLinks.get(foodName);
         } else {
-            list = new TreeSet<FoodLink>();
+            links = new TreeSet<FoodLink>();
+            foodToLinks.put(foodName, links);
         }
-        list.add(link);
+        links.add(link);
     }
 
     /**

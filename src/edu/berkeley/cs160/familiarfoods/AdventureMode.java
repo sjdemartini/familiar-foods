@@ -3,7 +3,6 @@ package edu.berkeley.cs160.familiarfoods;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.ListIterator;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
@@ -17,7 +16,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -99,7 +97,7 @@ public class AdventureMode extends Activity {
         setFoods(cuisines);
 
         alt_bld = new AlertDialog.Builder(this);
-		
+
         // Start the button click listeners
         startListeners();
 
@@ -151,7 +149,7 @@ public class AdventureMode extends Activity {
         					dialog.cancel();
         				}
         			});
-        		
+
         		alt_bld.show();
         	}
         });

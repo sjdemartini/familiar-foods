@@ -15,38 +15,10 @@
         android:id="@+id/food1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/linkSimilarFoodsBanner"
-        android:layout_marginBottom="5dp"
-        android:layout_marginLeft="40dp"
+        android:layout_below="@+id/linkSimilarFoodsBanner"
+        android:layout_marginTop="14dp"
+        android:layout_toLeftOf="@+id/submitButton"
         android:background="@drawable/food1" />
-
-    <ImageView
-        android:id="@+id/isSimilarTo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/autoCompleteFood1"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/similar_to_text" />
-
-    <ImageButton
-        android:id="@+id/submitButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/food2"
-        android:layout_marginLeft="18dp"
-        android:layout_marginTop="64dp"
-        android:layout_toRightOf="@+id/addDetailsButton"
-        android:background="@drawable/submit_button" />
-
-    <ImageButton
-        android:id="@+id/addDetailsButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/food2"
-        android:layout_alignTop="@+id/submitButton"
-        android:layout_marginLeft="39dp"
-        android:background="@drawable/add_details_button" />
 
     <ImageView
         android:id="@+id/food2"
@@ -57,12 +29,30 @@
         android:layout_marginTop="22dp"
         android:background="@drawable/food2" />
 
+    <ImageButton
+        android:id="@+id/submitButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="61dp"
+        android:background="@drawable/submit_button" />
+
+    <ImageView
+        android:id="@+id/isSimilarTo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/autoCompleteFood1"
+        android:layout_marginTop="28dp"
+        android:background="@drawable/similar_to_text" />
+
     <AutoCompleteTextView
         android:id="@+id/autoCompleteFood1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/submitButton"
         android:layout_below="@+id/food1"
+        android:layout_centerHorizontal="true"
         android:ems="10"
         android:hint="Food Item Name" />
 
@@ -70,12 +60,9 @@
         android:id="@+id/autoCompleteFood2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/autoCompleteFood1"
         android:layout_below="@+id/food2"
-        android:layout_centerHorizontal="true"
         android:ems="10"
-        android:hint="Food Item Name" >
-
-        <requestFocus />
-    </AutoCompleteTextView>
+        android:hint="Food Item Name" />
 
 </RelativeLayout>

@@ -13,9 +13,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -23,11 +20,7 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.Spinner;
-import android.widget.TableLayout;
-import android.widget.TableRow;
-import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.ToggleButton;
 
 public class AddFood extends Activity {
 
@@ -216,7 +209,4 @@ public class AddFood extends Activity {
                 String.format("You've successfully added %s.", foodName),
                 Toast.LENGTH_SHORT).show();
     }
-
-    // TODO: when food should be submitted use:
-    // db.addFoodToDatabase(foodName, cuisine, descriptors, photoFile)
 }
