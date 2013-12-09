@@ -22,5 +22,8 @@
     <string name="select_all">Select All</string>
     <string name="done">Done</string>
     <string name="food_type">Food Type</string>
+    
+    <string name="app_label">Familiar Foods</string>
+    <string name="search_hint">Search Familiar Foods</string>
 
 </resources>
