@@ -1,14 +1,12 @@
 package edu.berkeley.cs160.familiarfoods;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
@@ -18,7 +16,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
@@ -38,10 +35,10 @@ public class FindFood extends Activity implements OnItemClickListener {
     static final String KEY_VOTES = "votes";
     static final String KEY_THUMB_URL = "thumb_url";
     static final String KEY_CUISINE = "cuisine";
-    
+
     /** The database for this app. */
     FamiliarFoodsDatabase db;
-    
+
     List<String> foods;
     List<String> cuisines;
     List<HashMap<String, Object>> currentUnfilteredResults = new ArrayList<HashMap<String, Object>>();
@@ -52,7 +49,7 @@ public class FindFood extends Activity implements OnItemClickListener {
     ImageButton filterButton;
     ImageButton helpButton;
     AlertDialog.Builder alt_bld;
-    
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,14 +72,14 @@ public class FindFood extends Activity implements OnItemClickListener {
                 new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, foods);
         search.setAdapter(adapter);
         search.setOnItemClickListener(this);
-        
+
         Intent main_activity = getIntent();
         String query = main_activity.getExtras().get("query").toString();
 
         if (!query.equals("")) {
         	search.setText(query, TextView.BufferType.EDITABLE);
         }
-        
+
         setCuisines(main_activity);
         searchForFamiliarFoods();
 
@@ -91,7 +88,7 @@ public class FindFood extends Activity implements OnItemClickListener {
 //        InputMethodManager imm = (InputMethodManager)getSystemService(
 //        	      Context.INPUT_METHOD_SERVICE);
 //        imm.hideSoftInputFromWindow(search.getWindowToken(), 0);
-        
+
     }
 
 	/**
@@ -103,7 +100,7 @@ public class FindFood extends Activity implements OnItemClickListener {
             getActionBar().setDisplayHomeAsUpEnabled(true);
         }
     }
-    
+
     protected void startListeners() {
     	filterButton.setOnClickListener(new OnClickListener() {
     		@Override
@@ -128,7 +125,7 @@ public class FindFood extends Activity implements OnItemClickListener {
 			}
 		});
     }
-    
+
     /**
      * Open Filter Activity with the current set of cuisines selected
      */
@@ -138,7 +135,7 @@ public class FindFood extends Activity implements OnItemClickListener {
 		        "cuisines", (ArrayList<String>) cuisines);
         startActivityForResult(openFilterIntent, 1);
     }
-    
+
     /**
      * Sets class variale cuisines to be the updated list
      * @param i
@@ -151,7 +148,7 @@ public class FindFood extends Activity implements OnItemClickListener {
         	cuisines = db.getAllCuisines();
         }
     }
-    
+
     /**
      * Receive new set of cuisines from the Filter activity
      */
@@ -163,7 +160,7 @@ public class FindFood extends Activity implements OnItemClickListener {
     		}
     	}
     }
-    
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -191,25 +188,25 @@ public class FindFood extends Activity implements OnItemClickListener {
 	@Override
 	public void onItemClick(AdapterView<?> arg0, View view, int arg2, long arg3) {
 		String query = ((TextView) view).getText().toString();
-		
+
 		searchForFamiliarFoods();
 	}
 
 	/**
 	 * Populates listview with the search results.
-	 * 
+	 *
 	 * @param query The string with the food name that is being searched
 	 */
 	private void searchForFamiliarFoods() {
-		//Get 
+		//Get
 		Intent main_activity = getIntent();
-        
+
         String query = ((TextView) findViewById(R.id.similarFoodSearch)).getText().toString();
-        
+
 		List<String> foods = db.getLinkedFoods(query);
 		List<Integer> votes = db.getLinkVotes(query);
 		currentUnfilteredResults.clear();
-		for (int i = 0; i < foods.size() && i < votes.size(); i++) {			
+		for (int i = 0; i < foods.size() && i < votes.size(); i++) {
 			String food = foods.get(i);
 
 			HashMap<String, Object> map = new HashMap<String, Object>();
@@ -218,12 +215,12 @@ public class FindFood extends Activity implements OnItemClickListener {
 			map.put(KEY_DESCRIPTION, db.getFoodDescription(food));
 			map.put(KEY_THUMB_URL, db.getFoodPhoto(food));
 			map.put(KEY_CUISINE, db.getCuisineForFood(food));
-			
+
 			currentUnfilteredResults.add(map);
 		}
 		updateSearchResults();
 	}
-	
+
 	private void updateSearchResults() {
 		ArrayList<HashMap<String, Object>> filteredResults = new ArrayList<HashMap<String, Object>>();
 		for (HashMap<String, Object> foodMap : currentUnfilteredResults) {
@@ -231,17 +228,17 @@ public class FindFood extends Activity implements OnItemClickListener {
 				filteredResults.add(foodMap);
 			}
 		}
-		
+
 		// Debuggging
 		Toast.makeText(
                 this,
                 "Debug message: There are this many links - " + filteredResults.size(),
                 Toast.LENGTH_LONG).show();
-		
+
 		// Set up adapter
 		adapter = new LazyAdapter(this, filteredResults);
-		foodList.setAdapter(adapter);      
- 
+		foodList.setAdapter(adapter);
+
         // Click event for single list row
         foodList.setOnItemClickListener(new OnItemClickListener() {
 

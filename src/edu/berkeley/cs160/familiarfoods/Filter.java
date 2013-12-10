@@ -78,7 +78,7 @@ public class Filter extends Activity {
                         my_sel_items.add((String) filterList.getAdapter().getItem(idx));
                     }
                 }
-                
+
                 //Return to Intent that started this activity
                 Intent prevActivity = getIntent();
                 if (my_sel_items.size() > 0) {
@@ -87,7 +87,7 @@ public class Filter extends Activity {
 	                setResult(RESULT_OK, returnToPrevIntent);
 	                finish();
                 } else {
-                	Toast.makeText(this, "Sorry, you must selected as least one cuisine.", Toast.LENGTH_LONG).show();
+                	Toast.makeText(this, "Sorry, you must select as least one cuisine.", Toast.LENGTH_LONG).show();
                 }
         }
         return super.onOptionsItemSelected(item);

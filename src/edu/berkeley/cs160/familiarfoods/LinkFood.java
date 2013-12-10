@@ -7,7 +7,6 @@ import android.app.Activity;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -38,8 +37,8 @@ public class LinkFood extends Activity {
         // Get the string array
         ArrayList<String> foods = (ArrayList<String>) db.getAllFoods();
         // Create the adapter and set it to the AutoCompleteTextView
-        ArrayAdapter<String> adapter =
-                new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, foods);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_list_item_1, foods);
         textView1.setAdapter(adapter);
         textView2.setAdapter(adapter);
 
@@ -57,22 +56,14 @@ public class LinkFood extends Activity {
     }
 
     public void startListeners() {
-    	ImageButton submitButton = (ImageButton) findViewById(R.id.submitButton);
-    	submitButton.setOnClickListener(new OnClickListener() {
+        ImageButton submitButton = (ImageButton) findViewById(R.id.submitButton);
+        submitButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View arg0) {
                 addLink();
             }
         });
     }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.adventure_mode, menu);
-        return true;
-    }
-
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -91,48 +82,59 @@ public class LinkFood extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
-
-
     public void addLink() {
-    	AutoCompleteTextView textView1 = (AutoCompleteTextView) findViewById(R.id.autoCompleteFood1);
+        AutoCompleteTextView textView1 = (AutoCompleteTextView) findViewById(R.id.autoCompleteFood1);
         AutoCompleteTextView textView2 = (AutoCompleteTextView) findViewById(R.id.autoCompleteFood2);
 
-    	String foodName1 = textView1.getText().toString();
-    	String foodName2 = textView2.getText().toString();
-    	if (foodName1.equals(foodName2)) {
-			// Don't allow a food to be linked to itself
+        String foodName1 = textView1.getText().toString().trim();
+        String foodName2 = textView2.getText().toString().trim();
+        if (foodName1.isEmpty()) {
+            // Don't submit unless food name chosen
             Toast.makeText(
                     this,
-                    "Can't link a food with itself!",
+                    "Please enter a food name for Food 1.",
                     Toast.LENGTH_SHORT).show();
             return;
-    	}
-    	if (! db.doesFoodExist(foodName1)) {
-    	    Toast.makeText(
+        }
+        if (foodName2.isEmpty()) {
+            // Don't submit unless food name chosen
+            Toast.makeText(
                     this,
-                    "The food you entered for \"Food 1\" does not exist in " +
-                    "our app.\n" +
-                    "Please ensure that you enter an existing food.",
+                    "Please enter a food name for Food 2.",
+                    Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (foodName1.equals(foodName2)) {
+            // Don't allow a food to be linked to itself
+            Toast.makeText(this, "Can't link a food with itself!",
+                    Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (!db.doesFoodExist(foodName1)) {
+            Toast.makeText(
+                    this,
+                    "The food you entered for \"Food 1\" does not exist in "
+                            + "our app.\n"
+                            + "Please ensure that you enter an existing food.",
                     Toast.LENGTH_LONG).show();
             return;
-    	}
-    	if (! db.doesFoodExist(foodName2)) {
-    	    Toast.makeText(
-    	            this,
-    	            "The food you entered for \"Food 2\" does not exist in " +
-    	                    "our app.\n" +
-    	                    "Please ensure that you enter an existing food.",
-    	                    Toast.LENGTH_LONG).show();
-    	    return;
-    	}
-    	db.linkFoods(foodName1, foodName2);
+        }
+        if (!db.doesFoodExist(foodName2)) {
+            Toast.makeText(
+                    this,
+                    "The food you entered for \"Food 2\" does not exist in "
+                            + "our app.\n"
+                            + "Please ensure that you enter an existing food.",
+                    Toast.LENGTH_LONG).show();
+            return;
+        }
+        db.linkFoods(foodName1, foodName2);
 
-    	NavUtils.navigateUpFromSameTask(this);
+        NavUtils.navigateUpFromSameTask(this);
         Toast.makeText(
                 this,
                 String.format(
                         "You've successfully confirmed a link between %s and %s.",
-                        foodName1, foodName2),
-                Toast.LENGTH_LONG).show();
+                        foodName1, foodName2), Toast.LENGTH_LONG).show();
     }
 }
