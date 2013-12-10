@@ -1,6 +1,7 @@
 package edu.berkeley.cs160.familiarfoods;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
@@ -38,10 +39,15 @@ public class FindFood extends Activity implements OnItemClickListener {
     
     /** The database for this app. */
     FamiliarFoodsDatabase db;
+    
+    List<String> foods;
+    private int numFoods;
+    List<String> cuisines;
 
     Spinner linkFoodSpinner1;
     ListView foodList;
     LazyAdapter adapter;
+    ImageButton filterButton;
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +58,7 @@ public class FindFood extends Activity implements OnItemClickListener {
         setupActionBar();
 
         db = ((FamiliarFoodsDatabase) getApplication());
-
+        filterButton = (ImageButton) findViewById(R.id.filterButtonSimilarFood);
         foodList = (ListView) findViewById(R.id.familiarFoodsList);
         
         AutoCompleteTextView search = (AutoCompleteTextView) findViewById(R.id.similarFoodSearch);
@@ -71,12 +77,20 @@ public class FindFood extends Activity implements OnItemClickListener {
         	searchForFamiliarFoods(query);
         }
         
+        // Filter by cuisines
+        Intent i = getIntent();
+        if (i.getExtras() != null) {
+            cuisines = i.getStringArrayListExtra("cuisines");
+        } else {
+        	cuisines = db.getAllCuisines();
+        }
+        setFoods(cuisines);
+        
         // Hide soft keyboard
         InputMethodManager imm = (InputMethodManager)getSystemService(
         	      Context.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(search.getWindowToken(), 0);
         
-        startListeners();
     }
     
 	/**
@@ -89,8 +103,21 @@ public class FindFood extends Activity implements OnItemClickListener {
         }
     }
 
-    public void startListeners() {
-    	
+    /**
+     * Set the foods to be shown based on a list of cuisines.
+     *
+     * This method is useful when filtering by cuisine type. Results shown will
+     * be based on the foods field, which is a randomized ordering of foods from
+     * the cuisines provided here.
+     *
+     * @param cuisines The list of cuisines to be used for filtering.
+     */
+    protected void setFoods(List<String> cuisines) {
+        foods = db.getFoodsForCuisines(cuisines);
+        numFoods = foods.size();
+
+        // Randomize the order of the foods shown:
+        Collections.shuffle(foods);
     }
 
     @Override
@@ -99,7 +126,6 @@ public class FindFood extends Activity implements OnItemClickListener {
         getMenuInflater().inflate(R.menu.adventure_mode, menu);
         return true;
     }
-
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

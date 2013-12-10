@@ -87,7 +87,7 @@ public class AdventureMode extends Activity {
             }
         }
 
-        // Filter by foods
+        // Filter by cuisines
         Intent i = getIntent();
         if (i.getExtras() != null) {
             cuisines = i.getStringArrayListExtra("cuisines");
