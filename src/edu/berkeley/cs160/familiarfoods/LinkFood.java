@@ -14,7 +14,6 @@ import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.ImageButton;
-import android.widget.Spinner;
 import android.widget.Toast;
 
 public class LinkFood extends Activity {
@@ -126,17 +125,6 @@ public class LinkFood extends Activity {
     	                    Toast.LENGTH_LONG).show();
     	    return;
     	}
-//    	ArrayList<String> linkedFoods = (ArrayList<String>) db.getLinkedFoods(foodName1);
-//    	for (String food: linkedFoods) {
-//    		if (food.equals(foodName2)) {
-//    			// Don't allow an existing link to be added
-//                Toast.makeText(
-//                        this,
-//                        "That link already exists!",
-//                        Toast.LENGTH_SHORT).show();
-//                return;
-//    		}
-//    	}
     	db.linkFoods(foodName1, foodName2);
 
     	NavUtils.navigateUpFromSameTask(this);
