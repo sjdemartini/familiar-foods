@@ -22,11 +22,6 @@ public class LinkFood extends Activity {
     /** The database for this app. */
     FamiliarFoodsDatabase db;
 
-    Spinner linkFoodSpinner1;
-    Spinner linkFoodSpinner2;
-    Spinner linkCuisineSpinner1;
-    Spinner linkCuisineSpinner2;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -134,10 +129,10 @@ public class LinkFood extends Activity {
 //    	ArrayList<String> linkedFoods = (ArrayList<String>) db.getLinkedFoods(foodName1);
 //    	for (String food: linkedFoods) {
 //    		if (food.equals(foodName2)) {
-//    			// Don't allow an existing food to be added
+//    			// Don't allow an existing link to be added
 //                Toast.makeText(
 //                        this,
-//                        "That food already exists!",
+//                        "That link already exists!",
 //                        Toast.LENGTH_SHORT).show();
 //                return;
 //    		}
