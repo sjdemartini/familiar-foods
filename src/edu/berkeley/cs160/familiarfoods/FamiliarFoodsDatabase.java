@@ -617,7 +617,7 @@ public class FamiliarFoodsDatabase extends Application {
      *
      * @param foodName The name of the food to add.
      * @param cuisine The name of the cuisine type.
-     * @param description The descriptors for this food.
+     * @param descriptors The descriptors for this food.
      * @param photoFile The filename for the photo.
      *
      */
