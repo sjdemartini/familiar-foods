@@ -310,7 +310,7 @@ public class FamiliarFoodsDatabase extends Application {
      * @return the foodName stripped and lower-cased.
      */
     private String stripFoodName(String foodName) {
-        return foodName.trim().toLowerCase().replaceAll("[^a-z0-9]", "");
+        return foodName.trim().toLowerCase(Locale.US).replaceAll("[^a-z0-9]", "");
     }
 
     /**
@@ -617,9 +617,8 @@ public class FamiliarFoodsDatabase extends Application {
      *
      * @param foodName The name of the food to add.
      * @param cuisine The name of the cuisine type.
-     * @param description The descriptors for this food.
+     * @param descriptors The descriptors for this food.
      * @param photoFile The filename for the photo.
-     *
      */
     public void addFoodToDatabase(String foodName, String cuisine,
             String[] descriptors, String photoFile) {
