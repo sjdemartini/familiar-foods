@@ -19,6 +19,7 @@ import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 public class Filter extends Activity {
     FamiliarFoodsDatabase db;
@@ -77,9 +78,17 @@ public class Filter extends Activity {
                         my_sel_items.add((String) filterList.getAdapter().getItem(idx));
                     }
                 }
-                Intent returnToAdventureIntent = new Intent(this, AdventureMode.class);
-                returnToAdventureIntent.putStringArrayListExtra("cuisines", (ArrayList<String>) my_sel_items);
-                startActivity(returnToAdventureIntent);
+                
+                //Return to Intent that started this activity
+                Intent prevActivity = getIntent();
+                if (my_sel_items.size() > 0) {
+	                Intent returnToPrevIntent = new Intent();
+	                returnToPrevIntent.putStringArrayListExtra("cuisines", (ArrayList<String>) my_sel_items);
+	                setResult(RESULT_OK, returnToPrevIntent);
+	                finish();
+                } else {
+                	Toast.makeText(this, "Sorry, you must selected as least one cuisine.", Toast.LENGTH_LONG).show();
+                }
         }
         return super.onOptionsItemSelected(item);
     }
