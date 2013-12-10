@@ -7,7 +7,7 @@
     <ImageView
             android:id="@+id/addFoodBanner"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="60dp"
             android:background="@drawable/add_new_food_banner"
             android:layout_marginBottom="10dp"
             />
