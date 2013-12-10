@@ -27,25 +27,6 @@
 	        android:ems="10"
                                                       />
 
-
-
-    <Spinner
-            android:id="@+id/findSimilarFoodSpinner"
-            android:layout_height="26dp"
-            android:layout_width="150dp"
-            android:layout_alignRight="@+id/similarFoodSearchView"
-            android:layout_alignTop="@+id/cuisineFindSimilarFood"/>
-
-    <ImageButton
-            android:id="@+id/filterButtonSimilarFood"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:background="@drawable/filter_results_button"
-            android:layout_below="@id/cuisineFindSimilarFood"
-            android:layout_marginLeft="80dp"
-            android:layout_marginTop="15dp"
-            />
-
     <ImageButton
             android:id="@+id/helpButtonFindSimilarFood"
             android:layout_height="wrap_content"
@@ -57,16 +38,22 @@
             />
 
     <ListView
-            android:id="@+id/familiarFoodsList"
-            android:layout_width="fill_parent"
-            android:layout_height="180dp"
-            android:layout_below="@id/helpButtonFindSimilarFood"
-            android:layout_marginTop="20dp"
-            android:background = "@drawable/list_border"
-            />
+        android:id="@+id/familiarFoodsList"
+        android:layout_width="fill_parent"
+        android:layout_height="180dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:background="@drawable/list_border" >
+    </ListView>
 
-
-
-
+    <ImageButton
+        android:id="@+id/filterButtonSimilarFood"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/similarFoodSearch"
+        android:layout_below="@+id/similarFoodSearch"
+        android:layout_marginLeft="58dp"
+        android:layout_marginTop="34dp"
+        android:background="@drawable/filter_results_button" />
 
 </RelativeLayout>

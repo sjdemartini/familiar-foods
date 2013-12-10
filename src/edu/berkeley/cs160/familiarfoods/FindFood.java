@@ -1,6 +1,7 @@
 package edu.berkeley.cs160.familiarfoods;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import android.annotation.TargetApi;
@@ -126,7 +127,37 @@ public class FindFood extends Activity implements OnItemClickListener {
 			String cuisine = db.getCuisineForFood(food);
 			List<String> description = db.getFoodDescription(food);
 			Bitmap photo = db.getFoodPhoto(food);
-			
 		}
+		
+		// Set up adapter
+		//List results = []; //some list of all the info
+		final StableArrayAdapter adapter = new StableArrayAdapter(this,
+				android.R.layout.simple_list_item_1, foods);
+		foodList.setAdapter(adapter);
 	}
+	
+	private class StableArrayAdapter extends ArrayAdapter<String> {
+
+        HashMap<String, Integer> mIdMap = new HashMap<String, Integer>();
+
+        public StableArrayAdapter(Context context, int textViewResourceId,
+                List<String> objects) {
+            super(context, textViewResourceId, objects);
+            for (int i = 0; i < objects.size(); ++i) {
+                mIdMap.put(objects.get(i), i);
+            }
+        }
+
+        @Override
+        public long getItemId(int position) {
+            String item = getItem(position);
+            return mIdMap.get(item);
+        }
+
+        @Override
+        public boolean hasStableIds() {
+            return true;
+        }
+
+    }
 }

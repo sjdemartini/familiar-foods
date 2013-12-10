@@ -99,7 +99,7 @@ public class HomeActivity extends Activity implements OnItemClickListener {
 		
 		Intent openFindFoodIntent = new Intent(this, FindFood.class);
 		openFindFoodIntent.putExtra("query", query);
-		Toast.makeText(this, query, Toast.LENGTH_SHORT).show();
+		//Toast.makeText(this, query, Toast.LENGTH_SHORT).show();
 		startActivity(openFindFoodIntent);
 	}
 
