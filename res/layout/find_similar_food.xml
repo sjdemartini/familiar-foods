@@ -8,11 +8,11 @@
 
     <ImageView
             android:id="@+id/findSimilarFoodBanner"
-            android:layout_height="59dp"
+            android:layout_height="55dp"
             android:layout_width="wrap_content"
             android:src="@drawable/find_similar_food_banner"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"/>
+
+            />
 
 
     <AutoCompleteTextView
@@ -28,14 +28,24 @@
                                                       />
 
     <ImageButton
+            android:id="@+id/filterButtonSimilarFood"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:background="@drawable/filter_results_button"
+            android:layout_below="@id/similarFoodSearch"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            />
+
+    <ImageButton
             android:id="@+id/helpButtonFindSimilarFood"
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
             android:background="@drawable/help_button"
-            android:layout_toRightOf="@+id/filterButtonSimilarFood"
-            android:layout_alignTop="@+id/filterButtonSimilarFood"
-            android:layout_marginLeft="30dp"
+             android:layout_marginTop="3dp"
+            android:layout_marginLeft="270dp"
             />
+
 
     <ListView
         android:id="@+id/familiarFoodsList"
@@ -45,15 +55,5 @@
         android:layout_alignParentLeft="true"
         android:background="@drawable/list_border" >
     </ListView>
-
-    <ImageButton
-        android:id="@+id/filterButtonSimilarFood"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/similarFoodSearch"
-        android:layout_below="@+id/similarFoodSearch"
-        android:layout_marginLeft="58dp"
-        android:layout_marginTop="34dp"
-        android:background="@drawable/filter_results_button" />
 
 </RelativeLayout>
