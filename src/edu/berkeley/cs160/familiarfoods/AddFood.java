@@ -5,8 +5,11 @@ import java.util.ArrayList;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.v4.app.NavUtils;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -23,7 +26,6 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 public class AddFood extends Activity {
-
     /** The database for this app. */
     FamiliarFoodsDatabase db;
 
@@ -31,12 +33,16 @@ public class AddFood extends Activity {
     EditText foodNameEditText;
     Spinner cuisineSpinner;
     ImageButton cameraButton;
-    ImageView foodPhoto;
+    ImageView foodPhotoView;
+    Bitmap foodPhoto;
 
     ScrollView addFoodScrollView;
     LinearLayout descriptorLinearLayout;
 
     String[] descriptor;
+
+    /** Code used to indicate that an image capture. */
+    private static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 100;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,7 +63,7 @@ public class AddFood extends Activity {
         insertDescriptorInScrollView(descriptor);
 
         cameraButton = (ImageButton) findViewById(R.id.cameraButton);
-        foodPhoto = (ImageView) findViewById(R.id.foodPhotoImage);
+        foodPhotoView = (ImageView) findViewById(R.id.foodPhotoImage);
         foodNameEditText = (EditText) findViewById(R.id.foodNameEditText);
         cuisineSpinner = (Spinner) findViewById(R.id.cuisineSpinner);
         descriptorLinearLayout = (LinearLayout) findViewById(R.id.descriptorll);
@@ -91,9 +97,13 @@ public class AddFood extends Activity {
                 addFood();
             }
         });
-
+    	cameraButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                takePicture();
+            }
+        });
     }
-
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -126,15 +136,40 @@ public class AddFood extends Activity {
         	descriptorLL.setBaselineAligned(false);
         	descriptorLL.addView(newCheck, i);
         }
+    }
 
-        ScrollView sv = (ScrollView) toggleView.findViewById(R.id.addFoodScrollView);
+    /**
+     * Show the activity for taking pictures.
+     */
+    public void takePicture() {
+        // create Intent to take a picture and return control to the calling application
+        Intent takePicIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+
+        // start the image capture Intent
+        startActivityForResult(takePicIntent, CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE) {
+            if (resultCode == RESULT_OK) {
+                Bundle extras = data.getExtras();
+                foodPhoto = (Bitmap) extras.get("data");
+                foodPhotoView.setImageBitmap(foodPhoto);
+            } else if (resultCode != RESULT_CANCELED) {
+                // Image capture failed, so advise user of this
+                Toast.makeText(
+                        this,
+                        "Picture taking failed. Please try again.",
+                        Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 
     public void addFood() {
     	// Check whether the food name is valid:
         String foodName = foodNameEditText.getText().toString().trim();
     	if (foodName.isEmpty()) {
-    	    // Don't submit unless food name chosen
             Toast.makeText(
                     this,
                     "Please enter the food name.",
@@ -142,7 +177,6 @@ public class AddFood extends Activity {
             return;
     	}
     	if (db.doesFoodExist(foodName)) {
-    	    // Don't allow an existing food to be added
             Toast.makeText(
                     this,
                     "That food already exists!",
@@ -169,6 +203,16 @@ public class AddFood extends Activity {
             return;
         }
 
+        // Check whether there was a photo taken:
+        if (foodPhoto == null) {
+            Toast.makeText(
+                    this,
+                    "Please add a photo of this food.",
+                    Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        // Get the food descriptors
     	ArrayList<String> desc = new ArrayList<String>();
     	for(int i=0; i<descriptorLinearLayout.getChildCount(); i++) {
     	    View v = descriptorLinearLayout.getChildAt(i);
@@ -193,12 +237,9 @@ public class AddFood extends Activity {
     		descriptionStringArray[i] = descriptionArray[i].toString();
     	}
 
-    	// TODO: Ensure that photo is added as well
-    	if (foodNameEditText.getText() != null && cuisineSpinner.getSelectedItem() != null) {
-    		db.addFoodToDatabase(
-    		        foodName, cuisineSpinner.getSelectedItem().toString(),
-    		        descriptionStringArray, "");
-    	}
+		db.addFoodToDatabase(
+		        foodName, cuisineSpinner.getSelectedItem().toString(),
+		        descriptionStringArray, foodPhoto);
 
     	NavUtils.navigateUpFromSameTask(this);
     	Toast.makeText(

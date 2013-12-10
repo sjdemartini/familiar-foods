@@ -500,7 +500,7 @@ public class FamiliarFoodsDatabase extends Application {
      * @param photoFile The filename for the photo.
      */
     public void addFoodToDatabase(String foodName, String cuisine,
-            String[] descriptors, String photoFile) {
+            String[] descriptors, Bitmap photo) {
         foodName = foodName.trim();
         cuisine = cuisine.trim();
         if (allFoods.contains(stripFoodName(foodName))) {
@@ -518,10 +518,33 @@ public class FamiliarFoodsDatabase extends Application {
         allFoods.add(foodName);
         foodToCuisine.put(foodName, cuisine);
         foodToDesc.put(foodName, Arrays.asList(descriptors));
+        String photoFile = stripFoodName(foodName) + ".png";
+        savePhotoToFile(photo, photoFile);
         foodToPhoto.put(foodName, photoFile);
         cuisineToFood.get(cuisine).add(foodName);
         saveAllData();
         System.out.println("Added " + foodName);
+    }
+
+    /**
+     * Save the Bitmap image to internal storage with the given filename.
+     * @param filename Filename for photo.
+     * @param photo Bitmap image to save.
+     */
+    protected void savePhotoToFile(Bitmap photo, String filename) {
+        FileOutputStream fos;
+        try {
+            fos = openFileOutput(filename, Context.MODE_PRIVATE);
+            photo.compress(CompressFormat.PNG, 50, fos);
+            fos.flush();
+            fos.close();
+        } catch (FileNotFoundException e) {
+            Log.e(TAG, e.getMessage(), e);
+            e.printStackTrace();
+        } catch (IOException e) {
+            Log.e(TAG, e.getMessage(), e);
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -655,10 +678,8 @@ public class FamiliarFoodsDatabase extends Application {
                     descriptors = foodDetails[2].split(",");
                     photoUrl = foodDetails[3].trim();
                     Bitmap photo = getPhotoFromUrl(photoUrl);
-                    String photoFilename = foodName + ".png";
-                    savePhotoToFile(photo, photoFilename);
                     addFoodToDatabase(
-                            foodName, cuisine, descriptors, photoFilename);
+                            foodName, cuisine, descriptors, photo);
                 }
             } catch (FileNotFoundException e) {
                 Log.e(TAG, e.getMessage(), e);
@@ -695,27 +716,6 @@ public class FamiliarFoodsDatabase extends Application {
                 e.printStackTrace();
             }
             return bitmap;
-        }
-
-        /**
-         * Save the Bitmap image to internal storage with the given filename.
-         * @param filename Filename for photo.
-         * @param photo Bitmap image to save.
-         */
-        protected void savePhotoToFile(Bitmap photo, String filename) {
-            FileOutputStream fos;
-            try {
-                fos = openFileOutput(filename, Context.MODE_PRIVATE);
-                photo.compress(CompressFormat.PNG, 50, fos);
-                fos.flush();
-                fos.close();
-            } catch (FileNotFoundException e) {
-                Log.e(TAG, e.getMessage(), e);
-                e.printStackTrace();
-            } catch (IOException e) {
-                Log.e(TAG, e.getMessage(), e);
-                e.printStackTrace();
-            }
         }
     }
 }
