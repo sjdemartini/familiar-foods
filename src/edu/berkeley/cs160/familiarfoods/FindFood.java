@@ -29,12 +29,20 @@ import android.widget.Toast;
 
 public class FindFood extends Activity implements OnItemClickListener {
 
+	static final String KEY_SONG = "song"; // parent node
+    static final String KEY_ID = "id";
+    static final String KEY_NAME = "name";
+    static final String KEY_DESCRIPTION = "description";
+    static final String KEY_VOTES = "votes";
+    static final String KEY_THUMB_URL = "thumb_url";
+    
     /** The database for this app. */
     FamiliarFoodsDatabase db;
 
     Spinner linkFoodSpinner1;
     ListView foodList;
-
+    LazyAdapter adapter;
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,7 +78,7 @@ public class FindFood extends Activity implements OnItemClickListener {
         
         startListeners();
     }
-
+    
 	/**
      * Set up the {@link android.app.ActionBar}, if the API is available.
      */
@@ -120,44 +128,63 @@ public class FindFood extends Activity implements OnItemClickListener {
 	private void searchForFamiliarFoods(String query) {
 		List<String> foods = db.getLinkedFoods(query);
 		List<Integer> votes = db.getLinkVotes(query);
-		
+		ArrayList<HashMap<String, Object>> foodsList = new ArrayList<HashMap<String, Object>>();
 		for (int i = 0; i < foods.size() && i < votes.size(); i++) {
+			HashMap<String, Object> map = new HashMap<String, Object>();
+			
 			String food = foods.get(i);
-			int vote = votes.get(i);
+			//String description = StringUtils.join(db.getFoodDescription(food), ',');
+			map.put(KEY_NAME, food);
+			map.put(KEY_VOTES, votes.get(i).toString());
+			map.put(KEY_DESCRIPTION, db.getFoodDescription(food));
+			map.put(KEY_THUMB_URL, db.getFoodPhoto(food));
+			
+			//TODO
 			String cuisine = db.getCuisineForFood(food);
-			List<String> description = db.getFoodDescription(food);
-			Bitmap photo = db.getFoodPhoto(food);
+			
+			foodsList.add(map);
 		}
 		
 		// Set up adapter
 		//List results = []; //some list of all the info
-		final StableArrayAdapter adapter = new StableArrayAdapter(this,
-				android.R.layout.simple_list_item_1, foods);
-		foodList.setAdapter(adapter);
+//		final StableArrayAdapter adapter = new StableArrayAdapter(this,
+//				android.R.layout.simple_list_item_1, foods);
+		adapter = new LazyAdapter(this, foodsList);
+		foodList.setAdapter(adapter);      
+ 
+        // Click event for single list row
+        foodList.setOnItemClickListener(new OnItemClickListener() {
+ 
+            @Override
+            public void onItemClick(AdapterView parent, View view,
+                    int position, long id) {
+ 
+            }
+        });
 	}
 	
-	private class StableArrayAdapter extends ArrayAdapter<String> {
-
-        HashMap<String, Integer> mIdMap = new HashMap<String, Integer>();
-
-        public StableArrayAdapter(Context context, int textViewResourceId,
-                List<String> objects) {
-            super(context, textViewResourceId, objects);
-            for (int i = 0; i < objects.size(); ++i) {
-                mIdMap.put(objects.get(i), i);
-            }
-        }
-
-        @Override
-        public long getItemId(int position) {
-            String item = getItem(position);
-            return mIdMap.get(item);
-        }
-
-        @Override
-        public boolean hasStableIds() {
-            return true;
-        }
-
-    }
+//	private class StableArrayAdapter extends ArrayAdapter<String> {
+//
+//        HashMap<String, Integer> mIdMap = new HashMap<String, Integer>();
+//
+//        public StableArrayAdapter(Context context, int textViewResourceId,
+//                List<String> objects) {
+//            super(context, textViewResourceId, objects);
+//            for (int i = 0; i < objects.size(); ++i) {
+//                mIdMap.put(objects.get(i), i);
+//            }
+//        }
+//
+//        @Override
+//        public long getItemId(int position) {
+//            String item = getItem(position);
+//            return mIdMap.get(item);
+//        }
+//
+//        @Override
+//        public boolean hasStableIds() {
+//            return true;
+//        }
+//
+//    }
 }
