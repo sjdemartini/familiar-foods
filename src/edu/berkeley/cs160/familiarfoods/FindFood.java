@@ -7,7 +7,9 @@ import java.util.List;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -48,6 +50,8 @@ public class FindFood extends Activity implements OnItemClickListener {
     ListView foodList;
     LazyAdapter adapter;
     ImageButton filterButton;
+    ImageButton helpButton;
+    AlertDialog.Builder alt_bld;
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +64,9 @@ public class FindFood extends Activity implements OnItemClickListener {
         db = ((FamiliarFoodsDatabase) getApplication());
         filterButton = (ImageButton) findViewById(R.id.filterButtonSimilarFood);
         foodList = (ListView) findViewById(R.id.familiarFoodsList);
+		helpButton = (ImageButton) findViewById(R.id.helpButtonFindSimilarFood);
+
+		alt_bld = new AlertDialog.Builder(this);
 
         AutoCompleteTextView search = (AutoCompleteTextView) findViewById(R.id.similarFoodSearch);
         ArrayList<String> foods = (ArrayList<String>) db.getAllFoods();
@@ -104,6 +111,22 @@ public class FindFood extends Activity implements OnItemClickListener {
     			startFilterActivity();
     		}
     	});
+    	helpButton.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View arg0) {
+				alt_bld.setMessage(
+						"By filtering, you can select one or more cuisines that you wish to see in the results.")
+						.setPositiveButton("Got it!",
+								new DialogInterface.OnClickListener() {
+									public void onClick(DialogInterface dialog,
+											int id) {
+										dialog.cancel();
+									}
+								});
+
+				alt_bld.show();
+			}
+		});
     }
     
     /**
