@@ -80,7 +80,7 @@ public class FindFood extends Activity implements OnItemClickListener {
         String query = main_activity.getExtras().get("query").toString();
 
         if (!query.equals("")) {
-        	search.setHint(query);
+        	search.setText(query, TextView.BufferType.EDITABLE);
         }
         
         setCuisines(main_activity);
@@ -204,7 +204,7 @@ public class FindFood extends Activity implements OnItemClickListener {
 		//Get 
 		Intent main_activity = getIntent();
         
-        String query = main_activity.getExtras().get("query").toString();
+        String query = ((TextView) findViewById(R.id.similarFoodSearch)).getText().toString();
         
 		List<String> foods = db.getLinkedFoods(query);
 		List<Integer> votes = db.getLinkVotes(query);
