@@ -668,6 +668,7 @@ public class FamiliarFoodsDatabase extends Application {
         addLinkForFood(foodName1, link);
         addLinkForFood(foodName2, link);
         allFoodLinks.add(link);
+        saveFoodToLinks();
     }
 
     /**
@@ -703,6 +704,7 @@ public class FamiliarFoodsDatabase extends Application {
         for (FoodLink foodLink : links) {
             if (foodLink.equals(link)) {
                 foodLink.upVote();
+                saveFoodToLinks();
                 return;
             }
         }
@@ -723,6 +725,7 @@ public class FamiliarFoodsDatabase extends Application {
         for (FoodLink foodLink : links) {
             if (foodLink.equals(link)) {
                 foodLink.downVote();
+                saveFoodToLinks();
                 return;
             }
         }

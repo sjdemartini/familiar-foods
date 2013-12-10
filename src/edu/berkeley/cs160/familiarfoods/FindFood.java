@@ -9,7 +9,6 @@ import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
@@ -61,7 +60,7 @@ public class FindFood extends Activity implements OnItemClickListener {
         db = ((FamiliarFoodsDatabase) getApplication());
         filterButton = (ImageButton) findViewById(R.id.filterButtonSimilarFood);
         foodList = (ListView) findViewById(R.id.familiarFoodsList);
-        
+
         AutoCompleteTextView search = (AutoCompleteTextView) findViewById(R.id.similarFoodSearch);
         ArrayList<String> foods = (ArrayList<String>) db.getAllFoods();
 
@@ -71,15 +70,15 @@ public class FindFood extends Activity implements OnItemClickListener {
         search.setOnItemClickListener(this);
         
         Intent main_activity = getIntent();
-        
         String query = main_activity.getExtras().get("query").toString();
+
         if (!query.equals("")) {
         	search.setHint(query);
         }
         
         setCuisines(main_activity);
         searchForFamiliarFoods();
-        
+
         startListeners();
         // Hide soft keyboard
 //        InputMethodManager imm = (InputMethodManager)getSystemService(
@@ -87,7 +86,7 @@ public class FindFood extends Activity implements OnItemClickListener {
 //        imm.hideSoftInputFromWindow(search.getWindowToken(), 0);
         
     }
-    
+
 	/**
      * Set up the {@link android.app.ActionBar}, if the API is available.
      */
@@ -141,7 +140,7 @@ public class FindFood extends Activity implements OnItemClickListener {
     		}
     	}
     }
-
+    
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -199,7 +198,6 @@ public class FindFood extends Activity implements OnItemClickListener {
 			
 			currentUnfilteredResults.add(map);
 		}
-		
 		updateSearchResults();
 	}
 	
@@ -223,12 +221,13 @@ public class FindFood extends Activity implements OnItemClickListener {
  
         // Click event for single list row
         foodList.setOnItemClickListener(new OnItemClickListener() {
- 
+
             @Override
             public void onItemClick(AdapterView parent, View view,
                     int position, long id) {
- 
+
             }
         });
 	}
+
 }
