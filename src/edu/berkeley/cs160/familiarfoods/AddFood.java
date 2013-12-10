@@ -16,6 +16,7 @@ import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.Spinner;
@@ -29,6 +30,8 @@ public class AddFood extends Activity {
     ImageButton doneButton;
     EditText foodNameEditText;
     Spinner cuisineSpinner;
+    ImageButton cameraButton;
+    ImageView foodPhoto;
 
     ScrollView addFoodScrollView;
     LinearLayout descriptorLinearLayout;
@@ -53,11 +56,12 @@ public class AddFood extends Activity {
         addFoodScrollView = (ScrollView) findViewById(R.id.addFoodScrollView);
         insertDescriptorInScrollView(descriptor);
 
-        doneButton = (ImageButton) findViewById(R.id.doneButton);
+        cameraButton = (ImageButton) findViewById(R.id.cameraButton);
+        foodPhoto = (ImageView) findViewById(R.id.foodPhotoImage);
         foodNameEditText = (EditText) findViewById(R.id.foodNameEditText);
         cuisineSpinner = (Spinner) findViewById(R.id.cuisineSpinner);
         descriptorLinearLayout = (LinearLayout) findViewById(R.id.descriptorll);
-
+        doneButton = (ImageButton) findViewById(R.id.doneButton);
 
         // Get the database:
         db = ((FamiliarFoodsDatabase) getApplication());
@@ -87,6 +91,7 @@ public class AddFood extends Activity {
                 addFood();
             }
         });
+
     }
 
 
