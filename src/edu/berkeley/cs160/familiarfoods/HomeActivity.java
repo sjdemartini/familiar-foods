@@ -95,7 +95,6 @@ public class HomeActivity extends Activity implements OnItemClickListener {
 
 	@Override
 	public void onItemClick(AdapterView<?> arg0, View view, int arg2, long arg3) {
-		// TODO Auto-generated method stub
 		String query = ((TextView) view).getText().toString();
 		
 		Intent openFindFoodIntent = new Intent(this, FindFood.class);
