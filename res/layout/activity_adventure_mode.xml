@@ -7,40 +7,41 @@
                 android:background="@color/white">
     		<ImageView
                 android:id="@+id/adventureModeBanner"
-                android:layout_height="wrap_content"
+                android:layout_height="55dp"
                 android:layout_width="wrap_content"
                 android:background="@drawable/adventure_mode_banner"
-                android:layout_marginBottom="5dp"
-                />
+                android:layout_marginBottom="10dp"
+                android:layout_alignRight="@+id/suggestionText"/>
     <ImageButton
              android:id="@+id/filterResultsButton"
              android:layout_width="wrap_content"
              android:layout_height="wrap_content"
              android:background="@drawable/filter_results_button"
              android:layout_below="@id/adventureModeBanner"
-             android:layout_marginLeft="80dp"
+             android:layout_marginLeft="117dp"
             />
     <ImageButton
             android:id="@+id/helpButton"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
+            android:layout_height="45dp"
+            android:layout_width="45dp"
             android:background="@drawable/help_button"
-            android:layout_below="@id/adventureModeBanner"
-            android:layout_toRightOf="@id/filterResultsButton"
-            android:layout_marginLeft="20dp"
+            android:layout_marginLeft="270dp"
+            android:layout_marginTop="3dp"
+
             />
     <ImageView
             android:id="@+id/suggestionText"
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
             android:background="@drawable/why_dont_you_try"
-            android:layout_below="@id/helpButton"
-            android:layout_marginTop="15dp"
+            android:layout_below="@id/filterResultsButton"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="30dp"
             />
     <ImageButton
             android:id="@+id/previousFoodButton"
             android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
+            android:layout_width="50dp"
             android:background="@drawable/previous_button"
             android:layout_below="@id/suggestionText"
             android:layout_marginLeft="20dp"
@@ -48,12 +49,14 @@
             />
     <ImageButton
         android:id="@+id/nextFoodButton"
-        android:layout_width="wrap_content"
+        android:layout_width="50dp"
         android:layout_height="wrap_content"
         android:layout_below="@id/suggestionText"
         android:layout_marginTop="20dp"
-        android:layout_toRightOf="@+id/helpButton"
-        android:background="@drawable/next_button" />
+
+        android:background="@drawable/next_button"
+            android:layout_marginLeft="250dp"
+            />
     <TextView
             android:id="@+id/currentFood"
             android:textColor="@color/dark_blue"
@@ -62,7 +65,7 @@
             android:layout_width="wrap_content"
             android:layout_below="@id/previousFoodButton"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="90dp"
             android:textSize="25dp"
             android:textStyle="bold"
             />
@@ -91,14 +94,11 @@
         android:id="@+id/currentDisplayedFood"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/currentFood"
-        android:layout_below="@+id/suggestionText"
-        android:layout_alignRight="@+id/nextFoodButton"
-        android:layout_alignLeft="@+id/previousFoodButton"
         android:layout_weight="1"
         android:maxHeight="150dip"
         android:maxWidth="150dp"
         android:paddingLeft="70dp"
-        android:paddingRight="70dp" />
+        android:paddingRight="70dp" android:layout_alignLeft="@+id/previousFoodButton"
+        android:layout_alignBottom="@+id/previousFoodButton"/>
 
 </RelativeLayout>
