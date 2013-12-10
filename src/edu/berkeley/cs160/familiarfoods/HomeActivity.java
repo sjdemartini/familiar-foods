@@ -1,20 +1,32 @@
 package edu.berkeley.cs160.familiarfoods;
 
+import java.util.ArrayList;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.Toast;
 
-public class HomeActivity extends Activity {
+public class HomeActivity extends Activity implements OnItemClickListener {
 
     public static final String TAG = "FF_Home";
     ImageButton adventureModeButton;
     ImageButton addFoodButton;
     ImageButton linkFoodButton;
+    Spinner findFoodSpinner;
+    
+    FamiliarFoodsDatabase db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +37,16 @@ public class HomeActivity extends Activity {
         addFoodButton = (ImageButton) findViewById(R.id.AddNewFoodButton);
         linkFoodButton = (ImageButton) findViewById(R.id.LinkFoodsButton);
         
+        
+        db = ((FamiliarFoodsDatabase) getApplication());
+        
+        AutoCompleteTextView searchBar = (AutoCompleteTextView) findViewById(R.id.SearchBar);
+        ArrayList<String> foods = (ArrayList<String>) db.getAllFoods();
+        searchBar.setOnItemClickListener(this);
+        
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, foods);
+        searchBar.setAdapter(adapter);
+
         startListeners();
     }
 
@@ -70,5 +92,17 @@ public class HomeActivity extends Activity {
         Intent openAdventureIntent = new Intent(this, LinkFood.class);
         startActivity(openAdventureIntent);
     }
+
+	@Override
+	public void onItemClick(AdapterView<?> arg0, View view, int arg2, long arg3) {
+		// TODO Auto-generated method stub
+		String query = ((TextView) view).getText().toString();
+		
+		Intent openFindFoodIntent = new Intent(this, FindFood.class);
+		openFindFoodIntent.putExtra("query", query);
+		Toast.makeText(this, query, Toast.LENGTH_SHORT).show();
+		startActivity(openFindFoodIntent);
+	}
+
 
 }

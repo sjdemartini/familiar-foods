@@ -18,16 +18,16 @@
             android:layout_centerHorizontal="true"
             />
 
-    <SearchView
+    <AutoCompleteTextView
         android:id="@+id/SearchBar"
         android:layout_height="30dp"
         android:layout_width="200dp"
         android:background="@drawable/search_view"
         android:layout_below="@id/FamiliarFoodsBanner"
         android:layout_centerHorizontal="true"
-
-
-
+        android:hint="Search Familiar Foods"
+        android:imeOptions="actionDone"
+        android:ems="10"
         />
 
     <ImageButton

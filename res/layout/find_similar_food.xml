@@ -14,14 +14,17 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"/>
 
-    <SearchView
-            android:id="@+id/similarFoodSearchView"
+
+    <AutoCompleteTextView
+            android:id="@+id/similarFoodSearch"
             android:layout_height="30dp"
             android:layout_width="270dp"
             android:background="@drawable/search_view"
             android:layout_below="@id/findSimilarFoodBanner"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="5dp"
+	        android:imeOptions="actionDone"
+	        android:ems="10"
                                                       />
 
 
