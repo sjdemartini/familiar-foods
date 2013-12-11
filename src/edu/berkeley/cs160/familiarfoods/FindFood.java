@@ -29,8 +29,6 @@ import android.widget.TextView;
 
 public class FindFood extends Activity implements OnItemClickListener {
 
-	static final String KEY_SONG = "song"; // parent node
-    static final String KEY_ID = "id";
     static final String KEY_NAME = "name";
     static final String KEY_DESCRIPTION = "description";
     static final String KEY_VOTES = "votes";
@@ -216,6 +214,7 @@ public class FindFood extends Activity implements OnItemClickListener {
         for(int i=0; i<foods.size();i++) {
         	FamiliarFoodListRowView connection = new FamiliarFoodListRowView(this);
         	connection.setText((String) foods.get(i).get(KEY_NAME));
+        	connection.setCuisine((String) foods.get(i).get(KEY_CUISINE));
         	connection.setVotes((String) foods.get(i).get(KEY_VOTES));
         	connection.setDescription((List<String>) foods.get(i).get(KEY_DESCRIPTION));
         	connection.setPicture((Bitmap) foods.get(i).get(KEY_THUMB_URL));

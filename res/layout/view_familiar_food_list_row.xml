@@ -8,7 +8,6 @@
     android:padding="5dip" >
 
     <!-- ListRow Left sied Thumbnail image -->
-
     <LinearLayout
         android:id="@+id/thumbnail"
         android:layout_width="wrap_content"
@@ -64,8 +63,6 @@
             android:src="@drawable/logo" />
     </LinearLayout>
 
-    <!-- Title Of Song -->
-
     <TextView
         android:id="@+id/name"
         android:layout_width="wrap_content"
@@ -75,25 +72,35 @@
         android:ellipsize="end"
         android:lines="1"
         android:text="Samosas"
-        android:textColor="#040404"
-        android:textSize="15dip"
-        android:textStyle="bold"
-        android:typeface="sans" />
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/similar_food_cuisine"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/name"
+        android:layout_marginTop="1dip"
+        android:layout_toRightOf="@+id/thumbnail"
+        android:lines="1"
+        android:text="Cuisine Here"
+        android:textColor="@color/blue2"
+        android:textSize="14sp" />
 
     <!-- Description -->
-
     <TextView
         android:id="@+id/description"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/name"
+        android:layout_alignBottom="@+id/thumbnail"
+        android:layout_below="@id/similar_food_cuisine"
         android:layout_marginTop="1dip"
-        android:layout_toLeftOf="@+id/imageView1"
         android:layout_toRightOf="@+id/thumbnail"
         android:ellipsize="end"
         android:lines="4"
-        android:text="super long descriptoin to test the ellipsis thingy majitadsfh aewoijf daiojfs dfhuasildfh ew;ocfj awoiafiaskfhksdjf asjd f;lksjd f;oahwe;ofiawieojefwo wu "
+        android:text="super long descriptoin to test the ellipsis thingy majitadsfh aewoijf daiojfs dfhuasildfh ew;ocfj awoiafiaskfhksdjf asjd f;lksjd f;oahwe;ofiawieojefwo wu asdf sa fdasfd asfd a dfasdf asdf  "
         android:textColor="#343434"
-        android:textSize="10dip" />
+        android:textSize="10sp" />
 
 </RelativeLayout>

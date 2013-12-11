@@ -24,6 +24,7 @@ public class FamiliarFoodListRowView extends RelativeLayout {
 	private ImageView downButton;
 	private ImageView picture;
 	private TextView foodName;
+	private TextView cuisine;
 	private TextView foodDescription;
 	private ImageView nextButton;
 	FamiliarFoodsDatabase db;
@@ -36,6 +37,7 @@ public class FamiliarFoodListRowView extends RelativeLayout {
 	        inflater.inflate(R.layout.view_familiar_food_list_row, this, true);
 
 	    foodName = (TextView) findViewById(R.id.name);
+	    cuisine = (TextView) findViewById(R.id.similar_food_cuisine);
 	    picture = (ImageView) findViewById(R.id.list_image);
 	    votes = (TextView) findViewById(R.id.votes);
 	    upButton = (ImageView) findViewById(R.id.vote_up);
@@ -65,9 +67,9 @@ public class FamiliarFoodListRowView extends RelativeLayout {
 				updateVote(-1);
 			}
 		});
-		
+
 	}
-	
+
 	private void updateVote(int delta) {
 		int num = Integer.parseInt(votes.getText().toString());
 		votes.setText(Integer.toString(num + delta));
@@ -77,6 +79,9 @@ public class FamiliarFoodListRowView extends RelativeLayout {
 		foodName.setText(s);
 	}
 
+	public void setCuisine(String s) {
+	    cuisine.setText(s);
+	}
 	public void setDescription(List<String> s) {
 		String desc = "";
 		for(int i=0; i<s.size(); i++) {
