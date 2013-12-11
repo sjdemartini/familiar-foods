@@ -15,14 +15,26 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_marginRight="5dip"
-        android:padding="3dip" >
+        android:paddingTop="3dip" 
+        android:paddingBottom="3dip" >
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_marginRight="5dip"
             android:gravity="center_horizontal"
-            android:orientation="vertical" >
+            android:orientation="vertical"
+            android:paddingLeft="10dip" 
+            android:paddingRight="5dip">
+
+            <ImageButton
+                android:id="@+id/vote_up"
+                android:layout_width="23dp"
+                android:layout_height="27dp"
+                android:fromDegrees="0"
+                android:pivotX="50%"
+                android:src="@drawable/up_button"
+                android:toDegrees="-90" />
 
             <TextView
                 android:id="@+id/votes"
@@ -30,24 +42,13 @@
                 android:layout_height="wrap_content"
                 android:text="5"
                 android:textColor="#10bcc9"
-                android:textSize="10dip"
+                android:textSize="18dip"
                 android:textStyle="bold" />
 
-            <ImageView
-                android:id="@+id/vote_up"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="2dip"
-                android:fromDegrees="0"
-                android:pivotX="50%"
-                android:src="@drawable/up_button"
-                android:toDegrees="-90" />
-
-            <ImageView
+            <ImageButton
                 android:id="@+id/vote_down"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="3dip"
+                android:layout_width="23dp"
+                android:layout_height="27dp"
                 android:fromDegrees="0"
                 android:pivotX="50%"
                 android:src="@drawable/down_button"
@@ -57,8 +58,8 @@
 
         <ImageView
             android:id="@+id/list_image"
-            android:layout_width="50dip"
-            android:layout_height="50dip"
+            android:layout_width="73dip"
+            android:layout_height="77dip"
             android:background="@drawable/image_bg"
             android:src="@drawable/logo" />
     </LinearLayout>
@@ -70,7 +71,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/thumbnail"
-        android:layout_marginRight="30dip"
         android:layout_toRightOf="@+id/thumbnail"
         android:ellipsize="end"
         android:lines="1"
@@ -88,26 +88,12 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/name"
         android:layout_marginTop="1dip"
-        android:layout_marginRight="30dip"
         android:layout_toLeftOf="@+id/imageView1"
         android:layout_toRightOf="@+id/thumbnail"
         android:ellipsize="end"
-        android:lines="3"
+        android:lines="4"
         android:text="super long descriptoin to test the ellipsis thingy majitadsfh aewoijf daiojfs dfhuasildfh ew;ocfj awoiafiaskfhksdjf asjd f;lksjd f;oahwe;ofiawieojefwo wu "
         android:textColor="#343434"
         android:textSize="10dip" />
-
-    <!-- Rightend Arrow -->
-
-    <ImageView
-        android:id="@+id/food_details_arrow"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_centerVertical="true"
-        android:fromDegrees="0"
-        android:pivotX="50%"
-        android:src="@drawable/next_button"
-        android:toDegrees="-90" />
 
 </RelativeLayout>

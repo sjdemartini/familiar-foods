@@ -5,16 +5,6 @@
     android:layout_marginTop="10dp"
     android:background="@color/white" >
 
-    <!--
-         <ImageView
-            android:id="@+id/findSimilarFoodBanner"
-            android:layout_height="55dp"
-            android:layout_width="wrap_content"
-            android:src="@drawable/find_similar_food_banner"
-
-            />
-    -->
-
     <AutoCompleteTextView
         android:id="@+id/similarFoodSearch"
         android:layout_width="match_parent"
@@ -49,9 +39,8 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/view1"
-        android:background="@color/gray" >
-
+        android:layout_below="@+id/view1" >
+        
         <LinearLayout
             android:id="@+id/searchll"
             android:layout_width="match_parent"

@@ -7,30 +7,25 @@ import java.util.List;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.ImageButton;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class FindFood extends Activity implements OnItemClickListener {
 
@@ -61,6 +56,10 @@ public class FindFood extends Activity implements OnItemClickListener {
         // Show the Up button in the action bar.
         setupActionBar();
 
+        // Prevent from the keyboard from coming up:
+        this.getWindow().setSoftInputMode(
+                WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+
         db = ((FamiliarFoodsDatabase) getApplication());
         filterButton = (Button) findViewById(R.id.filterButtonSimilarFood);
 
@@ -85,11 +84,6 @@ public class FindFood extends Activity implements OnItemClickListener {
         searchForFamiliarFoods();
 
         startListeners();
-        // Hide soft keyboard
-//        InputMethodManager imm = (InputMethodManager)getSystemService(
-//        	      Context.INPUT_METHOD_SERVICE);
-//        imm.hideSoftInputFromWindow(search.getWindowToken(), 0);
-
     }
 
 	/**
@@ -195,9 +189,6 @@ public class FindFood extends Activity implements OnItemClickListener {
 	 * @param query The string with the food name that is being searched
 	 */
 	private void searchForFamiliarFoods() {
-		//Get
-		Intent main_activity = getIntent();
-
         String query = ((TextView) findViewById(R.id.similarFoodSearch)).getText().toString();
 
 		List<String> foods = db.getLinkedFoods(query);
@@ -217,17 +208,15 @@ public class FindFood extends Activity implements OnItemClickListener {
 		}
 		updateSearchResults();
 	}
-	
+
     private void insertFoodLinkInScrollView(List<HashMap<String, Object>> foods) {
-    	LayoutInflater inflator = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View toggleView = inflator.inflate(R.layout.find_similar_food, null);
-
-    	setContentView(toggleView);
-
-    	LinearLayout descriptorLL = (LinearLayout) toggleView.findViewById(R.id.searchll);
+    	LinearLayout descriptorLL = (LinearLayout) this.findViewById(R.id.searchll);
+    	// Remove all the old views before adding new ones:
+    	descriptorLL.removeAllViews();
         for(int i=0; i<foods.size();i++) {
         	FamiliarFoodListRowView connection = new FamiliarFoodListRowView(this);
         	connection.setText((String) foods.get(i).get(KEY_NAME));
+        	connection.setVotes((String) foods.get(i).get(KEY_VOTES));
         	connection.setDescription((List<String>) foods.get(i).get(KEY_DESCRIPTION));
         	connection.setPicture((Bitmap) foods.get(i).get(KEY_THUMB_URL));
 

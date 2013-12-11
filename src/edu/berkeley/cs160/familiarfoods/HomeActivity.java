@@ -100,5 +100,4 @@ public class HomeActivity extends Activity implements OnItemClickListener {
 		startActivity(openFindFoodIntent);
 	}
 
-
 }
