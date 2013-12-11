@@ -7,14 +7,12 @@ import java.util.List;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -212,12 +210,9 @@ public class FindFood extends Activity implements OnItemClickListener {
 	}
 
     private void insertFoodLinkInScrollView(List<HashMap<String, Object>> foods) {
-    	LayoutInflater inflator = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View toggleView = inflator.inflate(R.layout.find_similar_food, null);
-
-    	setContentView(toggleView);
-
-    	LinearLayout descriptorLL = (LinearLayout) toggleView.findViewById(R.id.searchll);
+    	LinearLayout descriptorLL = (LinearLayout) this.findViewById(R.id.searchll);
+    	// Remove all the old views before adding new ones:
+    	descriptorLL.removeAllViews();
         for(int i=0; i<foods.size();i++) {
         	FamiliarFoodListRowView connection = new FamiliarFoodListRowView(this);
         	connection.setText((String) foods.get(i).get(KEY_NAME));
@@ -237,7 +232,7 @@ public class FindFood extends Activity implements OnItemClickListener {
 				filteredResults.add(foodMap);
 			}
 		}
-		insertFoodLinkInScrollView(currentUnfilteredResults);
+		insertFoodLinkInScrollView(filteredResults);
 	}
 
 }
