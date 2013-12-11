@@ -664,6 +664,7 @@ public class FamiliarFoodsDatabase extends Application {
                     foodLink.downVote();
                 }
                 links.add(foodLink);
+                break;
             }
         }
 
@@ -676,6 +677,7 @@ public class FamiliarFoodsDatabase extends Application {
                 // it's new vote count will be used for ordering
                 links.remove(foodLink);
                 links.add(foodLink);
+                break;
             }
         }
 
