@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--  * Credit: http://www.androidhive.info/2012/02/android-custom-listview-with-image-and-text/ -->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="5dip" >
+
+    <!-- ListRow Left sied Thumbnail image -->
+
+    <LinearLayout
+        android:id="@+id/thumbnail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_marginRight="5dip"
+        android:padding="3dip" >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginRight="5dip"
+            android:gravity="center_horizontal"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/votes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="5"
+                android:textColor="#10bcc9"
+                android:textSize="10dip"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/vote_up"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dip"
+                android:fromDegrees="0"
+                android:pivotX="50%"
+                android:src="@drawable/up_button"
+                android:toDegrees="-90" />
+
+            <ImageView
+                android:id="@+id/vote_down"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dip"
+                android:fromDegrees="0"
+                android:pivotX="50%"
+                android:src="@drawable/down_button"
+                android:toDegrees="-90" />
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/list_image"
+            android:layout_width="50dip"
+            android:layout_height="50dip"
+            android:background="@drawable/image_bg"
+            android:src="@drawable/logo" />
+    </LinearLayout>
+
+    <!-- Title Of Song -->
+
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/thumbnail"
+        android:layout_marginRight="30dip"
+        android:layout_toRightOf="@+id/thumbnail"
+        android:ellipsize="end"
+        android:lines="1"
+        android:text="Samosas"
+        android:textColor="#040404"
+        android:textSize="15dip"
+        android:textStyle="bold"
+        android:typeface="sans" />
+
+    <!-- Description -->
+
+    <TextView
+        android:id="@+id/description"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/name"
+        android:layout_marginTop="1dip"
+        android:layout_marginRight="30dip"
+        android:layout_toLeftOf="@+id/imageView1"
+        android:layout_toRightOf="@+id/thumbnail"
+        android:ellipsize="end"
+        android:lines="3"
+        android:text="super long descriptoin to test the ellipsis thingy majitadsfh aewoijf daiojfs dfhuasildfh ew;ocfj awoiafiaskfhksdjf asjd f;lksjd f;oahwe;ofiawieojefwo wu "
+        android:textColor="#343434"
+        android:textSize="10dip" />
+
+    <!-- Rightend Arrow -->
+
+    <ImageView
+        android:id="@+id/food_details_arrow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:fromDegrees="0"
+        android:pivotX="50%"
+        android:src="@drawable/next_button"
+        android:toDegrees="-90" />
+
+</RelativeLayout>
