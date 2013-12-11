@@ -16,6 +16,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -50,7 +51,7 @@ public class AdventureMode extends Activity {
     /** Button to go to the previous food. */
     ImageButton prevButton;
     /** Button to go to the filter foods. */
-    ImageButton filterButton;
+    Button filterButton;
     /** Filter help dialog */
     AlertDialog.Builder alt_bld;
 
@@ -77,7 +78,7 @@ public class AdventureMode extends Activity {
         foodImage = (ImageView) findViewById(R.id.currentDisplayedFood);
         nextButton = (ImageButton) findViewById(R.id.nextFoodButton);
         prevButton = (ImageButton) findViewById(R.id.previousFoodButton);
-        filterButton = (ImageButton) findViewById(R.id.filterResultsButton);
+        filterButton = (Button) findViewById(R.id.filterResultsButton);
 
         // Hack to ensure that db initialization is complete
         while (!db.isInitializingFinished()) {

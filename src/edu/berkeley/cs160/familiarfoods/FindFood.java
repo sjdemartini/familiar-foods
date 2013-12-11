@@ -20,6 +20,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Spinner;
@@ -46,7 +47,7 @@ public class FindFood extends Activity implements OnItemClickListener {
     Spinner linkFoodSpinner1;
     ListView foodList;
     LazyAdapter adapter;
-    ImageButton filterButton;
+    Button filterButton;
     AlertDialog.Builder alt_bld;
 
     @Override
@@ -58,7 +59,7 @@ public class FindFood extends Activity implements OnItemClickListener {
         setupActionBar();
 
         db = ((FamiliarFoodsDatabase) getApplication());
-        filterButton = (ImageButton) findViewById(R.id.filterButtonSimilarFood);
+        filterButton = (Button) findViewById(R.id.filterButtonSimilarFood);
         foodList = (ListView) findViewById(R.id.familiarFoodsList);
 
 		alt_bld = new AlertDialog.Builder(this);

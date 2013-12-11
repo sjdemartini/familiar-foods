@@ -15,27 +15,33 @@
 
             />-->
 
-
     <AutoCompleteTextView
-            android:id="@+id/similarFoodSearch"
-            android:layout_height="30dp"
-            android:layout_width="270dp"
-            android:background="@drawable/search_view"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="5dp"
-	        android:imeOptions="actionDone"
-	        android:ems="10"
-                                                      />
+        android:id="@+id/similarFoodSearch"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="5dp"
+        android:background="@drawable/search_view"
+        android:ems="10"
+        android:imeOptions="actionDone"
+        android:padding="10dp" />
 
-    <ImageButton
-            android:id="@+id/filterButtonSimilarFood"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:background="@drawable/filter_results_button"
-            android:layout_below="@id/similarFoodSearch"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="20dp"
-            />
+    <Button
+        android:id="@+id/filterButtonSimilarFood"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/similarFoodSearch"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="5dp"
+        android:layout_marginTop="10dp"
+        android:text="@string/filter_button"
+        android:textSize="14sp" />
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/filterButtonSimilarFood"
+        android:background="@android:color/darker_gray"/>
 
     <ListView
         android:id="@+id/familiarFoodsList"
@@ -43,6 +49,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
+        android:layout_below="@+id/filterButtonSimilarFood"
+        android:layout_marginTop="5dp"
         android:background="@drawable/list_border" >
 
     </ListView>

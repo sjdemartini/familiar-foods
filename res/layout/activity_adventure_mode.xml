@@ -13,13 +13,14 @@
         android:layout_marginBottom="10dp"
         android:background="@drawable/adventure_mode_banner" />-->
 
-    <ImageButton
-    	android:layout_marginTop="10dp"
+    <Button
         android:id="@+id/filterResultsButton"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:background="@drawable/filter_results_button" />
+        android:layout_margin="5dp"
+        android:text="@string/filter_button"
+        android:textSize="14sp" />
 
     <ImageView
         android:id="@+id/suggestionText"
@@ -27,7 +28,6 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/filterResultsButton"
         android:layout_marginBottom="10dp"
-        android:layout_marginTop="10dp"
         android:background="@drawable/why_dont_you_try" />
 
     <ImageButton
@@ -35,15 +35,15 @@
         android:layout_width="45dp"
         android:layout_height="wrap_content"
         android:layout_below="@id/suggestionText"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="50dp"
-        android:layout_marginBottom="110dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="80dp"
+        android:layout_marginBottom="135dp"
         android:background="@drawable/previous_button" />
 
     <ImageView
         android:id="@+id/currentDisplayedFood"
-        android:layout_width="175dp"
-        android:layout_height="155dp"
+        android:layout_width="195dp"
+        android:layout_height="185dp"
         android:layout_below="@+id/suggestionText"
         android:layout_centerHorizontal="true" />
 
@@ -53,8 +53,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_below="@id/suggestionText"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="80dp"
         android:background="@drawable/next_button" />
 
     <ImageView
