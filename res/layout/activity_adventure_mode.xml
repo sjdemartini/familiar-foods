@@ -1,104 +1,103 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:orientation="vertical"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:background="@color/white">
-    		<ImageView
-                android:id="@+id/adventureModeBanner"
-                android:layout_height="55dp"
-                android:layout_width="wrap_content"
-                android:background="@drawable/adventure_mode_banner"
-                android:layout_marginBottom="10dp"
-                android:layout_alignRight="@+id/suggestionText"/>
-    <ImageButton
-             android:id="@+id/filterResultsButton"
-             android:layout_width="wrap_content"
-             android:layout_height="wrap_content"
-             android:background="@drawable/filter_results_button"
-             android:layout_below="@id/adventureModeBanner"
-             android:layout_marginLeft="117dp"
-            />
-    <ImageButton
-            android:id="@+id/helpButton"
-            android:layout_height="45dp"
-            android:layout_width="45dp"
-            android:background="@drawable/help_button"
-            android:layout_marginLeft="270dp"
-            android:layout_marginTop="3dp"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/white"
+    android:orientation="vertical" >
 
-            />
     <ImageView
-            android:id="@+id/suggestionText"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:background="@drawable/why_dont_you_try"
-            android:layout_below="@id/filterResultsButton"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="30dp"
-            />
+        android:id="@+id/adventureModeBanner"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_alignRight="@+id/suggestionText"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/adventure_mode_banner" />
+
     <ImageButton
-            android:id="@+id/previousFoodButton"
-            android:layout_height="wrap_content"
-            android:layout_width="50dp"
-            android:background="@drawable/previous_button"
-            android:layout_below="@id/suggestionText"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="20dp"
-            />
+        android:id="@+id/filterResultsButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/adventureModeBanner"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/filter_results_button" />
+
     <ImageButton
-        android:id="@+id/nextFoodButton"
-        android:layout_width="50dp"
+        android:id="@+id/helpButton"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_marginLeft="270dp"
+        android:layout_marginTop="3dp"
+        android:background="@drawable/help_button" />
+
+    <ImageView
+        android:id="@+id/suggestionText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/filterResultsButton"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/why_dont_you_try" />
+
+    <ImageButton
+        android:id="@+id/previousFoodButton"
+        android:layout_width="45dp"
         android:layout_height="wrap_content"
         android:layout_below="@id/suggestionText"
-        android:layout_marginTop="20dp"
-
-        android:background="@drawable/next_button"
-            android:layout_marginLeft="250dp"
-            />
-    <TextView
-            android:id="@+id/currentFood"
-            android:textColor="@color/dark_blue"
-            android:text="@string/food_type"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:layout_below="@id/previousFoodButton"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="90dp"
-            android:textSize="25dp"
-            android:textStyle="bold"
-            />
-    <ImageView
-            android:id="@+id/cuisine"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/cuisine_text"
-            android:layout_below="@id/currentFood"
-            android:layout_marginTop="5dp"
-            />
-    <TextView
-            android:id="@+id/currentCuisine"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:text="@string/cuisine_type"
-            android:layout_below="@id/cuisine"
-            android:layout_centerHorizontal="true"
-            android:textColor="@color/dark_blue"
-            android:textSize="20dp"
-            android:textStyle="bold"
-            android:layout_marginTop="5dp"
-            />
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="110dp"
+        android:background="@drawable/previous_button" />
 
     <ImageView
         android:id="@+id/currentDisplayedFood"
-        android:layout_width="100dp"
+        android:layout_width="175dp"
+        android:layout_height="155dp"
+        android:layout_below="@+id/suggestionText"
+        android:layout_centerHorizontal="true" />
+
+    <ImageButton
+        android:id="@+id/nextFoodButton"
+        android:layout_width="45dp"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:maxHeight="150dip"
-        android:maxWidth="150dp"
-        android:paddingLeft="70dp"
-        android:paddingRight="70dp" android:layout_alignLeft="@+id/previousFoodButton"
-        android:layout_alignBottom="@+id/previousFoodButton"/>
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/suggestionText"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/next_button" />
+
+    <ImageView
+        android:id="@+id/cuisine"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/previousFoodButton"
+        android:background="@drawable/cuisine_text" />
+
+    <TextView
+        android:id="@+id/currentFood"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/cuisine"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="5dp"
+        android:gravity="center"
+        android:text="@string/food_type"
+        android:textAlignment="center"
+        android:textColor="@color/dark_blue"
+        android:textSize="25sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/currentCuisine"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/cuisine"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp"
+        android:gravity="center"
+        android:text="@string/cuisine_type"
+        android:textAlignment="center"
+        android:textColor="@color/dark_blue"
+        android:textSize="20sp"
+        android:textStyle="bold" />
 
 </RelativeLayout>

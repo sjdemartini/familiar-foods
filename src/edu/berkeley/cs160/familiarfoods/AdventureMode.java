@@ -144,7 +144,7 @@ public class AdventureMode extends Activity {
 			@Override
 			public void onClick(View arg0) {
 				alt_bld.setMessage(
-						"By filtering, you can select one or more cuisines that you wish to see in the results.")
+						"By \"Choosing Cuisines\", you can select one or more cuisines that you wish to see in the results.")
 						.setPositiveButton("Got it!",
 								new DialogInterface.OnClickListener() {
 									public void onClick(DialogInterface dialog,
@@ -177,11 +177,11 @@ public class AdventureMode extends Activity {
 
 	/**
 	 * Set the foods to be shown based on a list of cuisines.
-	 * 
+	 *
 	 * This method is useful when filtering by cuisine type. Results shown will
 	 * be based on the foods field, which is a randomized ordering of foods from
 	 * the cuisines provided here.
-	 * 
+	 *
 	 * @param cuisines
 	 *            The list of cuisines to be used for filtering.
 	 */
@@ -195,10 +195,10 @@ public class AdventureMode extends Activity {
 
 	/**
 	 * Go to the next or previous food, depending on the given direction.
-	 * 
+	 *
 	 * The function silently ignores the command if there are no more foods in
 	 * the given direction.
-	 * 
+	 *
 	 * @param direction
 	 *            one of NEXT or PREV direction constants.
 	 */

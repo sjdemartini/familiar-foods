@@ -112,7 +112,7 @@ public class FindFood extends Activity implements OnItemClickListener {
 			@Override
 			public void onClick(View arg0) {
 				alt_bld.setMessage(
-						"By filtering, you can select one or more cuisines that you wish to see in the results.")
+                        "By \"Choosing Cuisines\", you can select one or more cuisines that you wish to see in the results.")
 						.setPositiveButton("Got it!",
 								new DialogInterface.OnClickListener() {
 									public void onClick(DialogInterface dialog,
