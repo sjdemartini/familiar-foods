@@ -17,6 +17,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map.Entry;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -116,12 +117,17 @@ public class FamiliarFoodsDatabase extends Application {
      */
     protected Set<String> allFoods;
 
+    /** A list of the descriptors allowed for "Add New Food". */
+    protected List<String> descriptors;
+
     @Override
     public void onCreate() {
         setupDatabaseFiles();
         if (shouldLoadData) {
             initializeDatabase();
             shouldLoadData = false;
+        } else {
+            loadDescriptors();
         }
     }
 
@@ -363,6 +369,10 @@ public class FamiliarFoodsDatabase extends Application {
         return new ArrayList<String>(Arrays.asList(cuisines));
     }
 
+    public List<String> getDescriptorChoices() {
+        return descriptors;
+    }
+
     /**
      * Return a cuisine type for a given food.
      *
@@ -574,6 +584,28 @@ public class FamiliarFoodsDatabase extends Application {
     }
 
     /**
+     * Store in the database a link between two foods.
+     *
+     * @param foodName1
+     * @param foodName2
+     */
+    private void linkFoods(String foodName1, String foodName2, int numVotes) {
+        FoodLink link = new FoodLink(foodName1, foodName2);
+        if (allFoodLinks.contains(link)) {
+            // If a link between these foods already exists, it has already
+            // been initialized with a certain number of votes
+            return;
+        }
+        addLinkForFood(foodName1, link);
+        addLinkForFood(foodName2, link);
+        for (int i=0; i<numVotes; i++) {
+            link.upVote();
+        }
+        allFoodLinks.add(link);
+        saveFoodToLinks();
+    }
+
+    /**
      * Ensure that the foodToLinks hashmap is updated, so that the list mapped
      * to from the given food name adds the given link.
      *
@@ -634,6 +666,23 @@ public class FamiliarFoodsDatabase extends Application {
     }
 
 
+    /**
+     * Store a list of the descriptors for foods based on the foods stored
+     * in the database.
+     */
+    protected void loadDescriptors() {
+        System.out.println("Loading all descriptor terms for foods...");
+        HashSet<String> descriptorSet = new HashSet<String>();
+        for (List<String> descriptorList : foodToDesc.values()) {
+            for (String descriptor : descriptorList) {
+                descriptorSet.add(descriptor);
+            }
+        }
+        descriptors = new ArrayList<String>(descriptorSet);
+        java.util.Collections.sort(descriptors);
+        System.out.println("All descriptors loaded.");
+    }
+
 
     /**
      * An AsyncTask that loads initial data into the database.
@@ -651,6 +700,8 @@ public class FamiliarFoodsDatabase extends Application {
 
         protected Void doInBackground(Void... params) {
             loadDataFromFile();
+            loadDescriptors();
+            initializeLinks();
             isInitializingFinished = true;
             return null;
         }
@@ -716,6 +767,24 @@ public class FamiliarFoodsDatabase extends Application {
                 e.printStackTrace();
             }
             return bitmap;
+        }
+
+        /**
+         * Initialize the database with some basic links between foods.
+         */
+        protected void initializeLinks() {
+            linkFoods("Monte Cristo Sandwich", "Croque Monsieur", 18);
+            linkFoods("Sambusa", "Samosa", 29);
+            linkFoods("Sambusa", "Empanada", 15);
+            linkFoods("Sambusa", "Potstickers", 3);
+            linkFoods("Samosa", "Empanada", 16);
+            linkFoods("Samosa", "Potstickers", 3);
+            linkFoods("Caponata", "Pisto", 7);
+            linkFoods("Caponata", "Ratatouille", 22);
+            linkFoods("Pisto", "Ratatouille", 9);
+            linkFoods("Onion Naan", "Green Onion Pancake", 8);
+            linkFoods("Tom Yum", "Asam Laksa", 11);
+            System.out.println("All initial links created.");
         }
     }
 }
