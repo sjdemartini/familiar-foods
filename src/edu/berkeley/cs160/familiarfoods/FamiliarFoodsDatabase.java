@@ -783,6 +783,7 @@ public class FamiliarFoodsDatabase extends Application {
             linkFoods("Caponata", "Ratatouille", 22);
             linkFoods("Pisto", "Ratatouille", 9);
             linkFoods("Onion Naan", "Green Onion Pancake", 8);
+            linkFoods("Tom Yum", "Asam Laksa", 11);
             System.out.println("All initial links created.");
         }
     }

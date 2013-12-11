@@ -28,10 +28,9 @@
             android:paddingRight="5dip">
 
             <ImageButton
-                android:id="@+id/upVote"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="2dip"
+                android:id="@+id/vote_up"
+                android:layout_width="23dp"
+                android:layout_height="27dp"
                 android:fromDegrees="0"
                 android:pivotX="50%"
                 android:src="@drawable/up_button"
@@ -47,20 +46,20 @@
                 android:textStyle="bold" />
 
             <ImageButton
-                android:id="@+id/downVote"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="1dip"
+                android:id="@+id/vote_down"
+                android:layout_width="23dp"
+                android:layout_height="27dp"
                 android:fromDegrees="0"
                 android:pivotX="50%"
                 android:src="@drawable/down_button"
                 android:toDegrees="-90" />
+
         </LinearLayout>
 
         <ImageView
             android:id="@+id/list_image"
-            android:layout_width="70dip"
-            android:layout_height="70dip"
+            android:layout_width="73dip"
+            android:layout_height="77dip"
             android:background="@drawable/image_bg"
             android:src="@drawable/logo" />
     </LinearLayout>
@@ -96,7 +95,5 @@
         android:text="super long descriptoin to test the ellipsis thingy majitadsfh aewoijf daiojfs dfhuasildfh ew;ocfj awoiafiaskfhksdjf asjd f;lksjd f;oahwe;ofiawieojefwo wu "
         android:textColor="#343434"
         android:textSize="10dip" />
-
-    <!-- Rightend Arrow -->
 
 </RelativeLayout>
