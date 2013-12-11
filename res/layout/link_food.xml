@@ -4,64 +4,71 @@
     android:layout_height="match_parent"
     android:background="@color/white" >
 
-    <!--  <ImageView
-        android:id="@+id/linkSimilarFoodsBanner"
-        android:layout_width="wrap_content"
+    <AutoCompleteTextView
+        android:id="@+id/autoCompleteFood1"
+        android:layout_width="275dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="15dp"
-        android:background="@drawable/link_similar_foods_banner" /> -->
+        android:layout_below="@+id/food1"
+        android:layout_centerHorizontal="true"
+        android:ems="10"
+        android:hint="@string/link_food_suggestion" />
 
-    <ImageView
+    <TextView
         android:id="@+id/food1"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="14dp"
-        android:layout_toLeftOf="@+id/submitButton"
-        android:background="@drawable/food1" />
+        android:layout_marginTop="19dp"
+        android:layout_alignLeft="@id/autoCompleteFood1"
+        android:text="@string/food1_label"
+        android:textColor="@color/black"
+        android:textSize="25sp"
+        android:textStyle="bold" />
 
-    <ImageView
-        android:id="@+id/food2"
-        android:layout_width="wrap_content"
+
+    <TextView
+        android:id="@+id/isSimilarTo"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@id/autoCompleteFood1"
+        android:layout_marginTop="32dp"
+        android:gravity="center"
+        android:background="@color/gray"
+        android:padding="10dp"
+        android:text="@string/is_similar_to"
+        android:textAlignment="center"
+        android:textColor="@color/dark_gray"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/food2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
         android:layout_alignLeft="@+id/food1"
         android:layout_below="@+id/isSimilarTo"
-        android:layout_marginTop="22dp"
-        android:background="@drawable/food2" />
+        android:text="@string/food2_label"
+        android:textColor="@color/black"
+        android:textSize="25sp"
+        android:textStyle="bold" />
 
-    <ImageButton
+    <AutoCompleteTextView
+        android:id="@+id/autoCompleteFood2"
+        android:layout_width="275dp"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/autoCompleteFood1"
+        android:layout_below="@+id/food2"
+        android:ems="10"
+        android:hint="@string/link_food_suggestion" />
+
+    <Button
         android:id="@+id/submitButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="61dp"
-        android:background="@drawable/submit_button" />
-
-    <ImageView
-        android:id="@+id/isSimilarTo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/autoCompleteFood1"
-        android:layout_marginTop="28dp"
-        android:background="@drawable/similar_to_text" />
-
-    <AutoCompleteTextView
-        android:id="@+id/autoCompleteFood1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/food1"
-        android:layout_centerHorizontal="true"
-        android:ems="10"
-        android:hint="Food Item Name" />
-
-    <AutoCompleteTextView
-        android:id="@+id/autoCompleteFood2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/autoCompleteFood1"
-        android:layout_below="@+id/food2"
-        android:ems="10"
-        android:hint="Food Item Name" />
+        android:text="@string/submit"
+        android:textSize="18sp" />
 
 </RelativeLayout>

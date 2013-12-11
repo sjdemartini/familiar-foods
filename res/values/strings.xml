@@ -8,6 +8,7 @@
     <string name="find_similar_food">Find Familiar Foods</string>
     <string name="search_food_hint">Search for a Familiar Food</string>
     <string name="link_food">Link Similar Foods</string>
+    <string name="is_similar_to">is similar to</string>
     <string name="add_food">Add New Food</string>
     <string name="adventure_mode">Adventure Mode</string>
     <string name="friends_foods">Friend\'s Foods</string>
@@ -31,5 +32,8 @@
     <string name="food_type">Food Type</string>
     <string name="submit">Submit</string>
     <string name="no_food_available">No foods available for your criteria. Please add foods if you have suggestions!</string>
+    <string name="food1_label">Food 1:</string>
+    <string name="food2_label">Food 2:</string>
+    <string name="link_food_suggestion">Food Item Name</string>
 
 </resources>

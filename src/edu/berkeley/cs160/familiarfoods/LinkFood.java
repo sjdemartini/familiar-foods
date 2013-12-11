@@ -12,7 +12,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
-import android.widget.ImageButton;
+import android.widget.Button;
 import android.widget.Toast;
 
 public class LinkFood extends Activity {
@@ -56,7 +56,7 @@ public class LinkFood extends Activity {
     }
 
     public void startListeners() {
-        ImageButton submitButton = (ImageButton) findViewById(R.id.submitButton);
+        Button submitButton = (Button) findViewById(R.id.submitButton);
         submitButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View arg0) {
