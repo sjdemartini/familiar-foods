@@ -777,8 +777,9 @@ public class FamiliarFoodsDatabase extends Application {
             linkFoods("Sambusa", "Samosa", 29);
             linkFoods("Sambusa", "Empanada", 15);
             linkFoods("Sambusa", "Potstickers", 3);
-            linkFoods("Samosa", "Empanada", 16);
+            linkFoods("Samosa", "Empanada", 13);
             linkFoods("Samosa", "Potstickers", 3);
+            linkFoods("Empanada", "Potstickers", 3);
             linkFoods("Caponata", "Pisto", 7);
             linkFoods("Caponata", "Ratatouille", 22);
             linkFoods("Pisto", "Ratatouille", 9);
