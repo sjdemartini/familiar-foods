@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/white"
-       			android:layout_marginTop="10dp"
-        >
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="10dp"
+    android:background="@color/white" >
 
-    <!-- <ImageView
+    <!--
+         <ImageView
             android:id="@+id/findSimilarFoodBanner"
             android:layout_height="55dp"
             android:layout_width="wrap_content"
             android:src="@drawable/find_similar_food_banner"
 
-            />-->
+            />
+    -->
 
     <AutoCompleteTextView
         android:id="@+id/similarFoodSearch"
@@ -38,21 +38,27 @@
         android:textSize="14sp" />
 
     <View
+        android:id="@+id/view1"
         android:layout_width="fill_parent"
         android:layout_height="1dp"
         android:layout_below="@id/filterButtonSimilarFood"
-        android:background="@android:color/darker_gray"/>
+        android:background="@android:color/darker_gray" />
 
-    <ListView
-        android:id="@+id/familiarFoodsList"
+    <ScrollView
+        android:id="@+id/searchFoodScrollView"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:layout_height="fill_parent"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/filterButtonSimilarFood"
-        android:layout_marginTop="5dp"
-        android:background="@drawable/list_border" >
+        android:layout_below="@+id/view1"
+        android:background="@color/gray" >
 
-    </ListView>
+        <LinearLayout
+            android:id="@+id/searchll"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+            
+        </LinearLayout>
+    </ScrollView>
 
 </RelativeLayout>

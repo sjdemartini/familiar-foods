@@ -7,11 +7,14 @@ import java.util.List;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -21,7 +24,9 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -45,8 +50,6 @@ public class FindFood extends Activity implements OnItemClickListener {
     List<HashMap<String, Object>> currentUnfilteredResults = new ArrayList<HashMap<String, Object>>();
 
     Spinner linkFoodSpinner1;
-    ListView foodList;
-    LazyAdapter adapter;
     Button filterButton;
     AlertDialog.Builder alt_bld;
 
@@ -60,7 +63,6 @@ public class FindFood extends Activity implements OnItemClickListener {
 
         db = ((FamiliarFoodsDatabase) getApplication());
         filterButton = (Button) findViewById(R.id.filterButtonSimilarFood);
-        foodList = (ListView) findViewById(R.id.familiarFoodsList);
 
 		alt_bld = new AlertDialog.Builder(this);
 
@@ -215,6 +217,24 @@ public class FindFood extends Activity implements OnItemClickListener {
 		}
 		updateSearchResults();
 	}
+	
+    private void insertFoodLinkInScrollView(List<HashMap<String, Object>> foods) {
+    	LayoutInflater inflator = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View toggleView = inflator.inflate(R.layout.find_similar_food, null);
+
+    	setContentView(toggleView);
+
+    	LinearLayout descriptorLL = (LinearLayout) toggleView.findViewById(R.id.searchll);
+        for(int i=0; i<foods.size();i++) {
+        	FamiliarFoodListRowView connection = new FamiliarFoodListRowView(this);
+        	connection.setText((String) foods.get(i).get(KEY_NAME));
+        	connection.setDescription((List<String>) foods.get(i).get(KEY_DESCRIPTION));
+        	connection.setPicture((Bitmap) foods.get(i).get(KEY_THUMB_URL));
+
+        	descriptorLL.setBaselineAligned(false);
+        	descriptorLL.addView(connection, i);
+        }
+    }
 
 	private void updateSearchResults() {
 		ArrayList<HashMap<String, Object>> filteredResults = new ArrayList<HashMap<String, Object>>();
@@ -223,26 +243,7 @@ public class FindFood extends Activity implements OnItemClickListener {
 				filteredResults.add(foodMap);
 			}
 		}
-
-		// Debuggging
-		Toast.makeText(
-                this,
-                "Debug message: There are this many links - " + filteredResults.size(),
-                Toast.LENGTH_LONG).show();
-
-		// Set up adapter
-		adapter = new LazyAdapter(this, filteredResults);
-		foodList.setAdapter(adapter);
-
-        // Click event for single list row
-        foodList.setOnItemClickListener(new OnItemClickListener() {
-
-            @Override
-            public void onItemClick(AdapterView parent, View view,
-                    int position, long id) {
-
-            }
-        });
+		insertFoodLinkInScrollView(currentUnfilteredResults);
 	}
 
 }
