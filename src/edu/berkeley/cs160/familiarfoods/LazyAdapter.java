@@ -67,7 +67,8 @@ public class LazyAdapter extends BaseAdapter {
         }
         
         // Setting all values in listview
-        name.setText((String) food.get(FindFood.KEY_NAME));
+        String nameText = (String) food.get(FindFood.KEY_NAME)+ " (" + food.get(FindFood.KEY_CUISINE) + ")"; 
+        name.setText(nameText);
         description.setText(desc);
         duration.setText((String) food.get(FindFood.KEY_VOTES));
         thumb_image.setImageBitmap((Bitmap) food.get(FindFood.KEY_THUMB_URL));

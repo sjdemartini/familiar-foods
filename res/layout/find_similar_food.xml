@@ -51,7 +51,8 @@
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/filterButtonSimilarFood"
         android:layout_marginTop="5dp"
-        android:background="@drawable/list_border" >
+        android:background="@drawable/list_border"
+        android:divider="@android:color/darker_gray" >
 
     </ListView>
 
