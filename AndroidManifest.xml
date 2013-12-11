@@ -15,7 +15,6 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
-
     <application
         android:allowBackup="true"
         android:icon="@drawable/logo"
@@ -23,17 +22,20 @@
         android:theme="@style/CustomActionBarTheme" android:name="FamiliarFoodsDatabase">
         <activity
             android:name="edu.berkeley.cs160.familiarfoods.HomeActivity"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name="edu.berkeley.cs160.familiarfoods.AdventureMode"
-            android:label="@string/app_name"
-            android:parentActivityName="edu.berkeley.cs160.familiarfoods.HomeActivity" >
+            android:label="@string/adventure_mode"
+            android:parentActivityName="edu.berkeley.cs160.familiarfoods.HomeActivity"
+            android:screenOrientation="portrait" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="edu.berkeley.cs160.familiarfoods.MainActivity" />
@@ -41,23 +43,27 @@
         <activity
             android:name="edu.berkeley.cs160.familiarfoods.Filter"
             android:label="@string/title_activity_filter"
-            android:parentActivityName="edu.berkeley.cs160.familiarfoods.HomeActivity" >
+            android:parentActivityName="edu.berkeley.cs160.familiarfoods.HomeActivity"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="edu.berkeley.cs160.familiarfoods.AddFood"
-            android:label="@string/app_name"
-            android:parentActivityName="edu.berkeley.cs160.familiarfoods.HomeActivity" >
+            android:label="@string/add_food"
+            android:parentActivityName="edu.berkeley.cs160.familiarfoods.HomeActivity"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="edu.berkeley.cs160.familiarfoods.LinkFood"
-            android:label="@string/app_name"
-            android:parentActivityName="edu.berkeley.cs160.familiarfoods.HomeActivity" >
+            android:label="@string/link_food"
+            android:parentActivityName="edu.berkeley.cs160.familiarfoods.HomeActivity"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="edu.berkeley.cs160.familiarfoods.FindFood"
-            android:label="@string/app_name"
+            android:label="@string/find_similar_food"
             android:parentActivityName="edu.berkeley.cs160.familiarfoods.HomeActivity"
-            android:windowSoftInputMode="adjustPan" >
+            android:windowSoftInputMode="adjustPan"
+            android:screenOrientation="portrait" >
         </activity>
     </application>
 
