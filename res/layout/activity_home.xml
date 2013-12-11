@@ -15,19 +15,18 @@
 
     <AutoCompleteTextView
         android:id="@+id/SearchBar"
-        android:layout_height="40dp"
         android:layout_width="250dp"
-        android:background="@drawable/search_view"
+        android:layout_height="40dp"
         android:layout_below="@id/FamiliarFoodsBanner"
         android:layout_centerHorizontal="true"
-        android:hint="Search for a similar food"
-        android:textColorHint="@color/white"
-        android:gravity="center_horizontal"
-        android:padding="10dp"
-        android:imeOptions="actionDone"
         android:layout_marginBottom="30dp"
+        android:background="@drawable/search_view"
         android:ems="10"
-        />
+        android:gravity="left"
+        android:hint="Search for a Familiar Food"
+        android:imeOptions="actionDone"
+        android:padding="10dp"
+        android:textColorHint="@color/white" />
 
     <ImageButton
             android:id="@+id/LinkFoodsButton"
