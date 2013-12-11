@@ -51,8 +51,6 @@ public class AdventureMode extends Activity {
     ImageButton prevButton;
     /** Button to go to the filter foods. */
     ImageButton filterButton;
-    /** Button to go to the help menu. */
-    ImageButton helpButton;
     /** Filter help dialog */
     AlertDialog.Builder alt_bld;
 
@@ -80,7 +78,6 @@ public class AdventureMode extends Activity {
         nextButton = (ImageButton) findViewById(R.id.nextFoodButton);
         prevButton = (ImageButton) findViewById(R.id.previousFoodButton);
         filterButton = (ImageButton) findViewById(R.id.filterResultsButton);
-        helpButton = (ImageButton) findViewById(R.id.helpButton);
 
         // Hack to ensure that db initialization is complete
         while (!db.isInitializingFinished()) {
@@ -121,8 +118,8 @@ public class AdventureMode extends Activity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.adventure_mode, menu);
-        return true;
+        getMenuInflater().inflate(R.menu.filter_help, menu);
+        return super.onCreateOptionsMenu(menu);
     }
 
     protected void startListeners() {
@@ -144,11 +141,25 @@ public class AdventureMode extends Activity {
                 startFilterActivity();
             }
         });
-        helpButton.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View arg0) {
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                // This ID represents the Home or Up button. In the case of this
+                // activity, the Up button is shown. Use NavUtils to allow users
+                // to navigate up one level in the application structure. For
+                // more details, see the Navigation pattern on Android Design:
+                //
+                // http://developer.android.com/design/patterns/navigation.html#up-vs-back
+                //
+                NavUtils.navigateUpFromSameTask(this);
+                return true;
+            case R.id.help_button:
+                // This is the id for the help dialog about choosing cuisines
                 alt_bld.setMessage(
-                        "By \"Choosing Cuisines\", you can select one or more cuisines that you wish to see in the results.")
+                        R.string.help_cuisine_filter_dialog)
                         .setPositiveButton("Got it!",
                                 new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog,
@@ -158,23 +169,7 @@ public class AdventureMode extends Activity {
                                 });
 
                 alt_bld.show();
-            }
-        });
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-        case android.R.id.home:
-            // This ID represents the Home or Up button. In the case of this
-            // activity, the Up button is shown. Use NavUtils to allow users
-            // to navigate up one level in the application structure. For
-            // more details, see the Navigation pattern on Android Design:
-            //
-            // http://developer.android.com/design/patterns/navigation.html#up-vs-back
-            //
-            NavUtils.navigateUpFromSameTask(this);
-            return true;
+                return true;
         }
         return super.onOptionsItemSelected(item);
     }

@@ -37,15 +37,6 @@
             android:layout_marginTop="20dp"
             />
 
-    <ImageButton
-            android:id="@+id/helpButtonFindSimilarFood"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:background="@drawable/help_button"
-             android:layout_marginTop="3dp"
-            android:layout_marginLeft="270dp"
-            />
-
     <ListView
         android:id="@+id/familiarFoodsList"
         android:layout_width="fill_parent"
