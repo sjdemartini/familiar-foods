@@ -47,7 +47,6 @@ public class FindFood extends Activity implements OnItemClickListener {
     ListView foodList;
     LazyAdapter adapter;
     ImageButton filterButton;
-    ImageButton helpButton;
     AlertDialog.Builder alt_bld;
 
     @Override
@@ -61,7 +60,6 @@ public class FindFood extends Activity implements OnItemClickListener {
         db = ((FamiliarFoodsDatabase) getApplication());
         filterButton = (ImageButton) findViewById(R.id.filterButtonSimilarFood);
         foodList = (ListView) findViewById(R.id.familiarFoodsList);
-		helpButton = (ImageButton) findViewById(R.id.helpButtonFindSimilarFood);
 
 		alt_bld = new AlertDialog.Builder(this);
 
@@ -108,22 +106,6 @@ public class FindFood extends Activity implements OnItemClickListener {
     			startFilterActivity();
     		}
     	});
-    	helpButton.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View arg0) {
-				alt_bld.setMessage(
-                        "By \"Choosing Cuisines\", you can select one or more cuisines that you wish to see in the results.")
-						.setPositiveButton("Got it!",
-								new DialogInterface.OnClickListener() {
-									public void onClick(DialogInterface dialog,
-											int id) {
-										dialog.cancel();
-									}
-								});
-
-				alt_bld.show();
-			}
-		});
     }
 
     /**
@@ -164,7 +146,7 @@ public class FindFood extends Activity implements OnItemClickListener {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.adventure_mode, menu);
+        getMenuInflater().inflate(R.menu.filter_help, menu);
         return true;
     }
 
@@ -181,14 +163,26 @@ public class FindFood extends Activity implements OnItemClickListener {
                 //
                 NavUtils.navigateUpFromSameTask(this);
                 return true;
+            case R.id.help_button:
+                // This is the id for the help dialog about choosing cuisines
+                alt_bld.setMessage(
+                        R.string.help_cuisine_filter_dialog)
+                        .setPositiveButton("Got it!",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog,
+                                            int id) {
+                                        dialog.cancel();
+                                    }
+                                });
+
+                alt_bld.show();
+                return true;
         }
         return super.onOptionsItemSelected(item);
     }
 
 	@Override
 	public void onItemClick(AdapterView<?> arg0, View view, int arg2, long arg3) {
-		String query = ((TextView) view).getText().toString();
-
 		searchForFamiliarFoods();
 	}
 
