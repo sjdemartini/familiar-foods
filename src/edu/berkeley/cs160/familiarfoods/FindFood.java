@@ -19,18 +19,15 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.ImageButton;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class FindFood extends Activity implements OnItemClickListener {
 
@@ -61,6 +58,10 @@ public class FindFood extends Activity implements OnItemClickListener {
         // Show the Up button in the action bar.
         setupActionBar();
 
+        // Prevent from the keyboard from coming up:
+        this.getWindow().setSoftInputMode(
+                WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+
         db = ((FamiliarFoodsDatabase) getApplication());
         filterButton = (Button) findViewById(R.id.filterButtonSimilarFood);
 
@@ -85,11 +86,6 @@ public class FindFood extends Activity implements OnItemClickListener {
         searchForFamiliarFoods();
 
         startListeners();
-        // Hide soft keyboard
-//        InputMethodManager imm = (InputMethodManager)getSystemService(
-//        	      Context.INPUT_METHOD_SERVICE);
-//        imm.hideSoftInputFromWindow(search.getWindowToken(), 0);
-
     }
 
 	/**
@@ -195,8 +191,6 @@ public class FindFood extends Activity implements OnItemClickListener {
 	 * @param query The string with the food name that is being searched
 	 */
 	private void searchForFamiliarFoods() {
-		Intent main_activity = getIntent();
-
         String query = ((TextView) findViewById(R.id.similarFoodSearch)).getText().toString();
 
 		List<String> foods = db.getLinkedFoods(query);
