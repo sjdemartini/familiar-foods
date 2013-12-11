@@ -243,7 +243,7 @@ public class FindFood extends Activity implements OnItemClickListener {
 				filteredResults.add(foodMap);
 			}
 		}
-		insertFoodLinkInScrollView(currentUnfilteredResults);
+		insertFoodLinkInScrollView(filteredResults);
 	}
 
 }
