@@ -33,6 +33,9 @@ public class FamiliarFoodsDatabase extends Application {
 
     public static final String TAG = "FF_Database";
 
+    public static final byte UPVOTE = 1;
+    public static final byte DOWNVOTE = -1;
+
     /**
      * The file name for storing a mapping from food name to cuisine type.
      */
@@ -525,7 +528,7 @@ public class FamiliarFoodsDatabase extends Application {
         for (int i=0; i<descriptors.length; i++) {
             descriptors[i] = descriptors[i].trim().toLowerCase(Locale.US);
         }
-        allFoods.add(foodName);
+        allFoods.add(stripFoodName(foodName));
         foodToCuisine.put(foodName, cuisine);
         foodToDesc.put(foodName, Arrays.asList(descriptors));
         String photoFile = stripFoodName(foodName) + ".png";
@@ -566,15 +569,9 @@ public class FamiliarFoodsDatabase extends Application {
     public void linkFoods(String foodName1, String foodName2) {
         FoodLink link = new FoodLink(foodName1, foodName2);
         if (allFoodLinks.contains(link)) {
-            // If a link between these foods already exists, find it and
-            // up-vote the link:
-            TreeSet<FoodLink> links = foodToLinks.get(foodName1);
-            for (FoodLink foodLink : links) {
-                if (foodLink.equals(link)) {
-                    foodLink.upVote();
-                    return;
-                }
-            }
+            // If a link between these foods already exists, just up-vote the
+            // link:
+            upVoteLink(foodName1, foodName2);
             return;
         }
         addLinkForFood(foodName1, link);
@@ -596,11 +593,11 @@ public class FamiliarFoodsDatabase extends Application {
             // been initialized with a certain number of votes
             return;
         }
-        addLinkForFood(foodName1, link);
-        addLinkForFood(foodName2, link);
         for (int i=0; i<numVotes; i++) {
             link.upVote();
         }
+        addLinkForFood(foodName1, link);
+        addLinkForFood(foodName2, link);
         allFoodLinks.add(link);
         saveFoodToLinks();
     }
@@ -627,44 +624,64 @@ public class FamiliarFoodsDatabase extends Application {
      * Up-vote a link between two foods.
      */
     public void upVoteLink(String foodName1, String foodName2) {
-        FoodLink link = new FoodLink(foodName1, foodName2);
-        if (! allFoodLinks.contains(link)) {
-            // Can't up-vote a link that does not exist
-            return;
-        }
-
-        // If a link between these foods exists, find it and upvote it
-        TreeSet<FoodLink> links = foodToLinks.get(foodName1);
-        for (FoodLink foodLink : links) {
-            if (foodLink.equals(link)) {
-                foodLink.upVote();
-                saveFoodToLinks();
-                return;
-            }
-        }
+        changeVoteCountLink(foodName1, foodName2, UPVOTE);
     }
 
     /**
      * Up-vote a link between two foods.
      */
     public void downVoteLink(String foodName1, String foodName2) {
+        changeVoteCountLink(foodName1, foodName2, DOWNVOTE);
+    }
+
+    /**
+     * Change vote count by up- or down-voting. Used as a helper function by
+     * upVoteLink and downVoteLink.
+     *
+     * @param foodName1
+     * @param foodName2
+     * @param operation whether to UPVOTE or DOWNVOTE, using constants defined
+     *  on this class.
+     */
+    private void changeVoteCountLink(
+            String foodName1, String foodName2, byte operation) {
         FoodLink link = new FoodLink(foodName1, foodName2);
         if (! allFoodLinks.contains(link)) {
             // Can't down-vote a link that does not exist
             return;
         }
 
-        // If a link between these foods exists, find it and down-vote it
+        // If a link between these foods exists, find it and vote
         TreeSet<FoodLink> links = foodToLinks.get(foodName1);
         for (FoodLink foodLink : links) {
             if (foodLink.equals(link)) {
-                foodLink.downVote();
-                saveFoodToLinks();
-                return;
+                // Remove and then re-add the food link from the TreeSet so that
+                // it's new vote count will be used for ordering
+                links.remove(foodLink);
+                if (operation == UPVOTE) {
+                    foodLink.upVote();
+                } else {
+                    foodLink.downVote();
+                }
+                links.add(foodLink);
             }
         }
-    }
 
+        // Find, remove, and re-add the link for the other food's TreeSet, as
+        // well
+        links = foodToLinks.get(foodName2);
+        for (FoodLink foodLink : links) {
+            if (foodLink.equals(link)) {
+                // Remove and then re-add the food link from the TreeSet so that
+                // it's new vote count will be used for ordering
+                links.remove(foodLink);
+                links.add(foodLink);
+            }
+        }
+
+        // Save the changes to the links (to internal storage)
+        saveFoodToLinks();
+    }
 
     /**
      * Store a list of the descriptors for foods based on the foods stored
