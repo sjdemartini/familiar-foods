@@ -22,5 +22,6 @@
     <string name="select_all">Select All</string>
     <string name="done">Done</string>
     <string name="food_type">Food Type</string>
+    <string name="no_food_available">No foods available for your criteria. Please add foods if you have suggestions!</string>
 
 </resources>
