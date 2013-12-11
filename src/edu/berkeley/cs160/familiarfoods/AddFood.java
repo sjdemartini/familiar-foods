@@ -1,6 +1,7 @@
 package edu.berkeley.cs160.familiarfoods;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
@@ -42,8 +43,6 @@ public class AddFood extends Activity {
     ScrollView addFoodScrollView;
     LinearLayout descriptorLinearLayout;
 
-    String[] descriptor;
-
     /** Code used to indicate that an image capture. */
     private static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 100;
 
@@ -59,15 +58,13 @@ public class AddFood extends Activity {
         this.getWindow().setSoftInputMode(
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
-        descriptor = new String[5];
-        descriptor[0] = "Crunchy";
-        descriptor[1] = "Nutty";
-        descriptor[2] = "Chewy";
-        descriptor[3] = "Salty";
-        descriptor[4] = "Sweet";
+        // Get the database:
+        db = ((FamiliarFoodsDatabase) getApplication());
 
+        // Get the descriptors and add them as choices
+        List<String> descriptors = db.getDescriptorChoices();
         addFoodScrollView = (ScrollView) findViewById(R.id.addFoodScrollView);
-        insertDescriptorInScrollView(descriptor);
+        insertDescriptorInScrollView(descriptors);
 
         cameraButton = (ImageButton) findViewById(R.id.cameraButton);
         foodPhotoView = (ImageView) findViewById(R.id.foodPhotoImage);
@@ -75,9 +72,6 @@ public class AddFood extends Activity {
         cuisineSpinner = (Spinner) findViewById(R.id.cuisineSpinner);
         descriptorLinearLayout = (LinearLayout) findViewById(R.id.descriptorll);
         doneButton = (Button) findViewById(R.id.doneButton);
-
-        // Get the database:
-        db = ((FamiliarFoodsDatabase) getApplication());
 
         ArrayList<String> cuisines = (ArrayList<String>) db.getAllCuisines();
         ArrayAdapter adapter = new ArrayAdapter(
@@ -129,16 +123,17 @@ public class AddFood extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void insertDescriptorInScrollView(String[] names) {
+    private void insertDescriptorInScrollView(List<String> descriptors) {
     	LayoutInflater inflator = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View toggleView = inflator.inflate(R.layout.add_food, null);
 
     	setContentView(toggleView);
 
     	LinearLayout descriptorLL = (LinearLayout) toggleView.findViewById(R.id.descriptorll);
-        for(int i=0; i<names.length;i++) {
+        int numDescriptors = descriptors.size();
+    	for(int i=0; i<numDescriptors; i++) {
         	CheckBox newCheck = new CheckBox(this);
-        	newCheck.setText(names[i]);
+        	newCheck.setText(descriptors.get(i));
 
         	descriptorLL.setBaselineAligned(false);
         	descriptorLL.addView(newCheck, i);
