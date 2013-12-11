@@ -3,21 +3,21 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:background="@color/white"
+    android:layout_marginTop="10dp"
     android:orientation="vertical" >
 
-    <ImageView
+    <!--  <ImageView
         android:id="@+id/adventureModeBanner"
         android:layout_width="match_parent"
         android:layout_height="55dp"
         android:layout_alignRight="@+id/suggestionText"
         android:layout_marginBottom="10dp"
-        android:background="@drawable/adventure_mode_banner" />
+        android:background="@drawable/adventure_mode_banner" />-->
 
     <ImageButton
         android:id="@+id/filterResultsButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/adventureModeBanner"
         android:layout_centerHorizontal="true"
         android:background="@drawable/filter_results_button" />
 

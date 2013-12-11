@@ -4,15 +4,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@color/white"
+       			android:layout_marginTop="10dp"
         >
 
-    <ImageView
+    <!-- <ImageView
             android:id="@+id/findSimilarFoodBanner"
             android:layout_height="55dp"
             android:layout_width="wrap_content"
             android:src="@drawable/find_similar_food_banner"
 
-            />
+            />-->
 
 
     <AutoCompleteTextView
@@ -20,7 +21,6 @@
             android:layout_height="30dp"
             android:layout_width="270dp"
             android:background="@drawable/search_view"
-            android:layout_below="@id/findSimilarFoodBanner"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="5dp"
 	        android:imeOptions="actionDone"
