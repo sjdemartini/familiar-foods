@@ -15,7 +15,10 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -29,7 +32,7 @@ public class AddFood extends Activity {
     /** The database for this app. */
     FamiliarFoodsDatabase db;
 
-    ImageButton doneButton;
+    Button doneButton;
     EditText foodNameEditText;
     Spinner cuisineSpinner;
     ImageButton cameraButton;
@@ -52,6 +55,10 @@ public class AddFood extends Activity {
         // Show the Up button in the action bar.
         setupActionBar();
 
+        // Prevent from the keyboard from coming up:
+        this.getWindow().setSoftInputMode(
+                WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+
         descriptor = new String[5];
         descriptor[0] = "Crunchy";
         descriptor[1] = "Nutty";
@@ -67,7 +74,7 @@ public class AddFood extends Activity {
         foodNameEditText = (EditText) findViewById(R.id.foodNameEditText);
         cuisineSpinner = (Spinner) findViewById(R.id.cuisineSpinner);
         descriptorLinearLayout = (LinearLayout) findViewById(R.id.descriptorll);
-        doneButton = (ImageButton) findViewById(R.id.doneButton);
+        doneButton = (Button) findViewById(R.id.doneButton);
 
         // Get the database:
         db = ((FamiliarFoodsDatabase) getApplication());

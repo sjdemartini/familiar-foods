@@ -21,11 +21,15 @@
     <string name="cuisine">Cuisine</string>
     <string name="cuisine_type">Cuisine Type Goes Here</string>
     <string name="food">Food</string>
+    <string name="food_name_label">Food Name</string>
+    <string name="add_picture_label">Add Picture</string>
+    <string name="descriptor_label">Flavors, Ingredients, Description</string>
     <string name="food_name">Name of Food Goes Here</string>
     <string name="select_none">Select None</string>
     <string name="select_all">Select All</string>
     <string name="done">Done</string>
     <string name="food_type">Food Type</string>
+    <string name="submit">Submit</string>
     <string name="no_food_available">No foods available for your criteria. Please add foods if you have suggestions!</string>
 
 </resources>
