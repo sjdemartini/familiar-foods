@@ -10,7 +10,7 @@
     <string name="add_food">Add New Food</string>
     <string name="adventure_mode">Adventure Mode</string>
     <string name="friends_foods">Friend\'s Foods</string>
-    <string name="filter_button">Filter Results</string>
+    <string name="filter_button">Choose Cuisines for Results</string>
     <string name="help_button">\?</string>
     <string name="help_text">Help</string>
     <string name="help_cuisine_filter_dialog">By \"Choosing Cuisines\", you can select one or more cuisines that you wish to see in the results.</string>
