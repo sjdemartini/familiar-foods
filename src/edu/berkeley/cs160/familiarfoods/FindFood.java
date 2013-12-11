@@ -195,7 +195,6 @@ public class FindFood extends Activity implements OnItemClickListener {
 	 * @param query The string with the food name that is being searched
 	 */
 	private void searchForFamiliarFoods() {
-		//Get
 		Intent main_activity = getIntent();
 
         String query = ((TextView) findViewById(R.id.similarFoodSearch)).getText().toString();
@@ -217,7 +216,7 @@ public class FindFood extends Activity implements OnItemClickListener {
 		}
 		updateSearchResults();
 	}
-	
+
     private void insertFoodLinkInScrollView(List<HashMap<String, Object>> foods) {
     	LayoutInflater inflator = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View toggleView = inflator.inflate(R.layout.find_similar_food, null);
@@ -228,6 +227,7 @@ public class FindFood extends Activity implements OnItemClickListener {
         for(int i=0; i<foods.size();i++) {
         	FamiliarFoodListRowView connection = new FamiliarFoodListRowView(this);
         	connection.setText((String) foods.get(i).get(KEY_NAME));
+        	connection.setVotes((String) foods.get(i).get(KEY_VOTES));
         	connection.setDescription((List<String>) foods.get(i).get(KEY_DESCRIPTION));
         	connection.setPicture((Bitmap) foods.get(i).get(KEY_THUMB_URL));
 
