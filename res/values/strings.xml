@@ -15,7 +15,7 @@
     <string name="help_button">\?</string>
     <string name="help_text">Help</string>
     <string name="help_cuisine_filter_dialog">By \"Choosing Cuisines\", you can select one or more cuisines that you wish to see in the results.</string>
-    <string name="suggestion_prompt">Why don\'t you try</string>
+    <string name="suggestion_prompt">Why don\'t you try&#8230;</string>
     <string name="previous_food">&lt;</string>
     <string name="next_food">&gt;</string>
     <string name="cuisine">Cuisine</string>
