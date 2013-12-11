@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:src="@drawable/familiar_foods_banner"
-        android:layout_marginBottom="20dp"/>
+        android:layout_marginBottom="5dp" />
 
     <AutoCompleteTextView
         android:id="@+id/SearchBar"
@@ -19,74 +19,80 @@
         android:layout_height="40dp"
         android:layout_below="@id/FamiliarFoodsBanner"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="30dp"
+        android:layout_marginBottom="16dp"
         android:background="@drawable/search_view"
         android:ems="10"
         android:gravity="left"
-        android:hint="Search for a Familiar Food"
+        android:hint="@string/search_food_hint"
         android:imeOptions="actionDone"
         android:padding="10dp"
         android:textColorHint="@color/white" />
 
     <ImageButton
-            android:id="@+id/LinkFoodsButton"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:background="@drawable/link_foods_button"
-            android:layout_below="@id/SearchBar"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="15dp"
-            />
+        android:id="@+id/LinkFoodsButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/SearchBar"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/link_foods_button" />
 
-    <ImageView
-            android:id="@+id/LinkFoodText"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:layout_below="@id/LinkFoodsButton"
-            android:background="@drawable/link_foods_text"
-            android:layout_centerHorizontal="true"
-            />
-
-    <ImageButton
-            android:id="@+id/AddNewFoodButton"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:background="@drawable/add_new_food_button"
-            android:layout_below="@id/LinkFoodText"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="5dp"
-
-            />
-
-    <ImageView
-            android:id="@+id/AddFoodText"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:layout_below="@id/AddNewFoodButton"
-            android:background="@drawable/add_new_food_text"
-            android:layout_centerHorizontal="true"
-            />
+    <TextView
+        android:id="@+id/LinkFoodText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/LinkFoodsButton"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:text="@string/link_food"
+        android:textAlignment="center"
+        android:textColor="@color/dark_gray"
+        android:textSize="15sp"
+        android:textStyle="bold" />
 
     <ImageButton
-            android:id="@+id/AdventureModeButton"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:background="@drawable/adventure_mode_button"
-            android:layout_below="@id/AddFoodText"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="5dp"
+        android:id="@+id/AddNewFoodButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/LinkFoodText"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/add_new_food_button" />
 
-            />
+    <TextView
+        android:id="@+id/AddFoodText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/AddNewFoodButton"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:text="@string/add_food"
+        android:textAlignment="center"
+        android:textColor="@color/dark_gray"
+        android:textSize="15sp"
+        android:textStyle="bold" />
 
-    <ImageView
-            android:id="@+id/AdventureModeText"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:layout_below="@id/AdventureModeButton"
-            android:background="@drawable/adventure_mode_text"
-            android:layout_centerHorizontal="true"
+    <ImageButton
+        android:id="@+id/AdventureModeButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/AddFoodText"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/adventure_mode_button" />
 
-            />
+    <TextView
+        android:id="@+id/AdventureModeText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/AdventureModeButton"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:text="@string/adventure_mode"
+        android:textAlignment="center"
+        android:textColor="@color/dark_gray"
+        android:textSize="15sp"
+        android:textStyle="bold" />
 
 </RelativeLayout>
 

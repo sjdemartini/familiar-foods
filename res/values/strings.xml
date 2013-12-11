@@ -6,6 +6,7 @@
     <string name="title_activity_adventure_mode">Adventure Mode</string>
     <string name="title_activity_filter">Filters</string>
     <string name="find_similar_food">Find Familiar Foods</string>
+    <string name="search_food_hint">Search for a Familiar Food</string>
     <string name="link_food">Link Similar Foods</string>
     <string name="add_food">Add New Food</string>
     <string name="adventure_mode">Adventure Mode</string>
