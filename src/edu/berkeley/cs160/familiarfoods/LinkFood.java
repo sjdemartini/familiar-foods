@@ -4,9 +4,12 @@ import java.util.ArrayList;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -19,6 +22,8 @@ public class LinkFood extends Activity {
 
     /** The database for this app. */
     FamiliarFoodsDatabase db;
+
+    AlertDialog.Builder alt_bld;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +46,8 @@ public class LinkFood extends Activity {
                 android.R.layout.simple_list_item_1, foods);
         textView1.setAdapter(adapter);
         textView2.setAdapter(adapter);
+
+        alt_bld = new AlertDialog.Builder(this);
 
         startListeners();
     }
@@ -78,8 +85,30 @@ public class LinkFood extends Activity {
                 //
                 NavUtils.navigateUpFromSameTask(this);
                 return true;
+            case R.id.help_button:
+                // This is the id for the help dialog about choosing cuisines
+                alt_bld.setMessage(
+                        R.string.help_link_foods_dialog)
+                        .setPositiveButton("Got it!",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog,
+                                            int id) {
+                                        dialog.cancel();
+                                    }
+                                });
+
+                alt_bld.show();
+                return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.help, menu);
+        return true;
     }
 
     public void addLink() {

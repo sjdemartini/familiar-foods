@@ -141,7 +141,7 @@ public class FindFood extends Activity implements OnItemClickListener {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.filter_help, menu);
+        getMenuInflater().inflate(R.menu.help, menu);
         return true;
     }
 
